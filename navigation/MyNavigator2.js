@@ -120,6 +120,16 @@ function TabBarNavigatorFunc({ navigation }) {
                     }
                 }}
             />
+            <TabBar.Screen name="AddInfoVaccine" component={AddInfoVaccine}
+                options={{
+                    headerTitleStyle: {
+                        fontFamily: 'Kanit_400Regular'
+                    },
+                    tabBarIcon: ({ color }) => {
+                        return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
+                    }
+                }}
+            />
             <TabBar.Screen name="MapMain" component={MapMain}
                 options={{
                     headerTitleStyle: {
