@@ -277,6 +277,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, SafeAreaView, TextInput, Image, Button } from "react-native";
+import { SearchBar } from "react-native-elements";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
 import axios from "axios";
@@ -316,13 +317,6 @@ class Vaccine extends Component {
         }).catch((error) => {
             console.log(error)
         })
-        
-        // axios.get('https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/vaccination/vaccine-delivery.json')
-        // .then((response) => {
-        //     this.setState({ population : response.data.data})
-        // }).catch((error) => {
-        //     console.log(error)
-        // })
     }
 
     loadAssetsAsync = async () => {
@@ -366,26 +360,45 @@ class Vaccine extends Component {
     }
 
     renderVaccineData({ item }) {
-        let color
-        if (item.total_1st_dose >= 1000000) {
-            color = "#27AE60";
-        }
-        if (item.total_1st_dose >= 500000 && item.total_1st_dose < 1000000 ) {
-            color = "#52BE80";
-        }
-        if (item.total_1st_dose < 500000 ) {
-            color = "#7DCEA0";
-        }
+        // let color
+        // if (item.total_1st_dose >= 1000000) {
+        //     color = "#27AE60";
+        // }
+        // if (item.total_1st_dose >= 500000 && item.total_1st_dose < 1000000 ) {
+        //     color = "#52BE80";
+        // }
+        // if (item.total_1st_dose < 500000 ) {
+        //     color = "#7DCEA0";
+        // }
         return(
-            <View style={styles.vaccineBox, { backgroundColor: color }}>
+            // <View style={styles.vaccineBox, { backgroundColor: color }}>
+            // {/* <View style={styles.vaccineBox}> */}
+            //     <TouchableOpacity onPress={() => {
+            //         console.log("Hello " + item.province)
+            //     }}>
+            //         <Text style={styles.provinceText}>{ item.province }</Text>
+            //         <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้นอย่างน่อย 1 เข็ม { item.total_1st_dose }</Text>
+            //         <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้นอย่างน่อย 2 เข็ม { item.total_2nd_dose }</Text>
+            //         <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้น 3 เข็ม { item.total_3rd_dose }</Text>
+            //     </TouchableOpacity>
+            // </View>
+            <View style={{ flex: 1, margin: 5, backgroundColor: "#E5E7E9", borderRadius: 5, height: 50, justifyContent: 'center' }}>
             {/* <View style={styles.vaccineBox}> */}
                 <TouchableOpacity onPress={() => {
                     console.log("Hello " + item.province)
                 }}>
-                    <Text style={styles.provinceText}>{ item.province }</Text>
-                    <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้นอย่างน่อย 1 เข็ม { item.total_1st_dose }</Text>
-                    <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้นอย่างน่อย 2 เข็ม { item.total_2nd_dose }</Text>
-                    <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้น 3 เข็ม { item.total_3rd_dose }</Text>
+                    <View style={{ justifyContent: 'center', marginTop: -5 }}>
+                        <Text style={styles.provinceText}>{ item.province }</Text>
+                    </View>
+                    <View style={{ marginLeft: 150, justifyContent: 'center', marginTop: -23}}>
+                        <Text style={styles.itemText}>{ item.total_1st_dose }</Text>
+                    </View>
+                    <View style={{ marginLeft: 235, justifyContent: 'center', marginTop: -23}}>
+                        <Text style={styles.itemText}>{ item.total_2nd_dose }</Text>
+                    </View>
+                    <View style={{ marginLeft: 325, justifyContent: 'center', marginTop: -23}}>
+                        <Text style={styles.itemText}>{ item.total_3rd_dose }</Text>
+                    </View>
                 </TouchableOpacity>
             </View>
         )
@@ -405,19 +418,25 @@ class Vaccine extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.searchContainer}>
-                    <TextInput style={styles.searchInput}
+                    <SearchBar containerStyle={{ width: "100%",borderWidth: 1, borderRadius: 10}}
+                        placeholder="ค้นหาจังหวัด..."
+                        onChangeText={(text) => this.searchFilter(text)}
+                        value={this.state.searchText}
+                        platform="android"
+                    />
+                    {/* <TextInput style={styles.searchInput}
                         placeholder="ค้นหาจังหวัด"
                         value={this.state.searchText}
                         onChangeText={(text) => this.searchFilter(text)}
                         underlineColorAndroid="transparent"
-                    ></TextInput>
-                    {/* <View style={styles.button}>
-                        <TouchableOpacity style={styles.touchButton} onPress={this.onPressSearch}>
-                            <Text style={{ color: "#fff" }}>Search</Text>
-                        </TouchableOpacity>
-                    </View> */}
-                    <Image source={require('../assets/image/search.png')} style={{width: 30, height: 30, alignSelf: 'flex-start', marginLeft:15, marginTop: -33}}/>
+                    ></TextInput> */}
                     <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 16, alignSelf: 'flex-end', marginTop: 5 }}>ข้อมูลอัพเดตเมื่อ { this.state.updateDate }</Text>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <Text style={{ marginLeft: -15, marginRight: 10, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>Province</Text>
+                    <Text style={{ marginLeft: 30, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>1st</Text>
+                    <Text style={{ fontSize: 18, fontFamily: 'Kanit_700Bold'}}>2nd</Text>
+                    <Text style={{ marginRight: -5, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>3td</Text>
                 </View>
                 <View style={styles.itemRow}>
                     <FlatList 
@@ -435,11 +454,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+        marginBottom: 60
     },
     vaccineBox: {
-        // backgroundColor: "#27AE60",
-        borderRadius: 10,
-        margin: 5
+        backgroundColor: "#27AE60",
+        borderRadius: 5,
+        margin: 5,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     searchContainer: {
         // flex: 1,
@@ -451,7 +474,7 @@ const styles = StyleSheet.create({
     },
     itemRow: {
         flex: 5,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
     },
     provinceText: {
         fontSize: 18,
@@ -467,7 +490,7 @@ const styles = StyleSheet.create({
         fontFamily: "Kanit-Regular"
     },
     searchInput: {
-        width: "85%",
+        width: "100%",
         height: 35,
         borderRadius: 5,
         borderWidth: 1,
