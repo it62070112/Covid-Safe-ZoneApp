@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View, ScrollView, SafeAreaView, VirtualizedView } from "react-native";
+import { FlatList, StyleSheet, Text, View, ScrollView, SafeAreaView, VirtualizedView, TouchableOpacity } from "react-native";
 import axios from "axios";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
 import { StatusBar } from 'expo-status-bar';
-// import MyChart from "./MyChart";
-import LineChartCovid from "../components/LineChartCovid";
+import { FontAwesome5 } from '@expo/vector-icons';
+import NewCaseLineChart from "../components/NewCaseLineChart";
+import DailyReportCovidProvince from "./DailyReportProvince";
+import SplashPermission from "../components/SplashPermission";
 
 class DailyReport extends Component {
 
@@ -48,8 +50,7 @@ class DailyReport extends Component {
     renderDailyReportData = ({ item }) => {
         return (
             <View style={{ backgroundColor: '#48C9B0' }}>
-                <Text style={{ fontSize: 35, marginTop: 20, marginBottom: 5, color: '#fff', marginLeft: 10, fontFamily: "Kanit-Medium" }}>Covid 19</Text>
-                <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 16, alignSelf: 'flex-end', marginRight: 5, }}>ข้อมูลอัพเดตเมื่อ : { item.update_date }</Text>
+                <Text style={{ fontFamily: 'Kanit-Medium', fontSize: 16, alignSelf: 'flex-end', marginRight: 10, color: '#fff' }}>อัพเดต : { item.update_date }</Text>
                 <View style={styles.dailyReportContainer}>
                     <View style={styles.newCaseBox}>
                         <Text style={styles.titleText}>ผู้ติดเชื้อรายใหม่</Text>
@@ -81,10 +82,9 @@ class DailyReport extends Component {
                 <View style={styles.container}>
                     {/* <Text style={{ marginLeft: 5, fontSize: 16 }}>อัตราการติดเชื้อรายวัน</Text> */}
                     <View style={styles.chartView}>
-                        <LineChartCovid />
+                        <NewCaseLineChart />
                     </View>
                 </View>
-                <StatusBar style="dark"/>
             </View>
         )
     }
@@ -93,7 +93,8 @@ class DailyReport extends Component {
             return <AppLoading />
         }
         return (
-            <SafeAreaView style={{ backgroundColor: "#fff", }}>
+            <SafeAreaView style={styles.container}>
+                <SplashPermission />
                 <FlatList nestedScrollEnabled
                     data={ this.state.dailyReportData }
                     renderItem={ this.renderDailyReportData }
@@ -107,8 +108,7 @@ class DailyReport extends Component {
 const styles =StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-
+        backgroundColor: '#48C9B0'
     },
     dailyReportContainer: {
         flex: 1,
@@ -220,74 +220,9 @@ const styles =StyleSheet.create({
     },
     chartView: {
         flex: 1,
-        backgroundColor: '#48C9B0'
-    }
+        marginBottom: 60,
+        // backgroundColor: '#48C9B0'
+    },
 })
 
 export default DailyReport;
-// import React, { useEffect, useState } from "react";
-// import { FlatList, StyleSheet, Text, View } from "react-native";
-// import axios from "axios";
-// import { 
-//     Kanit_400Regular,
-//     Kanit_500Medium,
-//     Kanit_600SemiBold,
-//     Kanit_700Bold,
-//   } from '@expo-google-fonts/kanit'
-// import { useFonts } from "expo-font";
-// import AppLoading from "expo-app-loading";
-
-// const DailyReport = () => {
-//     const [dailyReportData, setDailyReportData] = useState([])
-
-//     useEffect(() => {
-//         axios.get('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all')
-//         .then((response) => {
-//             setDailyReportData(response.data)
-//             console.log(response.data)
-//         })
-//         .catch((error) => {
-//             console.log(error)
-//         })
-//     }, [])
-
-//     let [fontsLoaded] = useFonts({
-//         Kanit_400Regular,
-//         Kanit_500Medium,
-//         Kanit_600SemiBold,
-//         Kanit_700Bold,
-//     })
-//     if (!fontsLoaded) {
-//         return <AppLoading />
-//     }
-
-//     const renderDailyReportData = ({ item }) => {
-//         return (
-//             <View>
-//                 <Text style={{ fontFamily: 'Kanit_400Regular', fontSize: 20 }}>new case : { item.new_case }</Text>
-//                 <Text style={{ fontFamily: 'Kanit_400Regular', fontSize: 20 }}>update_date : { item.update_date }</Text>
-//             </View>
-//         )
-//     }
-//     return (
-//         <View style={styles.container}>
-//             <FlatList 
-//                 data={ dailyReportData }
-//                 renderItem={ renderDailyReportData }
-//                 keyExtractor={item => item.txn_date}
-//             />
-//             {/* <Text style={{ fontFamily: 'Kanit_400Regular', fontSize: 20 }}>Hello DailyReport Page</Text>
-//             <Text>{ props.newCase }</Text> */}
-//         </View>
-//     )
-// }
-
-// const styles =StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         justifyContent: "center",
-//         alignItems: "center",
-//     }
-// })
-
-// export default DailyReport;

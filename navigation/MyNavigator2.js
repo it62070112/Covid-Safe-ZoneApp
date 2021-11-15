@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 //navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,11 +20,15 @@ import DailyReportCovidProvince from "../screens/DailyReportProvince";
 import SplashPermission from "../components/SplashPermission";
 import AddInfoVaccine from "../screens/AddInfoVaccine";
 import Home from "../screens/Home";
+import AllChartScreen from "../screens/AllChartScreen";
 
 //icon
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+//component
+import CustomHeaderButton from "../components/CustomHeaderButton";
 
 //fonts
 import { 
@@ -37,9 +42,8 @@ import AppLoading from "expo-app-loading";
 
 const TabBar = createBottomTabNavigator();
 const StackSplash = createNativeStackNavigator();
-const StackProvince = createNativeStackNavigator();
-const DrawerReport = createDrawerNavigator();
-const DrawerMap = createDrawerNavigator();
+const StackDailyReport = createNativeStackNavigator();
+// const StackProvince = createNativeStackNavigator();
 
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
@@ -49,13 +53,26 @@ function SplashScreenFunc({ navigation }) {
         <SplashScreen />
     )
 }
-
+//Stack 
+function StackDailyReportFunc() {
+    return (
+        <StackDailyReport.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+        >
+            <StackDailyReport.Screen name="DailyReport" component={DailyReport} />
+            <StackDailyReport.Screen name="DailyReportCovidProvince" component={DailyReportCovidProvince} />
+            <StackDailyReport.Screen name="AllChartScreen" component={AllChartScreen} />
+        </StackDailyReport.Navigator>
+    )
+}
 //TabBar
-function TabBarNavigatorFunc() {
+function TabBarNavigatorFunc({ navigation }) {
     return (
         <TabBar.Navigator initialRouteName={"Home"}
             screenOptions={{
-                tabBarActiveTintColor: "#27AE60",
+                tabBarActiveTintColor: "#48C9B0",
                 tabBarInactiveTintColor: "#AAB7B8",
                 tabBarLabelStyle: {
                     fontSize: 15,
@@ -65,35 +82,41 @@ function TabBarNavigatorFunc() {
                     height: 60,
                     position: 'absolute',
                     borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20
-                    // backgroundColor: '#27AE60'
+                    borderTopRightRadius: 20,
+                    // backgroundColor: '#F2F3F4'
                 }
             }}
         >
-            <TabBar.Screen name="Home" component={Home}
+            <TabBar.Screen name="Home" component={StackDailyReportFunc}
                 options={{
                     title: "Covid 19",
                     headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular',
+                        fontFamily: 'Kanit_500Medium',
+                        fontSize: 35,
+                        color: '#fff'
                     },
-                    // headerShown: false,
                     headerStyle: {
-                        height: 20,
                         backgroundColor: '#48C9B0'
                     },
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="home" size={24} color={ color } />
-                    }
+                    },
+                    headerRight: () => (
+                        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                          <Item iconName="list-ul" onPress={() => { navigation.navigate("DailyReportCovidProvince") }}/>
+                          <Item iconName="chart-area" onPress={() => { navigation.navigate("AllChartScreen") }}/>
+                        </HeaderButtons>
+                    ),
                 }}
             />
-            <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}
+            <TabBar.Screen name="HospitalMap" component={HospitalMap}
                 options={{
-                    // headerShown: false,
+                    title: "ศูนย์ฉีดวัคซีน",
                     headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular',
+                        fontFamily: 'Kanit_400Regular'
                     },
                     tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
+                        return <FontAwesome5 name="hospital-alt" size={24} color={ color } />
                     }
                 }}
             />
@@ -107,14 +130,14 @@ function TabBarNavigatorFunc() {
                     }
                 }}
             />
-            <TabBar.Screen name="HospitalMap" component={HospitalMap}
+            <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}
                 options={{
-                    title: "ศูนย์ฉีดวัคซีน",
+                    // headerShown: false,
                     headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular'
+                        fontFamily: 'Kanit_400Regular',
                     },
                     tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="hospital-alt" size={24} color={ color } />
+                        return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
                     }
                 }}
             />
@@ -144,7 +167,7 @@ export default function MyNavigator2() {
                 <StackSplash.Screen name="SplashScreen" component={SplashScreenFunc}/>
                 {/* <StackSplash.Screen name="SplashPermission" component={SplashPermission}/> */}
                 <StackSplash.Screen name="HomeAll" component={TabBarNavigatorFunc}/>
-                <StackSplash.Screen name="AddInfoVaccine" component={AddInfoVaccine}/>
+                {/* <StackSplash.Screen name="AddInfoVaccine" component={AddInfoVaccine}/> */}
             </StackSplash.Navigator>
         </NavigationContainer>
     )

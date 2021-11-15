@@ -36,7 +36,7 @@ import AppLoading from "expo-app-loading";
 const TabBar = createBottomTabNavigator();
 const StackSplash = createNativeStackNavigator();
 const StackProvince = createNativeStackNavigator();
-// const StackMap = createNativeStackNavigator();
+const StackMap = createNativeStackNavigator();
 const DrawerReport = createDrawerNavigator();
 const DrawerMap = createDrawerNavigator();
 
@@ -51,27 +51,27 @@ function SplashScreenFunc({ navigation }) {
 }
 
 //Stack Map
-// function StackMapFunc({ navigation }) {
-//     return (
-//         <StackMap.Navigator>
-//             <StackMap.Screen name="Map" component={MapMain}
-//                 options={{
-//                     headerRight: () => (
-//                         <TouchableOpacity
-//                             style={styles.buttonHeatMap}
-//                             onPress={() => {
-//                                 navigation.navigate("HeatMap")
-//                             }}
-//                         >
-//                             <Text style={{ color: "#fff", fontSize: 17, fontFamily: 'Kanit_600SemiBold' }}>HeatMap</Text>
-//                         </TouchableOpacity>
-//                     )
-//                 }}
-//             />
-//             <StackMap.Screen name="HeatMap" component={HeatMap}/>
-//         </StackMap.Navigator>
-//     )
-// }
+function StackMapFunc({ navigation }) {
+    return (
+        <StackMap.Navigator>
+            <StackMap.Screen name="Map" component={MapMain}
+                options={{
+                    headerRight: () => (
+                        <TouchableOpacity
+                            style={styles.buttonHeatMap}
+                            onPress={() => {
+                                navigation.navigate("HeatMap")
+                            }}
+                        >
+                            <Text style={{ color: "#fff", fontSize: 17, fontFamily: 'Kanit_600SemiBold' }}>HeatMap</Text>
+                        </TouchableOpacity>
+                    )
+                }}
+            />
+            <StackMap.Screen name="HeatMap" component={HeatMap}/>
+        </StackMap.Navigator>
+    )
+}
 
 //Drawer Map
 function DrawerMapFunc() {
@@ -155,15 +155,7 @@ function TabBarNavigatorFunc() {
                 }
             }}
         >
-            {/* <TabBar.Screen name="MapMain" component={StackMapFunc}
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => {
-                        return <Entypo name="map" size={24} color={color}/>
-                    }
-                }}
-            /> */}
-            <TabBar.Screen name="MapMain" component={DrawerMapFunc}
+            <TabBar.Screen name="MapMain" component={StackMapFunc}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color }) => {
@@ -171,6 +163,14 @@ function TabBarNavigatorFunc() {
                     }
                 }}
             />
+            {/* <TabBar.Screen name="MapMain" component={DrawerMapFunc}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({ color }) => {
+                        return <Entypo name="map" size={24} color={color}/>
+                    }
+                }}
+            /> */}
             <TabBar.Screen name="HospitalMap" component={HospitalMap}
                 options={{
                     title: "ศูนย์ฉีดวัคซีน",
