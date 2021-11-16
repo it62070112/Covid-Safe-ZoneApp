@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -104,7 +106,23 @@ const DailyReportCovidProvince = () => {
                             <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -30 }}>ทั้งหมด</Text>
                         </View>
                     </View>
+<<<<<<< HEAD
                 </View>
+            </View>
+            <View style={styles.itemContainer}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <Text style={{ marginLeft: -5, marginRight: 40, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>Province</Text>
+                    <Text style={{ marginLeft: 30, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>New Case</Text>
+                    <Text style={{ fontSize: 18, fontFamily: 'Kanit_700Bold'}}>Total</Text>
+                    <Text style={{ marginRight: -5, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>Death</Text>
+=======
+>>>>>>> 61acc70079fdbe8928beceba2a853f8bf4c5014c
+                </View>
+                <FlatList 
+                    data={dailyProvinceData}
+                    renderItem={renderReportProvinceData}
+                    keyExtractor={item => item.province}
+                />
             </View>
             <View style={styles.itemContainer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
