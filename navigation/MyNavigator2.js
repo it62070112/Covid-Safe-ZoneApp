@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 //navigation
@@ -45,6 +45,23 @@ const StackSplash = createNativeStackNavigator();
 const StackDailyReport = createNativeStackNavigator();
 // const StackProvince = createNativeStackNavigator();
 
+const CustomTabBarButton = ({ children, navigation }) => {
+    return (
+        <TouchableOpacity
+            style={{
+                top: -10,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+            onPress={() => navigation.navigate("AddInfoVaccine")}
+        >
+            <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}>
+                <FontAwesome5 name="plus" size={24} color="#fff"/>
+            </View>
+        </TouchableOpacity>
+    )
+}
+
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
         navigation.navigate("HomeAll")
@@ -84,7 +101,8 @@ function TabBarNavigatorFunc({ navigation }) {
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20,
                     // backgroundColor: '#F2F3F4'
-                }
+                },
+                // tabBarShowLabel: false
             }}
         >
             <TabBar.Screen name="Home" component={StackDailyReportFunc}
@@ -111,10 +129,13 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="HospitalMap" component={HospitalMap}
                 options={{
-                    title: "ศูนย์ฉีดวัคซีน",
+                    headerStyle: {
+                        backgroundColor: '#48C9B0'
+                    },
                     headerTitleStyle: {
                         fontFamily: 'Kanit_400Regular'
                     },
+                    tabBarLabel: "ศูนย์ฉีดวัคซีน",
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="hospital-alt" size={24} color={ color } />
                     }
@@ -122,12 +143,28 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="AddInfoVaccine" component={AddInfoVaccine}
                 options={{
+                    headerStyle: {
+                        backgroundColor: '#48C9B0'
+                    },
                     headerTitleStyle: {
                         fontFamily: 'Kanit_400Regular'
                     },
-                    // tabBarIcon: ({ color }) => {
-                    //     return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
-                    // }
+                    tabBarButton: () => {
+                        return (
+                            <TouchableOpacity
+                                style={{
+                                    top: -10,
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}
+                                onPress={() => navigation.navigate("AddInfoVaccine")}
+                            >
+                                <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: '#48C9B0', justifyContent: 'center', alignItems: 'center' }}>
+                                    <FontAwesome5 name="plus" size={28} color="#fff"/>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }
                 }}
             />
             <TabBar.Screen name="MapMain" component={MapMain}
@@ -135,6 +172,10 @@ function TabBarNavigatorFunc({ navigation }) {
                     headerTitleStyle: {
                         fontFamily: 'Kanit_400Regular'
                     },
+                    headerStyle: {
+                        backgroundColor: '#48C9B0'
+                    },
+                    tabBarLabel: "Map",
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
                     }
@@ -142,10 +183,13 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}
                 options={{
-                    // headerShown: false,
+                    headerStyle: {
+                        backgroundColor: '#48C9B0'
+                    },
                     headerTitleStyle: {
                         fontFamily: 'Kanit_400Regular',
                     },
+                    tabBarLabel: "Vaccine",
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
                     }
