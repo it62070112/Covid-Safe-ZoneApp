@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import {
     LineChart,
     BarChart,
@@ -17,52 +17,49 @@ import {
   } from '@expo-google-fonts/kanit'
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import NewCaseLineChart from "../components/NewCaseLineChart";
-import NewRecoverLineChart from "../components/NewRecoverLineChart";
-import DeathLineChart from "../components/DeathLineChart";
 
-const AllChartScreen = () => {
-    // const [resData, setResData] = useState([])
-    // const [loading, setLoading] = useState(true)
-    // useEffect(() => {
-    //     axios.get("https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/cases/national-timeseries.json")
-    //     .then((response) => {
-    //         setResData(response.data)
-    //         setLoading(false)
-    //     }).catch((error) => {
-    //         console.log(error)
-    //     })
-    //     return () => {}
-    // }, [])
+const NewRecoverLineChart = () => {
+    const [resData, setResData] = useState([])
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        axios.get("https://covid19.ddc.moph.go.th/api/Cases/timeline-cases-all")
+        .then((response) => {
+            setResData(response.data)
+            setLoading(false)
+        }).catch((error) => {
+            console.log(error)
+        })
+        return () => {}
+    }, [])
     
-    // let [fontsLoaded] = useFonts({
-    //     Kanit_400Regular,
-    //     Kanit_500Medium,
-    //     Kanit_600SemiBold,
-    //     Kanit_700Bold,
-    // })
-    // if (!fontsLoaded) {
-    //     return <AppLoading />
-    // }
-
-    // const SliceData = resData.slice(304)
-    // const dataChart = []
-    // // console.log("SliceData : ", SliceData)
-    // SliceData.map((item, index) => {
-    //     return dataChart.push(item.NewConfirmed)
-    // })
+    let [fontsLoaded] = useFonts({
+        Kanit_400Regular,
+        Kanit_500Medium,
+        Kanit_600SemiBold,
+        Kanit_700Bold,
+    })
+    if (!fontsLoaded) {
+        return <AppLoading />
+    }
     
-    // const date = []
-    // for (let i = 1; SliceData.length >= i; i++) {
-    //     date.push(i.toString())
-    //     // console.log(date)
-    // }
+    const SliceData = resData.slice(214)
+    const dataChart = []
+    // console.log("SliceData : ", SliceData)
+    SliceData.map((item, index) => {
+        return dataChart.push(item.new_recovered)
+    })
+    
+    const date = []
+    for (let i = 1; SliceData.length >= i; i++) {
+        date.push(i.toString())
+        // console.log(date)
+    }
     return (
         <View style={styles.container}>
-            {/* {
+            {
                 !loading ?         
                 <View style={styles.container}>
-                    <Text style={styles.header}>New Case</Text>
+                    <Text style={styles.header}>รักษาหาย</Text>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <LineChart
                             data={{
@@ -79,9 +76,9 @@ const AllChartScreen = () => {
                             chartConfig={{
                                 backgroundGradientFrom: '#fff',
                                 backgroundGradientTo: '#fff',
-                                color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
+                                color: (opacity = 1) => `rgba(39, 174, 96, ${opacity})`,
                                 style: {
-                                    // borderRadius: 16,
+                                    borderRadius: 5,
                                 },
                                     
                             }}
@@ -93,12 +90,7 @@ const AllChartScreen = () => {
                     </View>
                 </View>
                 : null
-            } */}
-            <ScrollView>
-                <NewCaseLineChart />
-                <NewRecoverLineChart />
-                <DeathLineChart />
-            </ScrollView>
+            }
         </View>
     );
 };
@@ -106,8 +98,8 @@ const AllChartScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#48C9B0',
-        marginBottom: 50
+        backgroundColor: '#48C9B0',
+        // marginTop: -20
     },
     header: {
         color: "#fff",
@@ -116,4 +108,4 @@ const styles = StyleSheet.create({
         marginLeft: 10
     }
 });
-export default AllChartScreen;
+export default NewRecoverLineChart;

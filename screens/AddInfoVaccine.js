@@ -24,10 +24,6 @@ const AddInfoVaccine = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.titleText}>AddInfoVaccine</Text>
-            <Button 
-                title="Add location"
-                onPress={() => {}}
-            />
         </View>
     );
 };

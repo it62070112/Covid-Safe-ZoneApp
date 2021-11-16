@@ -22,7 +22,7 @@ const NewCaseLineChart = () => {
     const [resData, setResData] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        axios.get("https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/cases/national-timeseries.json")
+        axios.get("https://covid19.ddc.moph.go.th/api/Cases/timeline-cases-all")
         .then((response) => {
             setResData(response.data)
             setLoading(false)
@@ -42,11 +42,11 @@ const NewCaseLineChart = () => {
         return <AppLoading />
     }
     
-    const SliceData = resData.slice(304)
+    const SliceData = resData.slice(214)
     const dataChart = []
     // console.log("SliceData : ", SliceData)
     SliceData.map((item, index) => {
-        return dataChart.push(item.NewConfirmed)
+        return dataChart.push(item.new_case)
     })
     
     const date = []
@@ -59,7 +59,7 @@ const NewCaseLineChart = () => {
             {
                 !loading ?         
                 <View style={styles.container}>
-                    <Text style={styles.header}>New Case</Text>
+                    <Text style={styles.header}>ผู้ติดเชื้อรายใหม่</Text>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <LineChart
                             data={{
@@ -76,7 +76,7 @@ const NewCaseLineChart = () => {
                             chartConfig={{
                                 backgroundGradientFrom: '#fff',
                                 backgroundGradientTo: '#fff',
-                                color: (opacity = 1) => `rgba(231, 76, 60, ${opacity})`,
+                                color: (opacity = 1) => `rgba(8, 79, 236, ${opacity})`,
                                 style: {
                                     borderRadius: 5,
                                 },
