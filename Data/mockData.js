@@ -773,110 +773,77 @@ export const GreenZone = [
     },
 ]
 
-// export const NewCaseInMont = [
-//     {
-//         "txn_date": "2021-11-01",
-//         "new_case": 8165,
-//         "total_case": 1920189,
-//         "new_case_excludeabroad": 8156,
-//         "total_case_excludeabroad": 1913725,
-//         "new_death": 55,
-//         "total_death": 19260,
-//         "new_recovered": 9574,
-//         "total_recovered": 1801921,
-//         "update_date": "2021-11-01 07:31:04"
-//     },
-//     {
-//         "txn_date": "2021-11-02",
-//         "new_case": 7574,
-//         "total_case": 1927763,
-//         "new_case_excludeabroad": 7564,
-//         "total_case_excludeabroad": 1921289,
-//         "new_death": 78,
-//         "total_death": 19338,
-//         "new_recovered": 8279,
-//         "total_recovered": 1810200,
-//         "update_date": "2021-11-02 07:31:16"
-//     },
-//     {
-//         "txn_date": "2021-11-03",
-//         "new_case": 7679,
-//         "total_case": 1935442,
-//         "new_case_excludeabroad": 7672,
-//         "total_case_excludeabroad": 1928961,
-//         "new_death": 56,
-//         "total_death": 19394,
-//         "new_recovered": 8482,
-//         "total_recovered": 1818682,
-//         "update_date": "2021-11-03 07:30:52"
-//     },
-//     {
-//         "txn_date": "2021-11-04",
-//         "new_case": 7982,
-//         "total_case": 1943424,
-//         "new_case_excludeabroad": 7972,
-//         "total_case_excludeabroad": 1936933,
-//         "new_death": 68,
-//         "total_death": 19462,
-//         "new_recovered": 8029,
-//         "total_recovered": 1826711,
-//         "update_date": "2021-11-04 07:31:25"
-//     },
-//     {
-//         "txn_date": "2021-11-05",
-//         "new_case": 8148,
-//         "total_case": 1951572,
-//         "new_case_excludeabroad": 8133,
-//         "total_case_excludeabroad": 1945066,
-//         "new_death": 80,
-//         "total_death": 19542,
-//         "new_recovered": 8238,
-//         "total_recovered": 1834949,
-//         "update_date": "2021-11-05 07:31:39"
-//     },
-//     {
-//         "txn_date": "2021-11-06",
-//         "new_case": 8467,
-//         "total_case": 1960039,
-//         "new_case_excludeabroad": 8454,
-//         "total_case_excludeabroad": 1953520,
-//         "new_death": 69,
-//         "total_death": 19611,
-//         "new_recovered": 8288,
-//         "total_recovered": 1843237,
-//         "update_date": "2021-11-06 07:31:10"
-//     },
-//     {
-//         "txn_date": "2021-11-07",
-//         "new_case": 7960,
-//         "total_case": 1967999,
-//         "new_case_excludeabroad": 7949,
-//         "total_case_excludeabroad": 1961469,
-//         "new_death": 53,
-//         "total_death": 19664,
-//         "new_recovered": 6950,
-//         "total_recovered": 1850187,
-//         "update_date": "2021-11-07 07:30:52"
-//     },
-//     {
-//         "txn_date": "2021-11-08",
-//         "new_case": 7592,
-//         "total_case": 1975591,
-//         "new_case_excludeabroad": 7582,
-//         "total_case_excludeabroad": 1969051,
-//         "new_death": 39,
-//         "total_death": 19703,
-//         "new_recovered": 7495,
-//         "total_recovered": 1857682,
-//         "update_date": "2021-11-08 07:30:40"
-//     }
-// ]
-
 export const HospitalLocation = [
     {
         id: 1,
         hospitalName: 'โรงพยาบาลปทุมธานี',
         latitude: 14.020671765181852,
         longitude: 100.52332718185117
+    },
+    {
+        id: 2,
+        hospitalName: 'โรงพยาบาลพญาไท 2',
+        latitude: 13.77022799590134,
+        longitude: 100.540458851027
+    },
+    {
+        id: 3,
+        hospitalName: 'โรงพยาบาลเกษมราษฎร์',
+        latitude: 13.776426947045218,
+        longitude: 100.67409597897002
+    },
+    {
+        id: 4,
+        hospitalName: 'โรงพยาบาลการุญเวช',
+        latitude: 14.117336652898196,
+        longitude: 100.61787805747379
+    },
+    {
+        id: 5,
+        hospitalName: 'โรงพยาบาลเวิลด์เมดิคอล',
+        latitude: 13.905152292258055,
+        longitude: 100.52481646827552
+    },
+    {
+        id: 6,
+        hospitalName: 'โรงพยาบาลเทพธารินทร',
+        latitude: 13.714791257386107,
+        longitude: 100.57676248176799
+    },
+    {
+        id: 7,
+        hospitalName: 'โรงพยาบาลวิมุต',
+        latitude: 13.788742745720633,
+        longitude: 100.54824375293379
+    },
+    {
+        id: 8,
+        hospitalName: 'โรงพยาบาลเอเชีย',
+        latitude: 13.8709708807659673,
+        longitude: 100.49336437413442
+    },
+    {
+        id: 9,
+        hospitalName: 'โรงพยาบาลพริ้นซ์สุวรรณภูมิ',
+        latitude: 13.657234502174962,
+        longitude: 100.66590071244805
+    },
+    {
+        id: 10,
+        hospitalName: 'โรงพยาบาลนนทเวช',
+        latitude: 13.855754923207911,
+        longitude: 100.54286322594506
+    },
+    {
+        id: 11,
+        hospitalName: 'โรงพยาบาลจุฬาภรณ์',
+        latitude: 13.881169472040401,
+        longitude: 100.57812047462873
+    },
+    {
+        id: 12,
+        hospitalName: 'โรงพยาบาลวิภาวดี',
+        latitude: 13.846485049873754,
+        longitude: 100.56212463176945
     },
 ]

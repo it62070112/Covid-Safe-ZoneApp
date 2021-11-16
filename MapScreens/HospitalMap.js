@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        fontFamily: 'Kanit_600SemiBold'
     },
     map: {
         width: Dimensions.get('window').width,
