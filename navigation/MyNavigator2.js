@@ -45,23 +45,6 @@ const StackSplash = createNativeStackNavigator();
 const StackDailyReport = createNativeStackNavigator();
 // const StackProvince = createNativeStackNavigator();
 
-const CustomTabBarButton = ({ children, navigation }) => {
-    return (
-        <TouchableOpacity
-            style={{
-                top: -10,
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}
-            onPress={() => navigation.navigate("AddInfoVaccine")}
-        >
-            <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}>
-                <FontAwesome5 name="plus" size={24} color="#fff"/>
-            </View>
-        </TouchableOpacity>
-    )
-}
-
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
         navigation.navigate("HomeAll")
