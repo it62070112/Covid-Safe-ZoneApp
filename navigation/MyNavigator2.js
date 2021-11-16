@@ -107,13 +107,6 @@ function TabBarNavigatorFunc({ navigation }) {
                           <Item iconName="chart-area" onPress={() => { navigation.navigate("AllChartScreen") }}/>
                         </HeaderButtons>
                     ),
-<<<<<<< HEAD
-                }}
-            />
-            <TabBar.Screen name="HospitalMap" component={HospitalMap}
-                options={{
-                    title: "ศูนย์ฉีดวัคซีน",
-=======
                 }}
             />
             <TabBar.Screen name="HospitalMap" component={HospitalMap}
@@ -124,21 +117,6 @@ function TabBarNavigatorFunc({ navigation }) {
                     },
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="hospital-alt" size={24} color={ color } />
-                    }
-                }}
-            />
-            <TabBar.Screen name="AddInfoVaccine" component={AddInfoVaccine}
-                options={{
->>>>>>> 61acc70079fdbe8928beceba2a853f8bf4c5014c
-                    headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular'
-                    },
-                    tabBarIcon: ({ color }) => {
-<<<<<<< HEAD
-                        return <FontAwesome5 name="hospital-alt" size={24} color={ color } />
-=======
-                        return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
->>>>>>> 61acc70079fdbe8928beceba2a853f8bf4c5014c
                     }
                 }}
             />

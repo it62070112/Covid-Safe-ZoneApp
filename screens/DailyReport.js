@@ -108,12 +108,9 @@ class DailyReport extends Component {
 const styles =StyleSheet.create({
     container: {
         flex: 1,
-<<<<<<< HEAD
         // backgroundColor: '#48C9B0'
         // backgroundColor: '#17A589',
-=======
         backgroundColor: '#48C9B0'
->>>>>>> 61acc70079fdbe8928beceba2a853f8bf4c5014c
     },
     dailyReportContainer: {
         flex: 1,
@@ -226,10 +223,7 @@ const styles =StyleSheet.create({
     chartView: {
         flex: 1,
         marginBottom: 60,
-<<<<<<< HEAD
-=======
         // backgroundColor: '#48C9B0'
->>>>>>> 61acc70079fdbe8928beceba2a853f8bf4c5014c
     },
 })
 
