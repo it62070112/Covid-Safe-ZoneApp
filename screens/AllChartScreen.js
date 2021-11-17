@@ -36,6 +36,7 @@ const AllChartScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff',
         // backgroundColor: '#48C9B0',
         // marginBottom: 50
     },

@@ -49,8 +49,8 @@ class DailyReport extends Component {
 
     renderDailyReportData = ({ item }) => {
         return (
-            <View style={{ backgroundColor: '#48C9B0' }}>
-                <Text style={{ fontFamily: 'Kanit-Medium', fontSize: 16, alignSelf: 'flex-end', marginRight: 10, color: '#fff' }}>อัพเดต : { item.update_date }</Text>
+            <View style={{ backgroundColor: '#fff' }}>
+                <Text style={{ fontFamily: 'Kanit-Medium', fontSize: 16, alignSelf: 'flex-end', marginRight: 10, color: 'black' }}>อัพเดต : { item.update_date }</Text>
                 <View style={styles.dailyReportContainer}>
                     <View style={styles.newCaseBox}>
                         <Text style={styles.titleText}>ผู้ติดเชื้อรายใหม่</Text>
@@ -80,7 +80,7 @@ class DailyReport extends Component {
                     </View>
                 </View>
                 <View style={styles.container}>
-                    {/* <Text style={{ marginLeft: 5, fontSize: 16 }}>อัตราการติดเชื้อรายวัน</Text> */}
+                    {/* <Text style={{ marginLeft: 5, marginTop: 20, fontSize: 18, fontFamily: 'Kanit-Regular', marginBottom: -30 }}>อัตราการติดเชื้อรายวัน</Text> */}
                     <View style={styles.chartView}>
                         <NewCaseLineChart />
                     </View>
@@ -108,9 +108,8 @@ class DailyReport extends Component {
 const styles =StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#48C9B0'
         // backgroundColor: '#17A589',
-        backgroundColor: '#48C9B0'
+        backgroundColor: '#fff'
     },
     dailyReportContainer: {
         flex: 1,
