@@ -10,7 +10,10 @@ import {
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { HospitalLocation } from "../Data/mockData";
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
+
 import { Button } from "react-native-elements/dist/buttons/Button";
 import * as Location from 'expo-location';
 
@@ -79,7 +82,7 @@ const HospitalMap = () =>  {
             //     ];
             // })
         }
-        console.log(data.length, '=', HospitalLocation.length)
+        // console.log(data.length, '=', HospitalLocation.length)
         if (data.length == HospitalLocation.length) {
             let current_min = null;
             for (let i = 0; i < data.length; i++) {
@@ -94,14 +97,14 @@ const HospitalMap = () =>  {
                 }
                 // console.log(JSON.stringify(element));
             }
-            console.log('current_min: ' + current_min);
+            // console.log('current_min: ' + current_min);
             for (let i = 0; i < data.length; i++) {
                 const element = data[i];
                 if (element.distance != current_min) {
                     // console.log(JSON.stringify(element));
                 }
             }
-            console.log('###');
+            // console.log('###');
         }
     }, []);
 
@@ -134,7 +137,7 @@ const HospitalMap = () =>  {
                     latitude: 14.0208391,
                     longitude: 100.52502759999993,
                     latitudeDelta: 0.8,
-                    longitudeDelta: 0.8,
+                    longitudeDelta: 0.7,
                 }}
             >
                 {
@@ -145,7 +148,8 @@ const HospitalMap = () =>  {
                                 key={index}
                                 title={val.hospitalName}
                                 >
-                                <MaterialCommunityIcons name="hospital-marker" size={35} color="red" />
+                                {/* <MaterialCommunityIcons name="hospital-marker" size={35} color="red" /> */}
+                                <FontAwesome5 name="hospital-symbol" size={25} color="#F52D2D" />
                             </Marker>
                         )
                     })
@@ -154,29 +158,23 @@ const HospitalMap = () =>  {
                     coordinate={{
                         latitude: lat_geo,
                         longitude: long_geo
+                        // latitude: 13.970414,
+                        // longitude: 100.509573
                     }}
-                    title="home"
+                    title="your home"
                     >
-                    <MaterialCommunityIcons name="home" size={35} color="blue" />
+                    <MaterialCommunityIcons name="home" size={45} color="#2958D1" />
                 </Marker>
             </MapView>
-            {/* <Text>
-                Lat: {lat_geo}
-            </Text>
-            <Text>
-                Long: {long_geo}
-            </Text> */}
-            {/* <Text>
-                {data.length}: {JSON.stringify(data)}
-            </Text> */}
+
             <FlatList
                 data={data}
                 renderItem={
                     ({item}) => (
                         <TouchableOpacity style={styles.listItem}>
                             <View style={styles.listItemView}>
-                                <Text styles={styles.listItemText}>
-                                    "{item.title}":
+                                <Text style={styles.listItemText}>
+                                    {item.title} :
                                     ระยะทาง {item.distance} กม.
                                 </Text>
                             </View>
@@ -212,6 +210,7 @@ const styles = StyleSheet.create({
     },
     listItemText: {
         fontSize: 18,
+        fontFamily: 'Kanit_400Regular'
     },
 });
 

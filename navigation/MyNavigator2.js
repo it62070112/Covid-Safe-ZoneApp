@@ -110,11 +110,14 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="HospitalMap" component={HospitalMap}
                 options={{
+                    headerTitle: "ศูนย์ฉีดวัคซีน",
                     headerStyle: {
                         backgroundColor: '#48C9B0'
                     },
                     headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular'
+                        fontSize: 26,
+                        fontFamily: 'Kanit_500Medium',
+                        color: "#fff"
                     },
                     tabBarLabel: "ศูนย์ฉีดวัคซีน",
                     tabBarIcon: ({ color }) => {
@@ -124,11 +127,14 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="AddInfoVaccine" component={AddInfoVaccine}
                 options={{
+                    headerTitle: "เพิ่มข้อมูลการฉีดวัคซีน",
                     headerStyle: {
                         backgroundColor: '#48C9B0'
                     },
                     headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular'
+                        fontSize: 26,
+                        fontFamily: 'Kanit_500Medium',
+                        color: "#fff"
                     },
                     tabBarButton: () => {
                         return (
@@ -150,11 +156,14 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="MapMain" component={MapMain}
                 options={{
-                    headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular'
-                    },
+                    headerTitle: "Map",
                     headerStyle: {
                         backgroundColor: '#48C9B0'
+                    },
+                    headerTitleStyle: {
+                        fontSize: 26,
+                        fontFamily: 'Kanit_500Medium',
+                        color: "#fff"
                     },
                     tabBarLabel: "Map",
                     tabBarIcon: ({ color }) => {
@@ -164,11 +173,14 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}
                 options={{
+                    headerTitle: "ข้อมูลการฉีดวัคซีน",
                     headerStyle: {
                         backgroundColor: '#48C9B0'
                     },
                     headerTitleStyle: {
-                        fontFamily: 'Kanit_400Regular',
+                        fontSize: 26,
+                        fontFamily: 'Kanit_500Medium',
+                        color: "#fff"
                     },
                     tabBarLabel: "Vaccine",
                     tabBarIcon: ({ color }) => {
