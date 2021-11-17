@@ -55,8 +55,6 @@ const SplashPermission = ({ navigation }) => {
         // setText(locationJson);
         console.log(location.coords.latitude)
         console.log(location.coords.longitude)
-        // navigation.navigate("AddInfoVaccine", { location_latitude: location.coords.latitude, location_longitude: location.coords.longitude})
-        // navigation.navigate("HomeAll")
     }
 
     let [fontsLoaded] = useFonts({

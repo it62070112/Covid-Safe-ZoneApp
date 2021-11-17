@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, FlatList } from "react-native";
-import MapView, { Circle, Marker, Callout } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Circle, Marker, Callout } from 'react-native-maps';
 import { 
     Kanit_400Regular,
     Kanit_500Medium,
@@ -139,6 +139,7 @@ const HospitalMap = () =>  {
                     latitudeDelta: 0.8,
                     longitudeDelta: 0.7,
                 }}
+                provider={ PROVIDER_GOOGLE }
             >
                 {
                     HospitalLocation.map((val, index) => {

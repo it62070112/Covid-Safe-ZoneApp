@@ -19,7 +19,7 @@ import ProvinceDetail from "../screens/ProvinceDetail";
 import DailyReportCovidProvince from "../screens/DailyReportProvince";
 import SplashPermission from "../components/SplashPermission";
 import AddInfoVaccine from "../screens/AddInfoVaccine";
-import Home from "../screens/Home";
+// import Home from "../screens/Home";
 import AllChartScreen from "../screens/AllChartScreen";
 
 //icon
@@ -42,6 +42,7 @@ const TabBar = createBottomTabNavigator();
 const StackSplash = createNativeStackNavigator();
 const StackDailyReport = createNativeStackNavigator();
 // const StackProvince = createNativeStackNavigator();
+const StackMap = createNativeStackNavigator();
 
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
@@ -63,6 +64,36 @@ function StackDailyReportFunc() {
             <StackDailyReport.Screen name="DailyReportCovidProvince" component={DailyReportCovidProvince} />
             <StackDailyReport.Screen name="AllChartScreen" component={AllChartScreen} />
         </StackDailyReport.Navigator>
+    )
+}
+
+//Stack
+function StackMapFunc({ navigation }) {
+    return (
+        <StackMap.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#48C9B0'
+                },
+                headerTitleStyle: {
+                    fontFamily: 'Kanit_500Medium',
+                    fontSize: 26,
+                    color: '#fff'
+                }
+                // headerShown: false
+            }}
+        >
+            <StackMap.Screen name="Map" component={MapMain} 
+                options={{
+                    headerRight: () => (
+                        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                          <Item iconName="map-marked-alt" onPress={() => { navigation.navigate("HeatMap") }}/>
+                        </HeaderButtons>
+                    ),
+                }}
+            />
+            <StackMap.Screen name="HeatMap" component={HeatMap} />
+        </StackMap.Navigator>
     )
 }
 //TabBar
@@ -154,7 +185,7 @@ function TabBarNavigatorFunc({ navigation }) {
                     }
                 }}
             />
-            <TabBar.Screen name="MapMain" component={MapMain}
+            <TabBar.Screen name="MapMain" component={StackMapFunc}
                 options={{
                     headerTitle: "Map",
                     headerStyle: {
@@ -168,7 +199,13 @@ function TabBarNavigatorFunc({ navigation }) {
                     tabBarLabel: "Map",
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
-                    }
+                    },
+                    // headerRight: () => (
+                    //     <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                    //       <Item iconName="map-marked-alt" onPress={() => { navigation.navigate("HeatMap") }}/>
+                    //     </HeaderButtons>
+                    // ),
+                    headerShown: false
                 }}
             />
             <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}

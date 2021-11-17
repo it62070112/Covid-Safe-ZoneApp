@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions, Platform, Alert } from 'react-native';
-import MapView, { Marker, Circle, Callout } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Circle, Callout } from 'react-native-maps';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import SplashPermission from '../components/SplashPermission';
@@ -18,8 +18,8 @@ export default function Map({ route }) {
                         latitudeDelta: 0.123,
                         longitudeDelta: 0.123,
                     }}
+                    provider={ PROVIDER_GOOGLE }
                 >
-                    {/* <Marker coordinate={{ latitude: route.params.location_latitude, longitude: route.params.location_longitude }}> */}
                     <Marker coordinate={{ latitude: 14.0208391, longitude: 100.52502759999993 }}>
                         <Callout>
                             <Text style={{ fontSize: 20 }}>Callout TEXT</Text>
