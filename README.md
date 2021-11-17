@@ -2,7 +2,8 @@
 
 *****ถ้า Run ไม่ได้ ให้ npm install*****
 
-*จำเป็นต้องติดตั้ง*
+ถ้ารันไม่ได้ลองแก้ตาม Error ดูจ้า
+
 expo install @react-navigation/native
 expo install react-native-screens react-native-safe-area-context
 
@@ -11,7 +12,7 @@ expo install @react-navigation/native-stack
 expo install @react-navigation/bottom-tabs
 
 *****************************************************************************
-*ใช้ Drawer ต้องติดตั้ง Gesture ด้วย*
+
 expo install @react-navigation/drawer
 expo install react-native-gesture-handler react-native-reanimated
 
