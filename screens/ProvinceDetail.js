@@ -1,10 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const ProvinceDetail = ({ route }) => {
+const ProvinceDetail = () => {
     return (
         <View style={styles.container}>
-            <Text>{ route.params.province }</Text>
             <Text>Hello ProvinceDetail Page</Text>
         </View>
     )

@@ -6,7 +6,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerContent, DrawerToggleButton } from "@react-navigation/drawer";
 
 //screens
 import MapMain from "../MapScreens/MapMain";
@@ -24,6 +24,9 @@ import AllChartScreen from "../screens/AllChartScreen";
 
 //icon
 import { FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons'; 
+
 
 //component
 import CustomHeaderButton from "../components/CustomHeaderButton";
@@ -42,7 +45,8 @@ const TabBar = createBottomTabNavigator();
 const StackSplash = createNativeStackNavigator();
 const StackDailyReport = createNativeStackNavigator();
 // const StackProvince = createNativeStackNavigator();
-const StackMap = createNativeStackNavigator();
+// const StackMap = createNativeStackNavigator();
+const DrawerVaccine = createDrawerNavigator();
 
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
@@ -68,32 +72,86 @@ function StackDailyReportFunc() {
 }
 
 //Stack
-function StackMapFunc({ navigation }) {
+// function StackMapFunc({ navigation }) {
+//     return (
+//         <StackMap.Navigator
+//             screenOptions={{
+//                 headerStyle: {
+//                     backgroundColor: '#48C9B0'
+//                 },
+//                 headerTitleStyle: {
+//                     fontFamily: 'Kanit_500Medium',
+//                     fontSize: 26,
+//                     color: '#fff'
+//                 }
+//                 // headerShown: false
+//             }}
+//         >
+//             <StackMap.Screen name="Map" component={MapMain} 
+//                 options={{
+//                     headerRight: () => (
+//                         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+//                           <Item iconName="map-marked-alt" onPress={() => { navigation.navigate("HeatMap") }}/>
+//                         </HeaderButtons>
+//                     ),
+//                 }}
+//             />
+//             <StackMap.Screen name="HeatMap" component={HeatMap} />
+//         </StackMap.Navigator>
+//     )
+// }
+
+//Drawer
+function DrawerVaccineFunc({ navigation }) {
     return (
-        <StackMap.Navigator
+        <DrawerVaccine.Navigator initialRouteName="VaccineCoverage"
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#48C9B0'
                 },
                 headerTitleStyle: {
-                    fontFamily: 'Kanit_500Medium',
                     fontSize: 26,
-                    color: '#fff'
-                }
-                // headerShown: false
+                    fontFamily: 'Kanit_500Medium',
+                    color: "#fff"
+                },
+                drawerActiveTintColor: "#48C9B0", 
+                drawerInactiveTintColor: "#707B7C",
+                // headerLeft: () => {
+                //     return (
+                //         <TouchableOpacity onPress={() => toggle(DrawerToggleButton)} >
+                //             <View>
+                //                 <Feather name="menu" size={24} color="#fff" />
+                //             </View>
+                //         </TouchableOpacity>
+                //     )
+                // }
             }}
         >
-            <StackMap.Screen name="Map" component={MapMain} 
+            <DrawerVaccine.Screen name="VaccineCoverage" component={VaccineCoverage} 
                 options={{
-                    headerRight: () => (
-                        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                          <Item iconName="map-marked-alt" onPress={() => { navigation.navigate("HeatMap") }}/>
-                        </HeaderButtons>
-                    ),
+                    headerTitle: "ข้อมูลการฉีดวัคซีน",
+                    drawerIcon: ({ color }) => {
+                        return <Foundation name="clipboard-notes" size={24} color={ color } />
+                    }
                 }}
             />
-            <StackMap.Screen name="HeatMap" component={HeatMap} />
-        </StackMap.Navigator>
+            <DrawerVaccine.Screen name="ProvinceDetail" component={ProvinceDetail} 
+                options={{
+                    title: "ข้อมูลการฉีดแยกตามผู้ผลิต",
+                    headerTitle: "ข้อมูลการฉีดแยกตามผู้ผลิต",
+                    drawerIcon: ({ color }) => {
+                        return <Foundation name="clipboard-notes" size={24} color={ color } />
+                    }
+                }}
+            />
+            <DrawerVaccine.Screen name="HeatMap" component={HeatMap} 
+                options={{
+                    drawerIcon: ({ color }) => {
+                        return <FontAwesome5 name="map-marked-alt" size={24} color={ color }/>
+                    }
+                }}
+            />
+        </DrawerVaccine.Navigator>
     )
 }
 //TabBar
@@ -185,7 +243,7 @@ function TabBarNavigatorFunc({ navigation }) {
                     }
                 }}
             />
-            <TabBar.Screen name="MapMain" component={StackMapFunc}
+            {/* <TabBar.Screen name="MapMain" component={StackMapFunc}
                 options={{
                     headerTitle: "Map",
                     headerStyle: {
@@ -200,15 +258,27 @@ function TabBarNavigatorFunc({ navigation }) {
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
                     },
-                    // headerRight: () => (
-                    //     <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                    //       <Item iconName="map-marked-alt" onPress={() => { navigation.navigate("HeatMap") }}/>
-                    //     </HeaderButtons>
-                    // ),
                     headerShown: false
                 }}
+            /> */}
+            <TabBar.Screen name="MapMain" component={MapMain}
+                options={{
+                    headerTitle: "Map",
+                    headerStyle: {
+                        backgroundColor: '#48C9B0'
+                    },
+                    headerTitleStyle: {
+                        fontSize: 26,
+                        fontFamily: 'Kanit_500Medium',
+                        color: "#fff"
+                    },
+                    tabBarLabel: "Map",
+                    tabBarIcon: ({ color }) => {
+                        return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
+                    },
+                }}
             />
-            <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}
+            {/* <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}
                 options={{
                     headerTitle: "ข้อมูลการฉีดวัคซีน",
                     headerStyle: {
@@ -223,6 +293,24 @@ function TabBarNavigatorFunc({ navigation }) {
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
                     }
+                }}
+            /> */}
+            <TabBar.Screen name="VaccineCoverageAll" component={DrawerVaccineFunc}
+                options={{
+                    headerTitle: "ข้อมูลการฉีดวัคซีน",
+                    headerStyle: {
+                        backgroundColor: '#48C9B0'
+                    },
+                    headerTitleStyle: {
+                        fontSize: 26,
+                        fontFamily: 'Kanit_500Medium',
+                        color: "#fff"
+                    },
+                    tabBarLabel: "Vaccine",
+                    tabBarIcon: ({ color }) => {
+                        return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
+                    },
+                    headerShown: false
                 }}
             />
         </TabBar.Navigator>
