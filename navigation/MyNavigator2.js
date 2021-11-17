@@ -23,9 +23,7 @@ import Home from "../screens/Home";
 import AllChartScreen from "../screens/AllChartScreen";
 
 //icon
-import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 //component
 import CustomHeaderButton from "../components/CustomHeaderButton";
