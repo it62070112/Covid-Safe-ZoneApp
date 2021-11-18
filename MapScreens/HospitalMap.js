@@ -48,10 +48,13 @@ const HospitalMap = () =>  {
                 'https://maps.googleapis.com/maps/api/'
                 + 'directions/json?'
                 + 'origin='
+                + lat_geo
+                + ','
+                + long_geo
+                + '&destination='
                 + HospitalLocation[i].latitude
                 + ','
                 + HospitalLocation[i].longitude
-                + '&destination=13.725816541961574,100.64163781801308'
                 + '&key=AIzaSyBDAbqYFsZYkYVPkja-T6YCDFHkgR-YJtc'
             );
             // let movie_item = ''
