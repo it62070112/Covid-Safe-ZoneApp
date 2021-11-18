@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const ProvinceDetail = () => {
+const TypeOfVaccine = () => {
     return (
         <View style={styles.container}>
             <Text>Hello ProvinceDetail Page</Text>
@@ -17,4 +17,4 @@ const styles =StyleSheet.create({
     }
 })
 
-export default ProvinceDetail;
+export default TypeOfVaccine;

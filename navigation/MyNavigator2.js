@@ -15,7 +15,7 @@ import DailyReport from "../screens/DailyReport";
 import VaccineCoverage from "../screens/VaccineCoverage";
 import HospitalMap from "../MapScreens/HospitalMap";
 import SplashScreen from "../components/SplashScreen";
-import ProvinceDetail from "../screens/ProvinceDetail";
+import TypeOfVaccine from "../screens/TypeOfVaccine";
 import DailyReportCovidProvince from "../screens/DailyReportProvince";
 import SplashPermission from "../components/SplashPermission";
 import AddInfoVaccine from "../screens/AddInfoVaccine";
@@ -26,7 +26,6 @@ import AllChartScreen from "../screens/AllChartScreen";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons'; 
-
 
 //component
 import CustomHeaderButton from "../components/CustomHeaderButton";
@@ -45,7 +44,6 @@ const TabBar = createBottomTabNavigator();
 const StackSplash = createNativeStackNavigator();
 const StackDailyReport = createNativeStackNavigator();
 // const StackProvince = createNativeStackNavigator();
-// const StackMap = createNativeStackNavigator();
 const DrawerVaccine = createDrawerNavigator();
 
 function SplashScreenFunc({ navigation }) {
@@ -71,36 +69,6 @@ function StackDailyReportFunc() {
     )
 }
 
-//Stack
-// function StackMapFunc({ navigation }) {
-//     return (
-//         <StackMap.Navigator
-//             screenOptions={{
-//                 headerStyle: {
-//                     backgroundColor: '#48C9B0'
-//                 },
-//                 headerTitleStyle: {
-//                     fontFamily: 'Kanit_500Medium',
-//                     fontSize: 26,
-//                     color: '#fff'
-//                 }
-//                 // headerShown: false
-//             }}
-//         >
-//             <StackMap.Screen name="Map" component={MapMain} 
-//                 options={{
-//                     headerRight: () => (
-//                         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-//                           <Item iconName="map-marked-alt" onPress={() => { navigation.navigate("HeatMap") }}/>
-//                         </HeaderButtons>
-//                     ),
-//                 }}
-//             />
-//             <StackMap.Screen name="HeatMap" component={HeatMap} />
-//         </StackMap.Navigator>
-//     )
-// }
-
 //Drawer
 function DrawerVaccineFunc({ navigation }) {
     return (
@@ -116,15 +84,6 @@ function DrawerVaccineFunc({ navigation }) {
                 },
                 drawerActiveTintColor: "#48C9B0", 
                 drawerInactiveTintColor: "#707B7C",
-                // headerLeft: () => {
-                //     return (
-                //         <TouchableOpacity onPress={() => toggle(DrawerToggleButton)} >
-                //             <View>
-                //                 <Feather name="menu" size={24} color="#fff" />
-                //             </View>
-                //         </TouchableOpacity>
-                //     )
-                // }
             }}
         >
             <DrawerVaccine.Screen name="VaccineCoverage" component={VaccineCoverage} 
@@ -135,7 +94,7 @@ function DrawerVaccineFunc({ navigation }) {
                     }
                 }}
             />
-            <DrawerVaccine.Screen name="ProvinceDetail" component={ProvinceDetail} 
+            <DrawerVaccine.Screen name="TypeOfVaccine" component={TypeOfVaccine} 
                 options={{
                     title: "ข้อมูลการฉีดแยกตามผู้ผลิต",
                     headerTitle: "ข้อมูลการฉีดแยกตามผู้ผลิต",

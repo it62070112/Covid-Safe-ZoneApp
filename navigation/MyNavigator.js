@@ -14,7 +14,7 @@ import DailyReport from "../screens/DailyReport";
 import VaccineCoverage from "../screens/VaccineCoverage";
 import HospitalMap from "../MapScreens/HospitalMap";
 import SplashScreen from "../components/SplashScreen";
-import ProvinceDetail from "../screens/ProvinceDetail";
+import TypeOfVaccine from "../screens/TypeOfVaccine";
 import DailyReportCovidProvince from "../screens/DailyReportProvince";
 import SplashPermission from "../components/SplashPermission";
 
