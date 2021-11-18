@@ -55,7 +55,7 @@ function SplashScreenFunc({ navigation }) {
     )
 }
 //Stack 
-function StackDailyReportFunc() {
+function StackDailyReportFunc({ navigation }) {
     return (
         <StackDailyReport.Navigator
             screenOptions={{

@@ -165,9 +165,9 @@ const HospitalMap = () =>  {
                         // latitude: 13.970414,
                         // longitude: 100.509573
                     }}
-                    title="your home"
+                    title="Your Here"
                     >
-                    <MaterialCommunityIcons name="home" size={45} color="#2958D1" />
+                    <MaterialCommunityIcons name="human-handsdown" size={45} color="#2958D1" />
                 </Marker>
             </MapView>
 
@@ -177,10 +177,7 @@ const HospitalMap = () =>  {
                     ({item}) => (
                         <TouchableOpacity style={styles.listItem}>
                             <View style={styles.listItemView}>
-                                <Text style={styles.listItemText}>
-                                    {item.title} :
-                                    ระยะทาง {item.distance} กม.
-                                </Text>
+                                <Text style={styles.listItemText}>{item.title} : ระยะทาง {item.distance} กม.</Text>
                             </View>
                         </TouchableOpacity>
                     )
@@ -206,7 +203,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#f8f8f8',
         borderBottomWidth: 1,
         borderColor: '#eee',
-        width: 500
+        width: "100%",
+        alignItems: 'flex-start'
     },
     listItemView: {
         flexDirection: 'row',

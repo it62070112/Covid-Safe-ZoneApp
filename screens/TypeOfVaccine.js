@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 const TypeOfVaccine = () => {
     return (
         <View style={styles.container}>
-            <Text>Hello ProvinceDetail Page</Text>
+            <Text>Hello TypeOfVaccine Page</Text>
         </View>
     )
 }

@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         // backgroundColor: "#27AE60",
-        // backgroundColor: '#47BAEA',
+        backgroundColor: '#47BAEA',
         // backgroundColor: '#48C9B0',
         // backgroundColor: '#574EDA',
-        backgroundColor: '#2E86C1'
+        // backgroundColor: '#2E86C1'
     },
     titleText: {
         fontSize: 50,

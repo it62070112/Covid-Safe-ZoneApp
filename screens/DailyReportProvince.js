@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -14,17 +12,30 @@ import AppLoading from "expo-app-loading";
 import axios from 'axios';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const DailyReportCovidProvince = () => {
+const DailyReportCovidProvince = ({ route }) => {
     const [selectProvince, setSelectProvince] = useState("")
     const [dailyProvinceData, setDailyProvinceData] = useState([])
     const [masterData, setMasterData] = useState([])
-    const [updateDate, setUpdateDate] = useState("")
+    // const [updateDate, setUpdateDate] = useState("")
+    const [totalCase, setTotalCase] = useState("")
+    const [totalRecovered, setTotalRecovered] = useState("")
+    const [totalDeath, setTotalDeath] = useState("")
     useEffect(() => {
         axios.get("https://covid19.ddc.moph.go.th/api/Cases/today-cases-by-provinces")
         .then((response) => {
             setDailyProvinceData(response.data)
             setMasterData(response.data)
-            setUpdateDate(response.data[0].update_date)
+            // setUpdateDate(response.data[0].update_date)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+        axios.get("https://covid19.ddc.moph.go.th/api/Cases/today-cases-all")
+        .then((response) => {
+            // setTotalCase(response.data)
+            setTotalCase(response.data[0].total_case)
+            setTotalRecovered(response.data[0].total_recovered)
+            setTotalDeath(response.data[0].total_death)
         }).catch((error) => {
             console.log(error)
         })
@@ -75,7 +86,6 @@ const DailyReportCovidProvince = () => {
             setSelectProvince(itemValue)
         }
     }
-
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -94,16 +104,16 @@ const DailyReportCovidProvince = () => {
                 <View style={{ alignItems: 'center' }}>
                     <View style={styles.totalBox}>
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -30 }}>ทั้งหมด</Text>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -30 }}>{  }</Text>
+                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_600SemiBold', marginLeft: 0 }}>ผู้ติดเชื้อทั้งหมด</Text>
+                            <Text style={{ fontSize: 25, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: 5 }}>{ totalCase }</Text>
                         </View>
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -30 }}>รักษาหาย</Text>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -30 }}>ทั้งหมด</Text>
+                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_600SemiBold' }}>รักษาหาย</Text>
+                            <Text style={{ fontSize: 25, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -10 }}>{ totalRecovered }</Text>
                         </View>
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -30 }}>ตาย</Text>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -30 }}>ทั้งหมด</Text>
+                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_600SemiBold' }}>ตาย</Text>
+                            <Text style={{ fontSize: 25, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -20 }}>{ totalDeath }</Text>
                         </View>
                     </View>
                 </View>
@@ -216,14 +226,14 @@ const styles = StyleSheet.create({
     },
     totalBox: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         // alignItems: 'center',
         marginTop: 5,
-        // marginBottom: 5,
         backgroundColor: '#3D7CD4',
-        width: '95%',
-        height: 80,
+        width: '98%',
+        height: 90,
         borderRadius: 10,
+        padding: 15
     }
 })
 export default DailyReportCovidProvince;

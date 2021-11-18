@@ -55,14 +55,14 @@ class DailyReport extends Component {
                     <View style={styles.newCaseBox}>
                         <Text style={styles.titleText}>ผู้ติดเชื้อรายใหม่</Text>
                         <Text style={styles.valueText}>{ item.new_case }</Text>
-                        {/* <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-start', marginLeft: 5, fontFamily: 'Kanit-Regular' }}>สะสม</Text> */}
-                        {/* <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-end', marginTop: -28, marginRight: 5, fontFamily: 'Kanit-Regular' }}>{ item.total_case }</Text> */}
+                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-start', marginLeft: 5, fontFamily: 'Kanit-Regular' }}>สะสม</Text>
+                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-end', marginTop: -28, marginRight: 5, fontFamily: 'Kanit-Regular' }}>{ item.total_case }</Text>
                     </View>
                     <View style={styles.deathCase}>
                         <Text style={styles.titleText}>ผู้เสียชีวิตรายใหม่</Text>
                         <Text style={styles.valueText}>{ item.new_death }</Text>
-                        {/* <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-start', marginLeft: 5, fontFamily: 'Kanit-Regular' }}>สะสม</Text> */}
-                        {/* <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-end', marginTop: -28, marginRight: 5, fontFamily: 'Kanit-Regular' }}>19730</Text> */}
+                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-start', marginLeft: 5, fontFamily: 'Kanit-Regular' }}>สะสม</Text>
+                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-end', marginTop: -28, marginRight: 5, fontFamily: 'Kanit-Regular' }}>19730</Text>
                     </View>
                     <View style={styles.recovered}>
                         <Text style={styles.titleText}>รักษาหาย</Text>
@@ -118,8 +118,9 @@ const styles =StyleSheet.create({
         flexWrap: 'wrap'
     },
     newCaseBox: {
-        width: 185,
+        width: 195,
         height: 150,
+        padding: 10,
         backgroundColor: '#E74C3C',
         borderRadius: 20,
         margin: 5,
@@ -137,8 +138,9 @@ const styles =StyleSheet.create({
         elevation: 6,
     },
     deathCase: {
-        width: 185,
+        width: 195,
         height: 150,
+        padding: 10,
         backgroundColor: '#797D7F',
         borderRadius: 20,
         margin: 5,
@@ -156,8 +158,9 @@ const styles =StyleSheet.create({
         elevation: 6,
     },
     recovered: {
-        width: 120,
+        width: 125,
         height: 150,
+        padding: 5,
         backgroundColor: '#27AE60',
         borderRadius: 20,
         margin: 5,
@@ -174,8 +177,9 @@ const styles =StyleSheet.create({
         elevation: 6,
     },
     active: {
-        width: 120,
+        width: 125,
         height: 150,
+        padding: 5,
         backgroundColor: '#47BAEA',
         borderRadius: 20,
         margin: 5,
@@ -192,8 +196,9 @@ const styles =StyleSheet.create({
         elevation: 6,
     },
     serious: {
-        width: 120,
+        width: 125,
         height: 150,
+        padding: 5,
         backgroundColor: '#AF7AC5',
         borderRadius: 20,
         margin: 5,

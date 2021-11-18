@@ -43,6 +43,7 @@ const SplashPermission = ({ navigation }) => {
         ])
     }, []);
 
+    
     async function getLocation() {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
