@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, FlatList } from "react-native";
-import MapView, { PROVIDER_GOOGLE, Circle, Marker, Callout } from 'react-native-maps';
+import MapView, { Circle, Marker, Callout } from 'react-native-maps';
 import { 
     Kanit_400Regular,
     Kanit_500Medium,
@@ -48,10 +48,13 @@ const HospitalMap = () =>  {
                 'https://maps.googleapis.com/maps/api/'
                 + 'directions/json?'
                 + 'origin='
+                + lat_geo
+                + ','
+                + long_geo
+                + '&destination='
                 + HospitalLocation[i].latitude
                 + ','
                 + HospitalLocation[i].longitude
-                + '&destination=13.725816541961574,100.64163781801308'
                 + '&key=AIzaSyBDAbqYFsZYkYVPkja-T6YCDFHkgR-YJtc'
             );
             // let movie_item = ''
@@ -139,7 +142,6 @@ const HospitalMap = () =>  {
                     latitudeDelta: 0.8,
                     longitudeDelta: 0.7,
                 }}
-                provider={ PROVIDER_GOOGLE }
             >
                 {
                     HospitalLocation.map((val, index) => {
