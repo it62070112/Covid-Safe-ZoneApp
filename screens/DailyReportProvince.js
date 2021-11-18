@@ -54,20 +54,22 @@ const DailyReportCovidProvince = ({ route }) => {
 
     const renderReportProvinceData = ({ item }) => {
         return(
-            <View style={{ flex: 1, margin: 5, backgroundColor: "#E5E7E9", borderRadius: 5, height: 50, justifyContent: 'center' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={styles.provinceText}>{ item.province }</Text>
+            <TouchableOpacity>
+                <View style={{ flex: 1, margin: 5, backgroundColor: "#E5E7E9", borderRadius: 5, height: 50, justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={styles.provinceText}>{ item.province }</Text>
+                    </View>
+                    <View style={{ flexDirection: 'column', backgroundColor: 'red', alignItems: 'center', marginLeft: 25 }}>
+                        <Text style={styles.itemText}>{ item.new_case }</Text>
+                    </View>
+                    <View style={{ flexDirection: 'column', backgroundColor: 'red', alignItems: 'center', marginLeft: 205 }}>
+                        <Text style={styles.itemText}>{ item.total_case }</Text>
+                    </View>
+                    <View style={{ flexDirection: 'column', backgroundColor: 'red', alignItems: 'center', marginLeft: 350 }}>
+                        <Text style={styles.itemText}>{ item.new_death }</Text>
+                    </View>
                 </View>
-                <View style={{ flexDirection: 'column', backgroundColor: 'red', alignItems: 'center', marginLeft: 25 }}>
-                    <Text style={styles.itemText}>{ item.new_case }</Text>
-                </View>
-                <View style={{ flexDirection: 'column', backgroundColor: 'red', alignItems: 'center', marginLeft: 205 }}>
-                    <Text style={styles.itemText}>{ item.total_case }</Text>
-                </View>
-                <View style={{ flexDirection: 'column', backgroundColor: 'red', alignItems: 'center', marginLeft: 350 }}>
-                    <Text style={styles.itemText}>{ item.new_death }</Text>
-                </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 
@@ -112,7 +114,7 @@ const DailyReportCovidProvince = ({ route }) => {
                             <Text style={{ fontSize: 25, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -10 }}>{ totalRecovered }</Text>
                         </View>
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_600SemiBold' }}>ตาย</Text>
+                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_600SemiBold', marginLeft: -11 }}>เสียชีวิต</Text>
                             <Text style={{ fontSize: 25, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: -20 }}>{ totalDeath }</Text>
                         </View>
                     </View>

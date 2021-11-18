@@ -11,26 +11,20 @@ import {
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 
-const SplashPermission = ({ navigation }) => {
-    const [location, setLocation] = useState([]);
-    const [errorMsg, setErrorMsg] = useState("");
-    const [isText, setText] = useState("Waiting..")
+const SplashPermission = () => {
+    // const [location, setLocation] = useState([]);
     useEffect(() => {
         Alert.alert('Safe-ZoneApp Permission', 'Safe-ZoneApp ขออนุญาตใช้ GPS', [
             {
                 text: 'Ask me later',
                 onPress: (() => {
-                    console.log('Ask me later pressed')
-                    setText("You pressed Ask me later location denied")
-                    // navigation.navigate("HomeAll")
+                    console.log('Ask me later location denied')
                 }),
             },
             {
                 text: 'Cancel',
                 onPress: (() => {
-                    console.log('Cancel Pressed')
-                    setText("You pressed Cancel location denied")
-                    // navigation.navigate("HomeAll")
+                    console.log('Cancel location denied')
                 }),
                 style: 'cancel',
             },
@@ -43,17 +37,16 @@ const SplashPermission = ({ navigation }) => {
         ])
     }, []);
 
-    
     async function getLocation() {
         let { status } = await Location.requestForegroundPermissionsAsync();
+        console.log("status : " + status)
         if (status !== 'granted') {
-            setErrorMsg('Permission to access location was denied');
+            console.log('Permission to access location was denied')
             return;
         }
         let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-        // const locationJson = JSON.stringify(location)
-        // setText(locationJson);
+        // setLocation(location);
+        // console.log("status : " + status)
         console.log(location.coords.latitude)
         console.log(location.coords.longitude)
     }

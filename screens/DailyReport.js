@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View, ScrollView, SafeAreaView, VirtualizedView, TouchableOpacity } from "react-native";
+import { FlatList, StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
 import axios from "axios";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import { FontAwesome5 } from '@expo/vector-icons';
 import NewCaseLineChart from "../components/NewCaseLineChart";
-import DailyReportCovidProvince from "./DailyReportProvince";
+// import DailyReportCovidProvince from "./DailyReportProvince";
 import SplashPermission from "../components/SplashPermission";
 
 class DailyReport extends Component {

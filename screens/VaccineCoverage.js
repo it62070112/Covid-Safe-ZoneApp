@@ -329,12 +329,21 @@ class Vaccine extends Component {
   
     // Item = ({ item, onPress }) => {
     //     return(
-    //         <View style={styles.vaccineBox}>
-    //             <TouchableOpacity onPress={onPress}>
-    //                 <Text style={styles.provinceText}>จังหวัด{ item.province }</Text>
-    //                 <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้นอย่างน่อย 1 เข็ม { item.total_1st_dose }</Text>
-    //                 <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้นอย่างน่อย 2 เข็ม { item.total_2nd_dose }</Text>
-    //                 <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้น 3 เข็ม { item.total_3rd_dose }</Text>
+    //         <View style={{ flex: 1, margin: 5, backgroundColor: "#E5E7E9", borderRadius: 5, height: 50, justifyContent: 'center' }}>
+    //         {/* <View style={styles.vaccineBox}> */}
+    //             <TouchableOpacity onPress={() => onPress}>
+    //                 <View style={{ justifyContent: 'center', marginTop: -5 }}>
+    //                     <Text style={styles.provinceText}>{ item.province }</Text>
+    //                 </View>
+    //                 <View style={{ marginLeft: 150, justifyContent: 'center', marginTop: -23}}>
+    //                     <Text style={styles.itemText}>{ item.total_1st_dose }</Text>
+    //                 </View>
+    //                 <View style={{ marginLeft: 235, justifyContent: 'center', marginTop: -23}}>
+    //                     <Text style={styles.itemText}>{ item.total_2nd_dose }</Text>
+    //                 </View>
+    //                 <View style={{ marginLeft: 325, justifyContent: 'center', marginTop: -23}}>
+    //                     <Text style={styles.itemText}>{ item.total_3rd_dose }</Text>
+    //                 </View>
     //             </TouchableOpacity>
     //         </View>
     //     )
@@ -382,11 +391,15 @@ class Vaccine extends Component {
             //         <Text style={styles.itemText}>ได้รับวัคซีนกระตุ้น 3 เข็ม { item.total_3rd_dose }</Text>
             //     </TouchableOpacity>
             // </View>
+
+
             <View style={{ flex: 1, margin: 5, backgroundColor: "#E5E7E9", borderRadius: 5, height: 50, justifyContent: 'center' }}>
             {/* <View style={styles.vaccineBox}> */}
-                <TouchableOpacity onPress={() => {
+                {/* <TouchableOpacity onPress={() => {
+                    this.props.navigation.navigate("TypeOfVaccine")
                     console.log("Hello " + item.province)
-                }}>
+                }}> */}
+                <TouchableOpacity>
                     <View style={{ justifyContent: 'center', marginTop: -5 }}>
                         <Text style={styles.provinceText}>{ item.province }</Text>
                     </View>
@@ -424,12 +437,6 @@ class Vaccine extends Component {
                         value={this.state.searchText}
                         platform="android"
                     />
-                    {/* <TextInput style={styles.searchInput}
-                        placeholder="ค้นหาจังหวัด"
-                        value={this.state.searchText}
-                        onChangeText={(text) => this.searchFilter(text)}
-                        underlineColorAndroid="transparent"
-                    ></TextInput> */}
                     <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 16, alignSelf: 'flex-end', marginTop: 5 }}>ข้อมูลอัพเดตเมื่อ { this.state.updateDate }</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
