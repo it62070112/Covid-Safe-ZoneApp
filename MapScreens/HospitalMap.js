@@ -158,8 +158,8 @@ const HospitalMap = () =>  {
                                 key={index}
                                 title={val.hospitalName}
                                 >
-                                {/* <MaterialCommunityIcons name="hospital-marker" size={35} color="red" /> */}
-                                <FontAwesome5 name="hospital-symbol" size={25} color="#F52D2D" />
+                                <MaterialCommunityIcons name="hospital-marker" size={35} color="red" />
+                                {/* <FontAwesome5 name="hospital-symbol" size={25} color="#F52D2D" /> */}
                             </Marker>
                         )
                     })

@@ -1,32 +1,35 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-//fonts
-import {
-    Kanit_400Regular,
-    Kanit_500Medium,
-    Kanit_600SemiBold,
-    Kanit_700Bold,
-} from '@expo-google-fonts/kanit'
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
+import { View, Text, StyleSheet, Button, LogBox, Alert } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
+import firebase from "../database/firebase";
 const AddInfoVaccine = () => {
-    let [fontsLoaded] = useFonts({
-        Kanit_400Regular,
-        Kanit_500Medium,
-        Kanit_600SemiBold,
-        Kanit_700Bold,
-    })
-    if (!fontsLoaded) {
-        return <AppLoading />
-    }
+    const latitude = useSelector((state) => state.LatLong.lat)
+    const longitude = useSelector((state) => state.LatLong.long)
+
+    var db = firebase.firestore();
+    const createLocation = () => {
+        return db.collection('location')
+            .add({
+                latitude: latitude,
+                longitude: longitude
+            })
+            .then((res) => {
+                LogBox.ignoreLogs(['Setting a timer for a long period of time'])
+                Alert.alert("Add Lat/Long Success")   
+            });
+    }; 
 
     return (
         <View style={styles.container}>
             <Text style={styles.titleText}>AddInfoVaccine</Text>
+            <Text>latitude : {latitude}</Text>
+            <Text>longitude : {longitude}</Text>
+            <Button title="Save" onPress={() => createLocation()}></Button>
         </View>
     );
-};
+
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -37,7 +40,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 50,
-        fontFamily: 'Kanit_700Bold',
+        fontFamily: 'Kanit-bold',
     },
 });
 

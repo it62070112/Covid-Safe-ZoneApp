@@ -10,15 +10,7 @@ import {
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import axios from 'axios';
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-} from "react-native-chart-kit";
-import { Line } from 'react-native-svg';
+import { BarChart } from "react-native-chart-kit";
 
 const TypeOfVaccine = ({ route }) => {
     const [selectProvince, setSelectProvince] = useState("")
