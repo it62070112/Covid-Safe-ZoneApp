@@ -32,7 +32,7 @@ const DailyReportCovidProvince = ({ route }) => {
 
         axios.get("https://covid19.ddc.moph.go.th/api/Cases/today-cases-all")
         .then((response) => {
-            // setTotalCase(response.data)
+            // console.log(response.data)
             setTotalCase(response.data[0].total_case)
             setTotalRecovered(response.data[0].total_recovered)
             setTotalDeath(response.data[0].total_death)
@@ -106,7 +106,7 @@ const DailyReportCovidProvince = ({ route }) => {
                 <View style={{ alignItems: 'center' }}>
                     <View style={styles.totalBox}>
                         <View style={{ flexDirection: 'column' }}>
-                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_600SemiBold', marginLeft: 0 }}>ผู้ติดเชื้อทั้งหมด</Text>
+                            <Text style={{ fontSize: 16, color: "#fff", fontFamily: 'Kanit_600SemiBold', marginLeft: 8 }}>ผู้ติดเชื้อทั้งหมด</Text>
                             <Text style={{ fontSize: 25, color: "#fff", fontFamily: 'Kanit_400Regular', marginLeft: 5 }}>{ totalCase }</Text>
                         </View>
                         <View style={{ flexDirection: 'column' }}>

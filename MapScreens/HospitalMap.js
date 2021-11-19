@@ -21,7 +21,12 @@ const HospitalMap = () =>  {
     let lat_geo = 13;
     let long_geo = 100;
 
-    const [location, setLocation] = useState(null);
+    const [location, setLocation] = useState({
+        coords: {
+            latitude: 13,
+            longitude: 100
+        }
+    });
     const [errorMsg, setErrorMsg] = useState(null);
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -35,44 +40,54 @@ const HospitalMap = () =>  {
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
         })();
+
+        let text = 'Waiting..';
+        if (errorMsg) {
+            text = errorMsg;
+        } else if (location) {
+            text = location.coords;
+            lat_geo = text.latitude;
+            long_geo = text.longitude;
+            setData([])
+            for (let i=0; i<HospitalLocation.length; i++) {
+                // let movie_url = (
+                //     'https://reactnative.dev/movies.json'
+                // );
+                let routes_url = (
+                    'https://maps.googleapis.com/maps/api/'
+                    + 'directions/json?'
+                    + 'origin='
+                    + lat_geo
+                    + ','
+                    + long_geo
+                    + '&destination='
+                    + HospitalLocation[i].latitude
+                    + ','
+                    + HospitalLocation[i].longitude
+                    + '&key=AIzaSyBDAbqYFsZYkYVPkja-T6YCDFHkgR-YJtc'
+                );
+                // let movie_item = ''
+                fetch(routes_url)
+                    .then((response) => response.json())
+                    .then((json) => {
+                        setData(prevItems => {
+                            return [
+                                ...prevItems,
+                                {
+                                    id: HospitalLocation[i].id,
+                                    title: HospitalLocation[i].hospitalName,
+                                    distance: json.routes[0].legs[0].distance.value / 1000,
+                                    // distance: 'JSON.stringify(text)',
+                                },
+                            ];
+                        })
+                    })
+                    .catch((error => console.log(error)))
+        }
         // fetch(movie_url)
         //     .then((response) => response.json())
         //     .then((json) => setData(json.movies))
         //     .catch((error => console.log(error)))
-        setData([])
-        for (let i=0; i<HospitalLocation.length; i++) {
-            // let movie_url = (
-            //     'https://reactnative.dev/movies.json'
-            // );
-            let routes_url = (
-                'https://maps.googleapis.com/maps/api/'
-                + 'directions/json?'
-                + 'origin='
-                + lat_geo
-                + ','
-                + long_geo
-                + '&destination='
-                + HospitalLocation[i].latitude
-                + ','
-                + HospitalLocation[i].longitude
-                + '&key=AIzaSyBDAbqYFsZYkYVPkja-T6YCDFHkgR-YJtc'
-            );
-            // let movie_item = ''
-            fetch(routes_url)
-                .then((response) => response.json())
-                .then((json) => {
-                    setData(prevItems => {
-                        return [
-                            ...prevItems,
-                            {
-                                id: HospitalLocation[i].id,
-                                title: HospitalLocation[i].hospitalName,
-                                distance: json.routes[0].legs[0].distance.value / 1000
-                            },
-                        ];
-                    })
-                })
-                .catch((error => console.log(error)))
             // setData(prevItems => {
             //     return [
             //         ...prevItems,
@@ -110,15 +125,6 @@ const HospitalMap = () =>  {
             // console.log('###');
         }
     }, []);
-
-    let text = 'Waiting..';
-    if (errorMsg) {
-        text = errorMsg;
-    } else if (location) {
-        text = location.coords;
-        lat_geo = text.latitude;
-        long_geo = text.longitude;
-    }
 
     let [fontsLoaded] = useFonts({
         Kanit_400Regular,
@@ -160,8 +166,8 @@ const HospitalMap = () =>  {
                 }
                 <Marker
                     coordinate={{
-                        latitude: lat_geo,
-                        longitude: long_geo
+                        latitude: location.coords.latitude,
+                        longitude: location.coords.longitude
                         // latitude: 13.970414,
                         // longitude: 100.509573
                     }}
@@ -177,7 +183,7 @@ const HospitalMap = () =>  {
                     ({item}) => (
                         <TouchableOpacity style={styles.listItem}>
                             <View style={styles.listItemView}>
-                                <Text style={styles.listItemText}>{item.title} : ระยะทาง {item.distance} กม.</Text>
+                                <Text style={styles.listItemText}>{item.title}  ระยะทาง {item.distance} กม.</Text>
                             </View>
                         </TouchableOpacity>
                     )
@@ -200,7 +206,7 @@ const styles = StyleSheet.create({
     },
     listItem: {
         padding: 15,
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#fff',
         borderBottomWidth: 1,
         borderColor: '#eee',
         width: "100%",

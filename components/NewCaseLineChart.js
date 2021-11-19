@@ -76,7 +76,7 @@ const NewCaseLineChart = () => {
                             chartConfig={{
                                 backgroundGradientFrom: '#fff',
                                 backgroundGradientTo: '#fff',
-                                color: (opacity = 1) => `rgba(8, 79, 236, ${opacity})`,
+                                color: (opacity = 1) => `rgba(231, 76, 60, ${opacity})`,
                                 style: {
                                     borderRadius: 5,
                                 },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     header: {
         // color: "#fff",
-        color: "#48C9B0",
+        color: "#E74C3C",
         fontFamily: "Kanit_600SemiBold",
         fontSize: 25,
         marginLeft: 10

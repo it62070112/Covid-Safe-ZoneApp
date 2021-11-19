@@ -20,7 +20,7 @@ import {
 } from "react-native-chart-kit";
 import { Line } from 'react-native-svg';
 
-const DailyReportCovidProvince = ({ route }) => {
+const TypeOfVaccine = ({ route }) => {
     const [selectProvince, setSelectProvince] = useState("")
     const [dailyProvinceData, setDailyProvinceData] = useState([])
     const [masterData, setMasterData] = useState([])
@@ -67,7 +67,7 @@ const DailyReportCovidProvince = ({ route }) => {
 
     const dataChart = []
     dataForChart.map((item, index) => {
-        return dataChart.push(item.AstraZeneca, item.Moderna, item.Pfizer, item.Sinopharm, item.Sinovac)
+        return dataChart.push(item.AstraZeneca, item['Johnson & Johnson'], item.Moderna, item.Pfizer, item.Sinopharm, item.Sinovac)
     })
     console.log("dataChart : " + dataChart)
 
@@ -76,12 +76,13 @@ const DailyReportCovidProvince = ({ route }) => {
             <View style={styles.containerChart}>
                 <BarChart
                     data={{
-                        labels: ['AstraZeneca', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'],
-                        labels: ['AstraZeneca', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'],
+                        labels: ['AstraZeneca', 'J&J', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'],
+                        // labels: ['AstraZeneca', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'],
                         datasets: [
                             {
                                 data: dataChart,
                                 colors: [
+                                    (opacity = 1) => '#229954',
                                     (opacity = 1) => '#229954',
                                     (opacity = 1) => '#27AE60',
                                     (opacity = 1) => '#52BE80',
@@ -101,7 +102,7 @@ const DailyReportCovidProvince = ({ route }) => {
                         backgroundGradientFrom: 'white',
                         backgroundGradientToOpacity: 0,
                         color: (opacity = 1) => `rgba(86, 101, 115, ${opacity})`,
-                        // barRadius: 10,
+                        barRadius: 5,
                         barPercentage: 0.3,
                         propsForLabels: {
                             fontSize: 12,
@@ -118,6 +119,7 @@ const DailyReportCovidProvince = ({ route }) => {
                     style={{
                         marginVertical: 8,
                         borderRadius: 5,
+                        marginLeft: -10
                     }}
                 />
             </View>
@@ -133,6 +135,12 @@ const DailyReportCovidProvince = ({ route }) => {
                         <Text style={styles.brandText}>AstraZeneca</Text>
                         <View>
                             <Text style={styles.itemText}>{ item.AstraZeneca } โดส</Text>
+                        </View>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={styles.brandText}>Johnson & Johnson</Text>
+                        <View>
+                            <Text style={styles.itemText}>{ item['Johnson & Johnson'] } โดส</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -283,4 +291,4 @@ const styles = StyleSheet.create({
         padding: 15
     }
 })
-export default DailyReportCovidProvince;
+export default TypeOfVaccine;

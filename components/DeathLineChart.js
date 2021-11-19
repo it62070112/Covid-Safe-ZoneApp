@@ -82,6 +82,7 @@ const DeathLineChart = () => {
                                 },
                                     
                             }}
+
                             style={{
                                 marginVertical: 8,
                                 borderRadius: 16,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     },
     header: {
         // color: "#fff",
-        color: "#48C9B0",
+        color: "#566573",
         fontFamily: "Kanit_600SemiBold",
         fontSize: 25,
         marginLeft: 10

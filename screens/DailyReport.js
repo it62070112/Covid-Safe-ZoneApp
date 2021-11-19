@@ -62,7 +62,7 @@ class DailyReport extends Component {
                         <Text style={styles.titleText}>ผู้เสียชีวิตรายใหม่</Text>
                         <Text style={styles.valueText}>{ item.new_death }</Text>
                         <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-start', marginLeft: 5, fontFamily: 'Kanit-Regular' }}>สะสม</Text>
-                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-end', marginTop: -28, marginRight: 5, fontFamily: 'Kanit-Regular' }}>19730</Text>
+                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-end', marginTop: -28, marginRight: 5, fontFamily: 'Kanit-Regular' }}>{ item.total_death }</Text>
                     </View>
                     <View style={styles.recovered}>
                         <Text style={styles.titleText}>รักษาหาย</Text>

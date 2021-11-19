@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     header: {
         // color: "#fff",
-        color: "#48C9B0",
+        color: "#27AE60",
         fontFamily: "Kanit_600SemiBold",
         fontSize: 25,
         marginLeft: 10
