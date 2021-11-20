@@ -17,16 +17,42 @@ const TypeOfVaccine = ({ route }) => {
     const [dailyProvinceData, setDailyProvinceData] = useState([])
     const [masterData, setMasterData] = useState([])
     const [dataForChart, setDataForChart] = useState([])
+    const [dataTotalVac, setDataTotalVac] = useState([])
+    const [label, setLabel] = useState([])
+    const [colorChart, setColorChart] = useState([])
     useEffect(() => {
         axios.get("https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/vaccination/provincial-vaccination-by-manufacturer.json")
             .then((response) => {
                 setDailyProvinceData(response.data.data)
                 setMasterData(response.data.data)
-                // console.log(masterData)
-                // setUpdateDate(response.data[0].update_date)
             }).catch((error) => {
                 console.log(error)
             })
+
+        axios.get("https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/vaccination/vaccine-manufacturer-timeseries.json")
+        .then((response) => {
+            var testData = response.data
+            var test = [testData[testData.length - 1]]
+            setDataTotalVac([testData[testData.length - 1]])
+            const dataVac = []
+            test.map((item, index) => {
+                return dataVac.push(item.AstraZeneca, item['Johnson & Johnson'], item.Pfizer, item.Sinopharm, item.Sinovac)
+            })
+            setDataForChart(dataVac)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+        setLabel(['AstraZeneca', 'J&J', 'Pfizer', 'Sinopharm', 'Sinovac'])
+        setColorChart(
+            [
+                (opacity = 1) => '#F4D03F',
+                (opacity = 1) => '#854FFF',
+                (opacity = 1) => '#00C7FF',
+                (opacity = 1) => '#27AE60',
+                (opacity = 1) => '#FC9604'
+            ]
+        )
     }, [])
 
     let [fontsLoaded] = useFonts({
@@ -47,40 +73,70 @@ const TypeOfVaccine = ({ route }) => {
                 return itemData.indexOf(itemValue) > -1
             });
             setDailyProvinceData(newData)
-            setDataForChart(newData)
+            // setDataForChart(newData)
             setSelectProvince(itemValue)
+            setLabel(['AstraZeneca', 'J&J', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'])
+            const dataChart = []
+            newData.map((item, index) => {
+                return dataChart.push(item.AstraZeneca, item['Johnson & Johnson'], item.Moderna, item.Pfizer, item.Sinopharm, item.Sinovac)
+            })
+            setDataForChart(dataChart)
+            setColorChart(
+                [
+                    (opacity = 1) => '#F4D03F',
+                    (opacity = 1) => '#854FFF',
+                    (opacity = 1) => '#FF4FA2',
+                    (opacity = 1) => '#00C7FF',
+                    (opacity = 1) => '#27AE60',
+                    (opacity = 1) => '#FC9604'
+                ]
+            )
         }
         if (itemValue == "ทั้งหมด") {
-            setDataForChart([])
+            setLabel(['AstraZeneca', 'J&J', 'Pfizer', 'Sinopharm', 'Sinovac'])
+            const dataVac = []
+            dataTotalVac.map((item, index) => {
+                return dataVac.push(item.AstraZeneca, item['Johnson & Johnson'], item.Pfizer, item.Sinopharm, item.Sinovac)
+            })
+            setDataForChart(dataVac)
+            setColorChart(
+                [
+                    (opacity = 1) => '#F4D03F',
+                    (opacity = 1) => '#854FFF',
+                    (opacity = 1) => '#00C7FF',
+                    (opacity = 1) => '#27AE60',
+                    (opacity = 1) => '#FC9604'
+                ]
+            )
             setDailyProvinceData(masterData)
             setSelectProvince(itemValue)
         }
     }
 
-    const dataChart = []
-    dataForChart.map((item, index) => {
-        return dataChart.push(item.AstraZeneca, item['Johnson & Johnson'], item.Moderna, item.Pfizer, item.Sinopharm, item.Sinovac)
-    })
-    console.log("dataChart : " + dataChart)
+    // const dataChart = []
+    // dataForChart.map((item, index) => {
+    //     return dataChart.push(item.AstraZeneca, item['Johnson & Johnson'], item.Moderna, item.Pfizer, item.Sinopharm, item.Sinovac)
+    // })
+    // console.log("dataChart : " + dataChart)
 
     const MyBarChart = () => {
         return (
             <View style={styles.containerChart}>
                 <BarChart
                     data={{
-                        labels: ['AstraZeneca', 'J&J', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'],
-                        // labels: ['AstraZeneca', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'],
+                        labels: label,
                         datasets: [
                             {
-                                data: dataChart,
-                                colors: [
-                                    (opacity = 1) => '#229954',
-                                    (opacity = 1) => '#229954',
-                                    (opacity = 1) => '#27AE60',
-                                    (opacity = 1) => '#52BE80',
-                                    (opacity = 1) => '#7DCEA0',
-                                    (opacity = 1) => '#A9DFBF'
-                                ]
+                                data: dataForChart,
+                                // colors: [
+                                //     (opacity = 1) => '#F4D03F',
+                                //     (opacity = 1) => '#854FFF',
+                                //     (opacity = 1) => '#FF4FA2',
+                                //     (opacity = 1) => '#00C7FF',
+                                //     (opacity = 1) => '#27AE60',
+                                //     (opacity = 1) => '#FC9604'
+                                // ]
+                                colors: colorChart
                             },
                         ],
                     }}

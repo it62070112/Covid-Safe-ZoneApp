@@ -3,10 +3,8 @@ import { FlatList, StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOp
 import axios from "axios";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
-// import { StatusBar } from 'expo-status-bar';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 import NewCaseLineChart from "../components/NewCaseLineChart";
-// import DailyReportCovidProvince from "./DailyReportProvince";
 import SplashPermission from "../components/SplashPermission";
 
 class DailyReport extends Component {
@@ -67,20 +65,17 @@ class DailyReport extends Component {
                     <View style={styles.recovered}>
                         <Text style={styles.titleText}>รักษาหาย</Text>
                         <Text style={styles.valueText}>{ item.new_recovered }</Text>
-                        {/* <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-start', marginLeft: 5, fontFamily: 'Kanit-Regular' }}>สะสม</Text> */}
-                        {/* <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'flex-end', marginTop: -28, marginRight: 5, fontFamily: 'Kanit-Regular' }}>{ item.total_recovered }</Text> */}
                     </View>
                     <View style={styles.active}>
                         <Text style={styles.titleText}>กำลังรักษา</Text>
-                        <Text style={styles.valueText}>98425</Text>
+                        <Text style={styles.valueText}>87885</Text>
                     </View>
                     <View style={styles.serious}>
                         <Text style={styles.titleText}>อาการหนัก</Text>
-                        <Text style={styles.valueText}>{ item.new_recovered }</Text>
+                        <Text style={styles.valueText}>389</Text>
                     </View>
                 </View>
                 <View style={styles.container}>
-                    {/* <Text style={{ marginLeft: 5, marginTop: 20, fontSize: 18, fontFamily: 'Kanit-Regular', marginBottom: -30 }}>อัตราการติดเชื้อรายวัน</Text> */}
                     <View style={styles.chartView}>
                         <NewCaseLineChart />
                     </View>
@@ -100,6 +95,7 @@ class DailyReport extends Component {
                     renderItem={ this.renderDailyReportData }
                     keyExtractor={item => item.txn_date}
                 />
+                 <StatusBar style="auto" />
             </SafeAreaView>
         )
     }

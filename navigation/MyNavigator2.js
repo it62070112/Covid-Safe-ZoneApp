@@ -131,7 +131,9 @@ function TabBarNavigatorFunc({ navigation }) {
                     borderTopRightRadius: 20,
                     // backgroundColor: '#F2F3F4'
                 },
-                // tabBarShowLabel: false
+                headerStyle: {
+                    backgroundColor: '#48C9B0'
+                },
             }}
         >
             <TabBar.Screen name="Home" component={StackDailyReportFunc}
@@ -141,9 +143,6 @@ function TabBarNavigatorFunc({ navigation }) {
                         fontFamily: 'Kanit_500Medium',
                         fontSize: 35,
                         color: '#fff'
-                    },
-                    headerStyle: {
-                        backgroundColor: '#48C9B0'
                     },
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="home" size={24} color={ color } />
@@ -159,9 +158,6 @@ function TabBarNavigatorFunc({ navigation }) {
             <TabBar.Screen name="HospitalMap" component={HospitalMap}
                 options={{
                     headerTitle: "ศูนย์ฉีดวัคซีน",
-                    headerStyle: {
-                        backgroundColor: '#48C9B0'
-                    },
                     headerTitleStyle: {
                         fontSize: 26,
                         fontFamily: 'Kanit_500Medium',
@@ -176,9 +172,6 @@ function TabBarNavigatorFunc({ navigation }) {
             <TabBar.Screen name="AddInfoVaccine" component={AddInfoVaccine}
                 options={{
                     headerTitle: "เพิ่มข้อมูลการฉีดวัคซีน",
-                    headerStyle: {
-                        backgroundColor: '#48C9B0'
-                    },
                     headerTitleStyle: {
                         fontSize: 26,
                         fontFamily: 'Kanit_500Medium',
@@ -257,9 +250,6 @@ function TabBarNavigatorFunc({ navigation }) {
             <TabBar.Screen name="VaccineCoverageAll" component={DrawerVaccineFunc}
                 options={{
                     headerTitle: "ข้อมูลการฉีดวัคซีน",
-                    headerStyle: {
-                        backgroundColor: '#48C9B0'
-                    },
                     headerTitleStyle: {
                         fontSize: 26,
                         fontFamily: 'Kanit_500Medium',

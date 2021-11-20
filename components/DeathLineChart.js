@@ -59,7 +59,7 @@ const DeathLineChart = () => {
             {
                 !loading ?         
                 <View style={styles.container}>
-                    <Text style={styles.header}>ยอดผู้เสียชีวิต</Text>
+                    <Text style={styles.header}>ผู้เสียชีวิตรายใหม่</Text>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <LineChart
                             data={{
