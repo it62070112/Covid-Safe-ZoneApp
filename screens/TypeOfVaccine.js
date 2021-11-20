@@ -73,7 +73,6 @@ const TypeOfVaccine = ({ route }) => {
                 return itemData.indexOf(itemValue) > -1
             });
             setDailyProvinceData(newData)
-            // setDataForChart(newData)
             setSelectProvince(itemValue)
             setLabel(['AstraZeneca', 'J&J', 'Moderna', 'Pfizer', 'Sinopharm', 'Sinovac'])
             const dataChart = []
@@ -93,6 +92,8 @@ const TypeOfVaccine = ({ route }) => {
             )
         }
         if (itemValue == "ทั้งหมด") {
+            setDailyProvinceData(masterData)
+            setSelectProvince(itemValue)
             setLabel(['AstraZeneca', 'J&J', 'Pfizer', 'Sinopharm', 'Sinovac'])
             const dataVac = []
             dataTotalVac.map((item, index) => {
@@ -108,16 +109,8 @@ const TypeOfVaccine = ({ route }) => {
                     (opacity = 1) => '#FC9604'
                 ]
             )
-            setDailyProvinceData(masterData)
-            setSelectProvince(itemValue)
         }
     }
-
-    // const dataChart = []
-    // dataForChart.map((item, index) => {
-    //     return dataChart.push(item.AstraZeneca, item['Johnson & Johnson'], item.Moderna, item.Pfizer, item.Sinopharm, item.Sinovac)
-    // })
-    // console.log("dataChart : " + dataChart)
 
     const MyBarChart = () => {
         return (
@@ -128,14 +121,6 @@ const TypeOfVaccine = ({ route }) => {
                         datasets: [
                             {
                                 data: dataForChart,
-                                // colors: [
-                                //     (opacity = 1) => '#F4D03F',
-                                //     (opacity = 1) => '#854FFF',
-                                //     (opacity = 1) => '#FF4FA2',
-                                //     (opacity = 1) => '#00C7FF',
-                                //     (opacity = 1) => '#27AE60',
-                                //     (opacity = 1) => '#FC9604'
-                                // ]
                                 colors: colorChart
                             },
                         ],

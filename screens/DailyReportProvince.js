@@ -197,38 +197,12 @@ const styles = StyleSheet.create({
         marginTop: -35,
         marginRight: 5,
     },
-    // touchButton: {
-    //     alignItems: "center",
-    //     backgroundColor: "#3498DB",
-    //     padding: 10,
-    //     borderRadius: 10,
-    //     marginRight: 3,
-    // },
-    // icon: {
-    //     flexDirection: 'row',
-    //     justifyContent: 'flex-end',
-    //     marginTop: -45,
-    // },
-    // list: {
-    //     paddingRight: 25
-    // },
-    // chart: {
-    //     paddingRight: 20
-    // },
-    // header: {
-    //     height: 90
-    // },
-    // headerContainer: {
-    //     // flex: 1,
-    //     // backgroundColor: '#48C9B0',
-    // },
     itemContainer: {
         flex: 2,
     },
     totalBox: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        // alignItems: 'center',
         marginTop: 5,
         backgroundColor: '#41b59e',
         width: '98%',

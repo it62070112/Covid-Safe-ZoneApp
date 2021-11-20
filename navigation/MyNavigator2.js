@@ -29,7 +29,7 @@ import { Foundation } from '@expo/vector-icons';
 
 //component
 import CustomHeaderButton from "../components/CustomHeaderButton";
-
+import { DrawerActions } from "@react-navigation/routers";
 //fonts
 import { 
     Kanit_400Regular,
@@ -83,12 +83,18 @@ function DrawerVaccineFunc({ navigation }) {
                     color: "#fff"
                 },
                 drawerActiveTintColor: "#48C9B0", 
-                drawerInactiveTintColor: "#707B7C",
+                drawerInactiveTintColor: "#808B96",
+                headerLeft: () => (
+                    <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+                        <Feather name="menu" size={28} color="#fff" />
+                    </TouchableOpacity>
+                  ),
             }}
         >
             <DrawerVaccine.Screen name="VaccineCoverage" component={VaccineCoverage} 
                 options={{
-                    headerTitle: "ข้อมูลการฉีดวัคซีน",
+                    headerTitle: "ข้อมูลการฉีดแยกตามโดส",
+                    title: "ข้อมูลการฉีดแยกตามโดส",
                     drawerIcon: ({ color }) => {
                         return <Foundation name="clipboard-notes" size={24} color={ color } />
                     }
