@@ -263,7 +263,8 @@ function TabBarNavigatorFunc({ navigation }) {
                     },
                     tabBarLabel: "Vaccine",
                     tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
+                        // return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
+                        return <FontAwesome5 name="syringe" size={24} color={ color }/>
                     },
                     headerShown: false
                 }}
