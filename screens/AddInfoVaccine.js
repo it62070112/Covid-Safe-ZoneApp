@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox } from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { Picker } from '@react-native-picker/picker';
 import {
@@ -11,6 +11,9 @@ import {
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import firebase from "../database/firebase";
+// import { Input } from 'react-native-elements';
+import { addIcon } from "../store/actions/changeIconAction";
+
 const AddInfoVaccine = () => {
     const latitude = useSelector((state) => state.LatLong.lat)
     const longitude = useSelector((state) => state.LatLong.long)
@@ -21,6 +24,10 @@ const AddInfoVaccine = () => {
     const [brandVaccine, setBrandVaccine] = useState("")
     const [numVaccine, setNumVaccine] = useState("")
     const [vaccinationPlace, setVaccinationPlace] = useState("")
+    const [saveSuccess, setSaveSuccess] = useState(null)
+    const [disable, setDisable] = useState(true)
+
+    const dispatch = useDispatch();
 
     let [fontsLoaded] = useFonts({
         Kanit_400Regular,
@@ -34,7 +41,7 @@ const AddInfoVaccine = () => {
 
     var db = firebase.firestore();
     const createInfoVaccineUser = () => {
-        if (age == "" || gender == "" || nameFirstLast == "" || numVaccine == "" || vaccinationPlace == "" || vaccineBrand == "" ) {
+        if (age == "" || gender == "" || nameFirstLast == "" || numVaccine == "" || vaccinationPlace == "" || brandVaccine == "" ) {
             Alert.alert("กรุณากรอกข้อมูลก่อนกดปุ่มบันทึก")
         } else {
             return db.collection('infoVaccineUser')
@@ -51,9 +58,17 @@ const AddInfoVaccine = () => {
             .then((res) => {
                 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
                 Alert.alert("บันทึกข้อมูลสำเร็จ")
+                setSaveSuccess(true)
+                setDisable(false)
+                // dispatch(addIcon(saveSuccess))
             });
         }
     };
+
+    dispatch(addIcon(saveSuccess))
+
+    console.log("saveSuccess : ", saveSuccess)
+    console.log("disable : ", disable)
 
     return (
         <View style={styles.container}>
@@ -62,25 +77,28 @@ const AddInfoVaccine = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='ชื่อ - นามสกุล'
-                    placeholderTextColor='black'
+                    placeholderTextColor='#566573'
                     onChangeText={(text) => setNameFirstLast(text)}
                     value={nameFirstLast}
+                    editable={ disable }
                 />
 
                 <View style={styles.column2}>
                     <TextInput
                         style={styles.input2}
                         placeholder='อายุ'
-                        placeholderTextColor='black'
+                        placeholderTextColor='#566573'
                         onChangeText={(text) => setAge(text)}
                         value={age}
                         keyboardType="numeric"
                         autoCompleteType='off'
+                        editable={ disable }
                     />
                     <Picker
                         selectedValue={gender}
                         onValueChange={(val) => setGender(val)}
                         style={styles.input2}
+                        enabled={ disable }
                     >
                         <Picker.Item label='เพศ' value='0' />
                         <Picker.Item label="ชาย" value="ชาย" />
@@ -93,6 +111,7 @@ const AddInfoVaccine = () => {
                         selectedValue={brandVaccine}
                         onValueChange={(val) => setBrandVaccine(val)}
                         style={styles.input2}
+                        enabled={ disable }
                     >
                         <Picker.Item label='ยี่ห้อวัคซีน' value='0' />
                         <Picker.Item label="Pfizer" value="Pfizer" />
@@ -107,6 +126,7 @@ const AddInfoVaccine = () => {
                         style={styles.input2}
                         selectedValue={numVaccine}
                         onValueChange={(val) => setNumVaccine(val)}
+                        enabled={ disable }
                     >
                         <Picker.Item label='จำนวนโดส' value='0' />
                         <Picker.Item label="1" value="1" />
@@ -118,12 +138,32 @@ const AddInfoVaccine = () => {
                 <TextInput
                     style={styles.input}
                     placeholder='สถานที่ฉีดวัคซีน'
-                    placeholderTextColor='black'
+                    placeholderTextColor='#566573'
                     onChangeText={(text) => setVaccinationPlace(text)}
                     value={vaccinationPlace}
                     autoCompleteType='off'
+                    editable={ disable }
                 />
-                <Button title='บันทึก' color='green' onPress={() => createInfoVaccineUser()}/>
+                {
+                    !saveSuccess ?
+                    <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => createInfoVaccineUser()}>
+                        <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#E74C3C', borderRadius: 10, justifyContent: 'center', marginTop: 5 }} onPress={() => setDisable(true)}>
+                        <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>แก้ไข</Text>
+                    </TouchableOpacity>
+                    ? disable == true ?
+                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => setDisable(false)}>
+                            <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>อัพเดตข้อมูล</Text>
+                        </TouchableOpacity>
+                    :
+                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#E74C3C', borderRadius: 10, justifyContent: 'center', marginTop: 5 }} onPress={() => setDisable(true)}>
+                            <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>แก้ไข</Text>
+                        </TouchableOpacity>
+                    :
+                    null
+                }
             </View>
         </View>
     )
@@ -148,7 +188,7 @@ const styles = StyleSheet.create({
     titleLogin: {
         fontSize: 22,
         textAlign: 'center',
-        color: 'black',
+        color: '#48586f',
         fontWeight: '600',
         marginBottom: 10,
         marginTop: 30,
@@ -163,7 +203,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     input: {
-        width: 320,
+        width: "100%",
         height: 50,
         padding: 15,
         margin: 5,
@@ -172,10 +212,11 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         borderStyle: 'solid',
         borderRadius: 4,
-        fontFamily: "Kanit_400Regular"
+        fontFamily: "Kanit_400Regular",
+        fontSize: 16
     },
     input2: {
-        width: 155,
+        width: 185,
         height: 40,
         padding: 8,
         margin: 5,
@@ -184,8 +225,8 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         borderStyle: 'solid',
         borderRadius: 4,
-        fontFamily: 'Kanit_400Regular'
-        // backgroundColor: "#ECCEF5",
+        fontFamily: 'Kanit_400Regular',
+        fontSize: 16
     },
     button: {
         width: 325,

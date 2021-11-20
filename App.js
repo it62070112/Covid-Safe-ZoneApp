@@ -7,9 +7,11 @@ import MyNavigator2 from "./navigation/MyNavigator2";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import LatLongReducer from "./store/reducers/LatLongReducer";
+import changeIconReducer from "./store/reducers/changeIconReducer";
 
 const rootReducer = combineReducers({
   LatLong: LatLongReducer,
+  changeIcon: changeIconReducer,
 })
 
 const store = createStore(rootReducer);

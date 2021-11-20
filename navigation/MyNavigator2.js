@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { Button, StyleSheet, TouchableOpacity, Text, View, LogBox } from 'react-native';
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 //navigation
@@ -25,27 +25,30 @@ import AllChartScreen from "../screens/AllChartScreen";
 //icon
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons'; 
+import { Foundation } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 //component
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import { DrawerActions } from "@react-navigation/routers";
+
 //fonts
-import { 
+import {
     Kanit_400Regular,
     Kanit_500Medium,
     Kanit_600SemiBold,
     Kanit_700Bold,
-  } from '@expo-google-fonts/kanit'
+} from '@expo-google-fonts/kanit'
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+
+//Redux
+import { useSelector, useDispatch } from "react-redux";
 
 const TabBar = createBottomTabNavigator();
 const StackSplash = createNativeStackNavigator();
 const StackDailyReport = createNativeStackNavigator();
-// const StackProvince = createNativeStackNavigator();
 const DrawerVaccine = createDrawerNavigator();
-
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
         navigation.navigate("HomeAll")
@@ -54,6 +57,7 @@ function SplashScreenFunc({ navigation }) {
         <SplashScreen />
     )
 }
+
 //Stack 
 function StackDailyReportFunc({ navigation }) {
     return (
@@ -82,37 +86,37 @@ function DrawerVaccineFunc({ navigation }) {
                     fontFamily: 'Kanit_500Medium',
                     color: "#fff"
                 },
-                drawerActiveTintColor: "#48C9B0", 
+                drawerActiveTintColor: "#48C9B0",
                 drawerInactiveTintColor: "#808B96",
                 headerLeft: () => (
                     <TouchableOpacity style={{ marginLeft: 10 }} onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
                         <Feather name="menu" size={28} color="#fff" />
                     </TouchableOpacity>
-                  ),
+                ),
             }}
         >
-            <DrawerVaccine.Screen name="VaccineCoverage" component={VaccineCoverage} 
+            <DrawerVaccine.Screen name="VaccineCoverage" component={VaccineCoverage}
                 options={{
                     headerTitle: "ข้อมูลการฉีดแยกตามโดส",
                     title: "ข้อมูลการฉีดแยกตามโดส",
                     drawerIcon: ({ color }) => {
-                        return <Foundation name="clipboard-notes" size={24} color={ color } />
+                        return <Foundation name="clipboard-notes" size={24} color={color} />
                     }
                 }}
             />
-            <DrawerVaccine.Screen name="TypeOfVaccine" component={TypeOfVaccine} 
+            <DrawerVaccine.Screen name="TypeOfVaccine" component={TypeOfVaccine}
                 options={{
                     title: "ข้อมูลการฉีดแยกตามผู้ผลิต",
                     headerTitle: "ข้อมูลการฉีดแยกตามผู้ผลิต",
                     drawerIcon: ({ color }) => {
-                        return <Foundation name="clipboard-notes" size={24} color={ color } />
+                        return <Foundation name="clipboard-notes" size={24} color={color} />
                     }
                 }}
             />
-            <DrawerVaccine.Screen name="HeatMap" component={HeatMap} 
+            <DrawerVaccine.Screen name="HeatMap" component={HeatMap}
                 options={{
                     drawerIcon: ({ color }) => {
-                        return <FontAwesome5 name="map-marked-alt" size={24} color={ color }/>
+                        return <FontAwesome5 name="map-marked-alt" size={24} color={color} />
                     }
                 }}
             />
@@ -121,6 +125,14 @@ function DrawerVaccineFunc({ navigation }) {
 }
 //TabBar
 function TabBarNavigatorFunc({ navigation }) {
+    // const [test, setTest] = useState(true)
+    const changeIcon = useSelector((state) => state.changeIcon.saveSuccess)
+    // if (changeIcon == false) {
+    //     setTest(changeIcon)
+    // } else {
+    //     console.log("error")
+    // }
+    console.log("changeIcon : ", changeIcon)
     return (
         <TabBar.Navigator initialRouteName={"Home"}
             screenOptions={{
@@ -151,12 +163,12 @@ function TabBarNavigatorFunc({ navigation }) {
                         color: '#fff'
                     },
                     tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="home" size={24} color={ color } />
+                        return <FontAwesome5 name="home" size={24} color={color} />
                     },
                     headerRight: () => (
                         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                          <Item iconName="list-ul" onPress={() => { navigation.navigate("DailyReportCovidProvince") }}/>
-                          <Item iconName="chart-area" onPress={() => { navigation.navigate("AllChartScreen") }}/>
+                            <Item iconName="list-ul" onPress={() => { navigation.navigate("DailyReportCovidProvince") }} />
+                            <Item iconName="chart-area" onPress={() => { navigation.navigate("AllChartScreen") }} />
                         </HeaderButtons>
                     ),
                 }}
@@ -171,7 +183,7 @@ function TabBarNavigatorFunc({ navigation }) {
                     },
                     tabBarLabel: "ศูนย์ฉีดวัคซีน",
                     tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="hospital-alt" size={24} color={ color } />
+                        return <FontAwesome5 name="hospital-alt" size={24} color={color} />
                     }
                 }}
             />
@@ -191,34 +203,28 @@ function TabBarNavigatorFunc({ navigation }) {
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}
-                                onPress={() => navigation.navigate("AddInfoVaccine")}
+                                onPress={() => {
+                                    navigation.navigate("AddInfoVaccine")
+                                }}
                             >
-                                <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: '#48C9B0', justifyContent: 'center', alignItems: 'center' }}>
-                                    <FontAwesome5 name="plus" size={28} color="#fff"/>
-                                </View>
+                                {/* <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: '#48C9B0', justifyContent: 'center', alignItems: 'center' }}>
+                                    <FontAwesome5 name="plus" size={28} color="#fff" />
+                                </View> */}
+                                {
+                                    changeIcon != null ?
+                                    <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: '#E74C3C', justifyContent: 'center', alignItems: 'center' }}>
+                                        <AntDesign name="edit" size={28} color="#fff" />
+                                    </View>
+                                    :
+                                    <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: '#48C9B0', justifyContent: 'center', alignItems: 'center' }}>
+                                        <FontAwesome5 name="plus" size={28} color="#fff" />
+                                    </View>
+                                }
                             </TouchableOpacity>
                         )
                     }
                 }}
             />
-            {/* <TabBar.Screen name="MapMain" component={StackMapFunc}
-                options={{
-                    headerTitle: "Map",
-                    headerStyle: {
-                        backgroundColor: '#48C9B0'
-                    },
-                    headerTitleStyle: {
-                        fontSize: 26,
-                        fontFamily: 'Kanit_500Medium',
-                        color: "#fff"
-                    },
-                    tabBarLabel: "Map",
-                    tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
-                    },
-                    headerShown: false
-                }}
-            /> */}
             <TabBar.Screen name="MapMain" component={MapMain}
                 options={{
                     headerTitle: "Map",
@@ -232,27 +238,10 @@ function TabBarNavigatorFunc({ navigation }) {
                     },
                     tabBarLabel: "Map",
                     tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="map-marked-alt" size={24} color={ color } />
+                        return <FontAwesome5 name="map-marked-alt" size={24} color={color} />
                     },
                 }}
             />
-            {/* <TabBar.Screen name="VaccineCoverage" component={VaccineCoverage}
-                options={{
-                    headerTitle: "ข้อมูลการฉีดวัคซีน",
-                    headerStyle: {
-                        backgroundColor: '#48C9B0'
-                    },
-                    headerTitleStyle: {
-                        fontSize: 26,
-                        fontFamily: 'Kanit_500Medium',
-                        color: "#fff"
-                    },
-                    tabBarLabel: "Vaccine",
-                    tabBarIcon: ({ color }) => {
-                        return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
-                    }
-                }}
-            /> */}
             <TabBar.Screen name="VaccineCoverageAll" component={DrawerVaccineFunc}
                 options={{
                     headerTitle: "ข้อมูลการฉีดวัคซีน",
@@ -264,7 +253,7 @@ function TabBarNavigatorFunc({ navigation }) {
                     tabBarLabel: "Vaccine",
                     tabBarIcon: ({ color }) => {
                         // return <FontAwesome5 name="briefcase-medical" size={24} color={color}/>
-                        return <FontAwesome5 name="syringe" size={24} color={ color }/>
+                        return <FontAwesome5 name="syringe" size={24} color={color} />
                     },
                     headerShown: false
                 }}
@@ -273,7 +262,9 @@ function TabBarNavigatorFunc({ navigation }) {
     )
 }
 
-export default function MyNavigator2() {
+LogBox.ignoreLogs(['Cannot update a component (`TabBarNavigatorFunc`)'])
+
+const MyNavigator2 = () => {
     let [fontsLoaded] = useFonts({
         Kanit_400Regular,
         Kanit_500Medium,
@@ -292,11 +283,12 @@ export default function MyNavigator2() {
                     headerShown: false
                 }}
             >
-                <StackSplash.Screen name="SplashScreen" component={SplashScreenFunc}/>
+                <StackSplash.Screen name="SplashScreen" component={SplashScreenFunc} />
                 {/* <StackSplash.Screen name="SplashPermission" component={SplashPermission}/> */}
-                <StackSplash.Screen name="HomeAll" component={TabBarNavigatorFunc}/>
+                <StackSplash.Screen name="HomeAll" component={TabBarNavigatorFunc} />
                 {/* <StackSplash.Screen name="AddInfoVaccine" component={AddInfoVaccine}/> */}
             </StackSplash.Navigator>
         </NavigationContainer>
     )
 }
+export default MyNavigator2;
