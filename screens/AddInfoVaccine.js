@@ -13,6 +13,7 @@ import AppLoading from "expo-app-loading";
 import firebase from "../database/firebase";
 // import { Input } from 'react-native-elements';
 import { addIcon } from "../store/actions/changeIconAction";
+import getDataFirebase from "../components/getDataFirebase";
 
 const AddInfoVaccine = () => {
     const latitude = useSelector((state) => state.LatLong.lat)
@@ -26,6 +27,7 @@ const AddInfoVaccine = () => {
     const [vaccinationPlace, setVaccinationPlace] = useState("")
     const [saveSuccess, setSaveSuccess] = useState(null)
     const [disable, setDisable] = useState(true)
+    const [isValidate, setValidate] = useState("")
 
     const dispatch = useDispatch();
 
@@ -41,30 +43,38 @@ const AddInfoVaccine = () => {
 
     var db = firebase.firestore();
     const createInfoVaccineUser = () => {
-        if (age == "" || gender == "" || nameFirstLast == "" || numVaccine == "" || vaccinationPlace == "" || brandVaccine == "" ) {
+        if (age == "" || gender == "" || nameFirstLast == "" || numVaccine == "" || vaccinationPlace == "" || brandVaccine == "") {
             Alert.alert("กรุณากรอกข้อมูลก่อนกดปุ่มบันทึก")
         } else {
             return db.collection('infoVaccineUser')
-            .add({
-                age: age,
-                gender: gender,
-                latitude: latitude,
-                longitude: longitude,
-                name: nameFirstLast,
-                quantity: numVaccine,
-                vaccinationPlace: vaccinationPlace,
-                vaccineBrand: brandVaccine
-            })
-            .then((res) => {
-                LogBox.ignoreLogs(['Setting a timer for a long period of time'])
-                Alert.alert("บันทึกข้อมูลสำเร็จ")
-                setSaveSuccess(true)
-                setDisable(false)
-                // dispatch(addIcon(saveSuccess))
-            });
+                .add({
+                    age: age,
+                    gender: gender,
+                    latitude: latitude,
+                    longitude: longitude,
+                    name: nameFirstLast,
+                    quantity: numVaccine,
+                    vaccinationPlace: vaccinationPlace,
+                    vaccineBrand: brandVaccine
+                })
+                .then((res) => {
+                    Alert.alert("บันทึกข้อมูลสำเร็จ")
+                    setSaveSuccess(true)
+                    setDisable(false)
+                });
         }
     };
 
+    const updateInfoVaccine = () => {
+        setDisable(false)
+        // return db.collection('infoVaccineUser')
+        // // .doc("qfXwGI7Ix4sGzWaTMCst")
+        // .get().then((res) => {
+        //     console.log(res.data())
+        // })
+    }
+
+    LogBox.ignoreLogs(['Setting a timer for a long period of time'])
     dispatch(addIcon(saveSuccess))
 
     console.log("saveSuccess : ", saveSuccess)
@@ -80,9 +90,8 @@ const AddInfoVaccine = () => {
                     placeholderTextColor='#566573'
                     onChangeText={(text) => setNameFirstLast(text)}
                     value={nameFirstLast}
-                    editable={ disable }
+                    editable={disable}
                 />
-
                 <View style={styles.column2}>
                     <TextInput
                         style={styles.input2}
@@ -92,13 +101,13 @@ const AddInfoVaccine = () => {
                         value={age}
                         keyboardType="numeric"
                         autoCompleteType='off'
-                        editable={ disable }
+                        editable={disable}
                     />
                     <Picker
                         selectedValue={gender}
                         onValueChange={(val) => setGender(val)}
                         style={styles.input2}
-                        enabled={ disable }
+                        enabled={disable}
                     >
                         <Picker.Item label='เพศ' value='0' />
                         <Picker.Item label="ชาย" value="ชาย" />
@@ -111,7 +120,7 @@ const AddInfoVaccine = () => {
                         selectedValue={brandVaccine}
                         onValueChange={(val) => setBrandVaccine(val)}
                         style={styles.input2}
-                        enabled={ disable }
+                        enabled={disable}
                     >
                         <Picker.Item label='ยี่ห้อวัคซีน' value='0' />
                         <Picker.Item label="Pfizer" value="Pfizer" />
@@ -126,7 +135,7 @@ const AddInfoVaccine = () => {
                         style={styles.input2}
                         selectedValue={numVaccine}
                         onValueChange={(val) => setNumVaccine(val)}
-                        enabled={ disable }
+                        enabled={disable}
                     >
                         <Picker.Item label='จำนวนโดส' value='0' />
                         <Picker.Item label="1" value="1" />
@@ -142,29 +151,42 @@ const AddInfoVaccine = () => {
                     onChangeText={(text) => setVaccinationPlace(text)}
                     value={vaccinationPlace}
                     autoCompleteType='off'
-                    editable={ disable }
+                    editable={disable}
                 />
                 {
                     !saveSuccess ?
-                    <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => createInfoVaccineUser()}>
-                        <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
-                    </TouchableOpacity>
-                    :
-                    <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#E74C3C', borderRadius: 10, justifyContent: 'center', marginTop: 5 }} onPress={() => setDisable(true)}>
-                        <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>แก้ไข</Text>
-                    </TouchableOpacity>
-                    ? disable == true ?
-                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => setDisable(false)}>
-                            <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>อัพเดตข้อมูล</Text>
+                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => createInfoVaccineUser()}>
+                            <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
                         </TouchableOpacity>
-                    :
+                        :
                         <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#E74C3C', borderRadius: 10, justifyContent: 'center', marginTop: 5 }} onPress={() => setDisable(true)}>
                             <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>แก้ไข</Text>
                         </TouchableOpacity>
-                    :
-                    null
+                            ? disable == true ?
+                                <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => updateInfoVaccine()}>
+                                    <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>อัพเดตข้อมูล</Text>
+                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#E74C3C', borderRadius: 10, justifyContent: 'center', marginTop: 5 }} onPress={() => setDisable(true)}>
+                                    <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>แก้ไข</Text>
+                                </TouchableOpacity>
+                            :
+                            null
                 }
             </View>
+            {
+                saveSuccess ?
+                    <View>
+                        <Text>{nameFirstLast}</Text>
+                        <Text>{age}</Text>
+                        <Text>{gender}</Text>
+                        <Text>{brandVaccine}</Text>
+                        <Text>{numVaccine}</Text>
+                        <Text>{vaccinationPlace}</Text>
+                    </View>
+                    :
+                    null
+            }
         </View>
     )
 }
@@ -175,11 +197,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 10,
-        // backgroundColor: "#ECCEF5",
+        backgroundColor: '#fff'
     },
     column2: {
         flexDirection: "row",
         justifyContent: "flex-start",
+        marginTop: -10
     },
     containerBtn: {
         flexDirection: "column",
@@ -191,7 +214,7 @@ const styles = StyleSheet.create({
         color: '#48586f',
         fontWeight: '600',
         marginBottom: 10,
-        marginTop: 30,
+        marginTop: 10,
         fontFamily: 'Kanit_600SemiBold'
     },
     form: {
@@ -200,7 +223,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
-        marginTop: 30,
+        marginTop: -5,
     },
     input: {
         width: "100%",
@@ -226,7 +249,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 4,
         fontFamily: 'Kanit_400Regular',
-        fontSize: 16
+        fontSize: 16,
     },
     button: {
         width: 325,

@@ -19,7 +19,7 @@ import TypeOfVaccine from "../screens/TypeOfVaccine";
 import DailyReportCovidProvince from "../screens/DailyReportProvince";
 import SplashPermission from "../components/SplashPermission";
 import AddInfoVaccine from "../screens/AddInfoVaccine";
-// import Home from "../screens/Home";
+import VaccinationRates from "../screens/VaccinationRates";
 import AllChartScreen from "../screens/AllChartScreen";
 
 //icon
@@ -76,7 +76,7 @@ function StackDailyReportFunc({ navigation }) {
 //Drawer
 function DrawerVaccineFunc({ navigation }) {
     return (
-        <DrawerVaccine.Navigator initialRouteName="VaccineCoverage"
+        <DrawerVaccine.Navigator initialRouteName="VaccinationRates"
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#48C9B0'
@@ -95,6 +95,15 @@ function DrawerVaccineFunc({ navigation }) {
                 ),
             }}
         >
+            <DrawerVaccine.Screen name="VaccinationRates" component={VaccinationRates}
+                options={{
+                    headerTitle: "อัตราการฉีดวัคซีนทั้งประเทศ",
+                    title: "อัตราการฉีดวัคซีนทั้งประเทศ",
+                    drawerIcon: ({ color }) => {
+                        return <Foundation name="clipboard-notes" size={24} color={color} />
+                    }
+                }}
+            />
             <DrawerVaccine.Screen name="VaccineCoverage" component={VaccineCoverage}
                 options={{
                     headerTitle: "ข้อมูลการฉีดแยกตามโดส",

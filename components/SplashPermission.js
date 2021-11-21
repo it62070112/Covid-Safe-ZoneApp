@@ -42,7 +42,7 @@ const SplashPermission = () => {
                 style: 'cancel',
             },
             {
-                text: 'OK',
+                text: 'Ok',
                 onPress: (() => {
                     getLocation()
                 }),
@@ -99,79 +99,3 @@ const styles = StyleSheet.create({
 });
 
 export default SplashPermission;
-
-
-// import React, { Component } from "react";
-// import { View, Text, StyleSheet, Alert } from "react-native";
-// import * as Location from 'expo-location';
-
-// class SplashPermission extends Component {
-
-//     state = {
-//         latitude: null,
-//         longitude: null
-//     }
-
-//     componentDidMount() {
-//         Alert.alert('Safe-ZoneApp Permission', 'Safe-ZoneApp ขออนุญาตใช้ GPS', [
-//             {
-//                 text: 'Ask me later',
-//                 onPress: (() => {
-//                     console.log('Ask me later location denied')
-//                 }),
-//             },
-//             {
-//                 text: 'Cancel',
-//                 onPress: (() => {
-//                     console.log('Cancel location denied')
-//                 }),
-//                 style: 'cancel',
-//             },
-//             {
-//                 text: 'OK',
-//                 onPress: (() => {
-//                     this.getLocation()
-//                 }),
-//             }
-//         ])
-//     }
-
-//     async getLocation () {
-//         let { status } = await Location.requestForegroundPermissionsAsync();
-//         console.log("status : " + status)
-//         if (status !== 'granted') {
-//             console.log('Permission to access location was denied')
-//             return;
-//         }
-//         let location = await Location.getCurrentPositionAsync({});
-//         this.setState({
-//             latitude: location.coords.latitude,
-//             longitude: location.coords.longitude
-//         })
-//         console.log(this.state.latitude)
-//         console.log(this.state.longitude)
-//     }
-
-//     render() {
-//         return (
-//             <View style={styles.container}>
-//                 {/* <Text style={styles.titleText}>COVID-19</Text>
-//                 <Text style={styles.titleText}>SAFE-ZONE</Text> */}
-//             </View>
-//         )
-//     }
-// }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         alignItems: "center",
-//         justifyContent: "center",
-//     },
-//     titleText: {
-//         fontSize: 50,
-//         fontFamily: 'Kanit_700Bold',
-//         color: '#fff'
-//     },
-// });
-
-// export default SplashPermission;
