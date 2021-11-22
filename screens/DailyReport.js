@@ -15,7 +15,7 @@ class DailyReport extends Component {
     }
 
     async componentDidMount() {
-        console.log("render DidMount")
+        // console.log("render DidMount")
         this.loadAssetsAsync()
         await axios.get('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all')
         .then((response) => {
@@ -38,7 +38,7 @@ class DailyReport extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log("shouldComponentUpdate")
+        // console.log("shouldComponentUpdate")
         if (nextState.dailyReportData != this.state.dailyReportData) {
             return true
         }

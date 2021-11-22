@@ -90,8 +90,24 @@ const DailyReportCovidProvince = ({ route }) => {
     }
     return (
         <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <Picker
+            <View>
+                <View style={styles.headerContainer}>
+                    <View style={{ borderBottomColor: '#48586f', borderWidth: 0.7, width: '98%', borderRadius: 10, marginTop: 5 }}>
+                        <Picker
+                            selectedValue={selectProvince}
+                            // style={{ width: "95%", fontSize: 20, fontFamily: "Kanit_400Regular", borderWidth: 1, alignSelf: 'center', marginTop: 10, backgroundColor: '#fff' }}
+                            onValueChange={(itemValue, itemIndex) => searchFilter(itemValue)}
+                        >
+                            <Picker.Item label="ทั้งหมด" value="ทั้งหมด" style={{ fontSize: 18, fontFamily: "Kanit_400Regular"}}/>
+                            {
+                                masterData.map((item, index) => {
+                                    return(<Picker.Item label={item.province} value={item.province} key={index} style={{ fontSize: 18, fontFamily: "Kanit_400Regular"}}/>)
+                                })
+                            }
+                        </Picker>
+                    </View>
+                </View>
+                {/* <Picker
                     selectedValue={selectProvince}
                     style={{ width: "95%", fontSize: 20, fontFamily: "Kanit_400Regular", borderWidth: 1, alignSelf: 'center', marginTop: 10, backgroundColor: '#fff' }}
                     onValueChange={(itemValue, itemIndex) => searchFilter(itemValue)}
@@ -102,7 +118,7 @@ const DailyReportCovidProvince = ({ route }) => {
                             return(<Picker.Item label={item.province} value={item.province} key={index} style={{ fontSize: 18, fontFamily: "Kanit_400Regular"}}/>)
                         })
                     }
-                </Picker>
+                </Picker> */}
                 <View style={{ alignItems: 'center' }}>
                     <View style={styles.totalBox}>
                         <View style={{ flexDirection: 'column' }}>
@@ -209,6 +225,9 @@ const styles = StyleSheet.create({
         height: 90,
         borderRadius: 10,
         padding: 15
+    },
+    headerContainer: {
+        alignItems: 'center'
     }
 })
 export default DailyReportCovidProvince;

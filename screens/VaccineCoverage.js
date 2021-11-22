@@ -19,7 +19,7 @@ class Vaccine extends Component {
         fontLoaded: false
     }
     componentDidMount() {
-        console.log("render DidMount")
+        // console.log("render DidMount")
         this.loadAssetsAsync()
         fetch('https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/vaccination/provincial-vaccination.json').then((response) => response.json())
         .then((responseJson) => {
@@ -114,14 +114,15 @@ class Vaccine extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.searchContainer}>
-                    <SearchBar containerStyle={{ width: "100%",borderWidth: 1, borderRadius: 10}}
+                    <SearchBar containerStyle={{ width: "98%",borderWidth: 0.8, borderRadius: 10}}
                         placeholder="ค้นหาจังหวัด..."
                         onChangeText={(text) => this.searchFilter(text)}
                         value={this.state.searchText}
                         platform="android"
                     />
-                    <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 16, alignSelf: 'flex-end', marginTop: 5 }}>ข้อมูลอัพเดตเมื่อ { this.state.updateDate }</Text>
+                    {/* <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 16, alignSelf: 'flex-end', marginTop: 5 }}>ข้อมูลอัพเดตเมื่อ { this.state.updateDate }</Text> */}
                 </View>
+                <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 16, alignSelf: 'flex-end', marginTop: -5, marginRight: 5 }}>ข้อมูลอัพเดตเมื่อ { this.state.updateDate }</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Text style={{ marginLeft: -15, marginRight: 10, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>Province</Text>
                     <Text style={{ marginLeft: 30, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>1st</Text>
@@ -156,11 +157,13 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         // flex: 1,
-        marginLeft: 10,
+        // justifyContent: "center",
+        alignItems: 'center',
+        marginLeft: -10,
         alignItems: 'flex-end',
-        marginTop: 20,
+        marginTop: 10,
         marginBottom: 10,
-        marginRight: 5
+        // marginRight: 5
     },
     itemRow: {
         flex: 5,

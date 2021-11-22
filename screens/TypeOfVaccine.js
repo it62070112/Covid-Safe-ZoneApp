@@ -209,7 +209,21 @@ const TypeOfVaccine = ({ route }) => {
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <MyBarChart />
-                <Picker
+                <View style={{ borderBottomColor: '#48586f', borderWidth: 0.7, width: '98%', borderRadius: 10 }}>
+                    <Picker
+                        selectedValue={selectProvince}
+                        // style={{ width: "95%", fontSize: 20, fontFamily: "Kanit_400Regular", alignSelf: 'center', marginTop: 10, backgroundColor: '#fff' }}
+                        onValueChange={(itemValue, itemIndex) => searchFilter(itemValue)}
+                    >
+                        <Picker.Item label="ทั้งหมด" value="ทั้งหมด" style={{ fontSize: 18, fontFamily: "Kanit_400Regular" }} />
+                        {
+                            masterData.map((item, index) => {
+                                return (<Picker.Item label={item.province} value={item.province} key={index} style={{ fontSize: 18, fontFamily: "Kanit_400Regular" }} />)
+                            })
+                        }
+                    </Picker>
+                </View>
+                {/* <Picker
                     selectedValue={selectProvince}
                     style={{ width: "95%", fontSize: 20, fontFamily: "Kanit_400Regular", alignSelf: 'center', marginTop: 10, backgroundColor: '#fff' }}
                     onValueChange={(itemValue, itemIndex) => searchFilter(itemValue)}
@@ -220,7 +234,7 @@ const TypeOfVaccine = ({ route }) => {
                             return (<Picker.Item label={item.province} value={item.province} key={index} style={{ fontSize: 18, fontFamily: "Kanit_400Regular" }} />)
                         })
                     }
-                </Picker>
+                </Picker> */}
             </View>
             <View style={styles.itemContainer}>
                 {/* <View style={{ alignItems: 'flex-start', marginLeft: 10 }}>
@@ -306,6 +320,7 @@ const styles = StyleSheet.create({
     headerContainer: {
         // flex: 1,
         // backgroundColor: '#48C9B0',
+        alignItems: 'center'
     },
     itemContainer: {
         flex: 2,

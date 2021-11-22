@@ -21,6 +21,8 @@ import SplashPermission from "../components/SplashPermission";
 import AddInfoVaccine from "../screens/AddInfoVaccine";
 import VaccinationRates from "../screens/VaccinationRates";
 import AllChartScreen from "../screens/AllChartScreen";
+import ShowInfoVacUser from "../screens/ShowInfoVacUser";
+import EditDataVac from "../screens/EditDataVac";
 
 //icon
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -49,6 +51,8 @@ const TabBar = createBottomTabNavigator();
 const StackSplash = createNativeStackNavigator();
 const StackDailyReport = createNativeStackNavigator();
 const DrawerVaccine = createDrawerNavigator();
+const StackAddInfo = createNativeStackNavigator();
+
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
         navigation.navigate("HomeAll")
@@ -70,6 +74,29 @@ function StackDailyReportFunc({ navigation }) {
             <StackDailyReport.Screen name="DailyReportCovidProvince" component={DailyReportCovidProvince} />
             <StackDailyReport.Screen name="AllChartScreen" component={AllChartScreen} />
         </StackDailyReport.Navigator>
+    )
+}
+
+//Stack
+function StackAddInfoFunc() {
+    return (
+        <StackAddInfo.Navigator
+            // screenOptions={{
+            //     headerShown: false
+            // }}
+        >
+            <StackAddInfo.Screen name="AddInfoVaccine" component={AddInfoVaccine}
+                options={{
+                    headerShown: false
+                }}
+            />
+            <StackAddInfo.Screen name="ShowInfoVacUser" component={ShowInfoVacUser}
+                options={{
+                    headerShown: false
+                }}
+            />
+            <StackAddInfo.Screen name="EditDataVac" component={EditDataVac}/>
+        </StackAddInfo.Navigator>
     )
 }
 
@@ -100,7 +127,8 @@ function DrawerVaccineFunc({ navigation }) {
                     headerTitle: "อัตราการฉีดวัคซีนทั้งประเทศ",
                     title: "อัตราการฉีดวัคซีนทั้งประเทศ",
                     drawerIcon: ({ color }) => {
-                        return <Foundation name="clipboard-notes" size={24} color={color} />
+                        // return <Foundation name="clipboard-notes" size={24} color={color} />
+                        return <FontAwesome5 name="syringe" size={24} color={color} />
                     }
                 }}
             />
@@ -109,6 +137,7 @@ function DrawerVaccineFunc({ navigation }) {
                     headerTitle: "ข้อมูลการฉีดแยกตามโดส",
                     title: "ข้อมูลการฉีดแยกตามโดส",
                     drawerIcon: ({ color }) => {
+                        // return <FontAwesome5 name="syringe" size={24} color={color} />
                         return <Foundation name="clipboard-notes" size={24} color={color} />
                     }
                 }}
@@ -118,7 +147,7 @@ function DrawerVaccineFunc({ navigation }) {
                     title: "ข้อมูลการฉีดแยกตามผู้ผลิต",
                     headerTitle: "ข้อมูลการฉีดแยกตามผู้ผลิต",
                     drawerIcon: ({ color }) => {
-                        return <Foundation name="clipboard-notes" size={24} color={color} />
+                        return <FontAwesome5 name="chart-bar" size={24} color={color} />
                     }
                 }}
             />
@@ -136,12 +165,7 @@ function DrawerVaccineFunc({ navigation }) {
 function TabBarNavigatorFunc({ navigation }) {
     // const [test, setTest] = useState(true)
     const changeIcon = useSelector((state) => state.changeIcon.saveSuccess)
-    // if (changeIcon == false) {
-    //     setTest(changeIcon)
-    // } else {
-    //     console.log("error")
-    // }
-    console.log("changeIcon : ", changeIcon)
+    // console.log("changeIcon from Navi : ", changeIcon)
     return (
         <TabBar.Navigator initialRouteName={"Home"}
             screenOptions={{
@@ -196,7 +220,7 @@ function TabBarNavigatorFunc({ navigation }) {
                     }
                 }}
             />
-            <TabBar.Screen name="AddInfoVaccine" component={AddInfoVaccine}
+            <TabBar.Screen name="AddInfoVaccineMain" component={StackAddInfoFunc}
                 options={{
                     headerTitle: "เพิ่มข้อมูลการฉีดวัคซีน",
                     headerTitleStyle: {
@@ -213,7 +237,7 @@ function TabBarNavigatorFunc({ navigation }) {
                                     alignItems: 'center'
                                 }}
                                 onPress={() => {
-                                    navigation.navigate("AddInfoVaccine")
+                                    navigation.navigate("AddInfoVaccineMain")
                                 }}
                             >
                                 {/* <View style={{ width: 70, height: 70, borderRadius: 35, backgroundColor: '#48C9B0', justifyContent: 'center', alignItems: 'center' }}>

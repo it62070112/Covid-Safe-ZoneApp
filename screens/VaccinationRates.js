@@ -32,7 +32,7 @@ class VaccinationRates extends Component {
     // }
 
     async componentDidMount() {
-        console.log("render DidMount")
+        // console.log("render DidMount")
         this.loadAssetsAsync()
         await axios.get('https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/vaccination/national-vaccination-timeseries.json')
         .then((response) => {
@@ -58,7 +58,7 @@ class VaccinationRates extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log("shouldComponentUpdate")
+        // console.log("shouldComponentUpdate")
         if (nextState.vaccineRateData != this.state.vaccineRateData) {
             return true
         }
@@ -71,7 +71,7 @@ class VaccinationRates extends Component {
         SliceData.map((item, index) => {
             return dataChart.push(item.daily_vaccinations)
         })
-        console.log('dataChart: ', dataChart);
+        // console.log('dataChart: ', dataChart);
         
         const labelDate = []
         for (let i = 1; SliceData.length >= i; i++) {
@@ -233,7 +233,7 @@ const styles =StyleSheet.create({
         width: "95%",
         height: 55,
         padding: 10,
-        backgroundColor: '#4CC6DA',
+        backgroundColor: '#6dd4c0',
         borderRadius: 10,
         margin: 5,
         marginTop: 10,
@@ -254,7 +254,7 @@ const styles =StyleSheet.create({
         width: "95%",
         height: 55,
         padding: 10,
-        backgroundColor: '#4CC6DA',
+        backgroundColor: '#6dd4c0',
         borderRadius: 10,
         margin: 5,
         marginTop: 10,
@@ -274,7 +274,7 @@ const styles =StyleSheet.create({
         width: "95%",
         height: 120,
         padding: 10,
-        backgroundColor: '#4CC6DA',
+        backgroundColor: '#6dd4c0',
         borderRadius: 10,
         margin: 5,
         marginTop: 10,
@@ -291,14 +291,14 @@ const styles =StyleSheet.create({
         elevation: 6,
     },
     header: {
-        color: "#4CC6DA",
+        color: "#6dd4c0",
         fontFamily: "Kanit_600SemiBold",
         fontSize: 25,
         marginLeft: 10
     },
     titleText: {
         fontFamily: 'Kanit-bold',
-        fontSize: 21,
+        fontSize: 20,
         color: "#fff",
     },
     valueText: {
