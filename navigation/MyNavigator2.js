@@ -56,7 +56,7 @@ const StackAddInfo = createNativeStackNavigator();
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
         navigation.navigate("HomeAll")
-    }, 3000)
+    }, 5000)
     return (
         <SplashScreen />
     )

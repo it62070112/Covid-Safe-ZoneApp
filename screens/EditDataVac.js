@@ -180,10 +180,13 @@ class EditDataVac extends Component {
                         value={this.state.vaccinationPlace}
                         autoCompleteType='off'
                     />
-                <View style={{ width: "100%", margin: 10}}>
+                <View style={{ width: "100%", margin: 10, }}>
                     <Button
                         title="Update Vaccine Info"
-                        onPress={() => this.updateVaccine()}    
+                        onPress={() => this.updateVaccine()}
+                        buttonStyle={{
+                            backgroundColor: "#52BE80"
+                        }} 
                     />
                 </View>
                 </View>

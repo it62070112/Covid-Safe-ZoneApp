@@ -33,7 +33,7 @@ class ShowInfoVacUser extends Component {
                 vaccineBrandThirdDose,
             });
         });
-        console.log("all_data : ", all_data);
+        // console.log("all_data : ", all_data);
         this.setState({
             infoVaccine: all_data,
         })
@@ -61,7 +61,7 @@ class ShowInfoVacUser extends Component {
                         this.state.infoVaccine.map(( item, index ) => {
                             if (this.props.route.params.nameUser == item.name) {
                                 return (
-                                    <View key={ index } style={{ width: '100%', backgroundColor: 'pink', borderRadius: 10, padding: 10 }}>
+                                    <View key={ index } style={{ width: '100%', backgroundColor: '#fff', borderRadius: 10, padding: 10 }}>
                                         <TouchableOpacity onPress={() => this.updateData(item.key)} style={{ alignItems: 'flex-end' }}>
                                             <Feather name="edit" size={24} color="black" />
                                         </TouchableOpacity>
