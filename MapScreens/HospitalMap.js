@@ -384,7 +384,7 @@ const HospitalMap = () =>  {
                                 key={index}
                                 title={val.hospitalName}
                                 >
-                                <MaterialCommunityIcons name="hospital-marker" size={35} color="#ff1d44" />
+                                <MaterialCommunityIcons name="hospital-marker" size={35} color="#F92D2D" />
                             </Marker>
                         )
                     })

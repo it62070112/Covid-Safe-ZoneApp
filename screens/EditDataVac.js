@@ -122,7 +122,7 @@ class EditDataVac extends Component {
                             <Picker.Item label="1" value="1" />
                             <Picker.Item label="2" value="2" />
                             <Picker.Item label="3" value="3" />
-                            <Picker.Item label="มากกว่า 3" value="มากกว่า 3" />
+                            {/* <Picker.Item label="มากกว่า 3" value="มากกว่า 3" /> */}
                         </Picker>
                         <Picker
                             selectedValue={this.state.vaccineBrandFirstDose}
@@ -182,10 +182,20 @@ class EditDataVac extends Component {
                     />
                 <View style={{ width: "100%", margin: 10, }}>
                     <Button
-                        title="Update Vaccine Info"
+                        title="อัพเดตข้อมูล"
                         onPress={() => this.updateVaccine()}
                         buttonStyle={{
-                            backgroundColor: "#52BE80"
+                            backgroundColor: "#52BE80",
+                            borderRadius: 10,
+                        }} 
+                    />
+                    <Button
+                        title="กลับหน้าแสดงข้อมูล"
+                        onPress={() => this.props.navigation.pop()}
+                        buttonStyle={{
+                            marginTop: 5,
+                            borderRadius: 10,
+                            backgroundColor: "#34CCF3"
                         }} 
                     />
                 </View>

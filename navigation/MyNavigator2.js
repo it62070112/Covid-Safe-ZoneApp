@@ -56,7 +56,7 @@ const StackAddInfo = createNativeStackNavigator();
 function SplashScreenFunc({ navigation }) {
     setTimeout(() => {
         navigation.navigate("HomeAll")
-    }, 5000)
+    }, 3000)
     return (
         <SplashScreen />
     )
@@ -228,6 +228,7 @@ function TabBarNavigatorFunc({ navigation }) {
                         fontFamily: 'Kanit_500Medium',
                         color: "#fff"
                     },
+                    // headerShown: false,
                     tabBarButton: () => {
                         return (
                             <TouchableOpacity

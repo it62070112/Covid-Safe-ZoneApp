@@ -144,7 +144,7 @@ const AddInfoVaccine = ({ navigation }) => {
                             <Picker.Item label="1" value="1" />
                             <Picker.Item label="2" value="2" />
                             <Picker.Item label="3" value="3" />
-                            <Picker.Item label="มากกว่า 3" value="มากกว่า 3" />
+                            {/* <Picker.Item label="มากกว่า 3" value="มากกว่า 3" /> */}
                         </Picker>
                         <Picker
                             selectedValue={vaccineBrandFirstDose}

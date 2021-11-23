@@ -1,163 +1,26 @@
-// import React, { Component } from 'react';
-// import { View, StyleSheet, Text, Dimensions, Platform, Alert, SafeAreaView, LogBox } from 'react-native';
-// import MapView, { PROVIDER_GOOGLE, Marker, Circle, Callout } from 'react-native-maps';
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import firebase from "../database/firebase";
-// import * as Location from 'expo-location';
-
-// class Map extends Component {
-//     constructor() {
-//         super();
-    
-//         this.infoVaccineUserCollection = firebase.firestore().collection("infoVaccineUser")
-    
-//         this.state = {
-//             infoVaccine: [],
-//             latitude: 0,
-//             longitude: 0,
-//             quantity: 0,
-//             loadComplete: false,
-//             myLatitude: 0,
-//             myLongitude: 0,
-//         };
-//     }
-
-//     getCollection = (querySnapshot) => {
-//         const all_data = [];
-//         querySnapshot.forEach((res) => {
-//             const { age, gender, latitude, longitude, name, quantity, vaccinationPlace, vaccineBrandFirstDose, vaccineBrandSecondDose, vaccineBrandThirdDose } = res.data();
-//             all_data.push({
-//                 key: res.id,
-//                 age,
-//                 gender,
-//                 latitude,
-//                 longitude,
-//                 name,
-//                 quantity,
-//                 vaccinationPlace,
-//                 vaccineBrandFirstDose,
-//                 vaccineBrandSecondDose,
-//                 vaccineBrandThirdDose,
-//             });
-//         });
-//         console.log("all_data_Map : ", all_data);
-//         all_data.map((item, index) => {
-//             this.setState({
-//                 latitude: item.latitude,
-//                 longitude: item.longitude,
-//                 quantity: item.quantity,
-//                 gender: item.gender,
-//                 vaccineBrandFirstDose: item.vaccineBrandFirstDose,
-//                 vaccineBrandSecondDose: item.vaccineBrandSecondDose,
-//                 vaccineBrandThirdDose: item.vaccineBrandThirdDose,
-//             })
-//         })
-//         this.setState({
-//             infoVaccine: all_data,
-//             loadComplete: true,
-//         })
-//         console.log(this.state.latitude)
-//         console.log(this.state.longitude)
-//         console.log(this.state.loadComplete)
-//         LogBox.ignoreAllLogs();
-//     }
-
-//     async componentDidMount() {
-//         this.unsubscribe = this.infoVaccineUserCollection.onSnapshot(this.getCollection);
-//             let { status } = await Location.requestForegroundPermissionsAsync();
-//             if (status !== 'granted') {
-//                 console.log('Permission to access location was denied')
-//                 return;
-//             }
-//             let location = await Location.getCurrentPositionAsync({});
-//             this.setState({
-//                 myLatitude: location.coords.latitude,
-//                 myLongitude: location.coords.longitude,
-//             })
-//             console.log(this.state.myLatitude)
-//             console.log(this.state.myLongitude)
-//     }
-
-//     componentWillUnmount() {
-//         this.unsubscribe();
-//     }
-//     render() {
-//         return (
-//             <View style={styles.container}>
-//                 {
-//                     this.state.loadComplete == true ?
-//                         <MapView style={styles.map}
-//                             initialRegion={{
-//                                 latitude: this.state.latitude,
-//                                 longitude: this.state.longitude,
-//                                 latitudeDelta: 1,
-//                                 longitudeDelta: 1,
-//                             }}
-//                             provider={PROVIDER_GOOGLE}
-//                         >
-//                             <Marker coordinate={{ latitude: this.state.myLatitude, longitude: this.state.myLongitude }} pinColor="blue">
-
-//                                 {/* <Callout>
-//                                     <Text>{ this.state.gender }</Text>
-//                                     <Text>รับวัควีนแล้ว : { this.state.quantity } เข็ม</Text>
-//                                     <Text>เข็มที่ 1 : { this.state.vaccineBrandFirstDose }</Text>
-//                                     <Text>เข็มที่ 2 : { this.state.vaccineBrandSecondDose }</Text>
-//                                     <Text>เข็มที่ 3 : { this.state.vaccineBrandThirdDose }</Text>
-//                                 </Callout>                                 */}
-                            
-//                             </Marker>
-//                         {
-//                             this.state.infoVaccine.map((item, index) => {
-//                                 return (
-//                                     <Marker coordinate={{ latitude: item.latitude, longitude: item.longitude }}>
-//                                         <MaterialCommunityIcons name="human-handsdown" size={35} color="#229954" />
-//                                     </Marker> 
-//                                 )
-//                                 // return (
-//                                 //     <Circle
-//                                 //         center={{ latitude: item.latitude, longitude: item.longitude }}
-//                                 //         radius={5000}
-//                                 //         fillColor="#52BE80"ห
-//                                 //     />
-//                                 // )
-//                             })
-//                         }
-//                         {/* <Marker coordinate={{ latitude: this.state.latitude, longitude: this.state.longitude }}></Marker> */}
-//                         </MapView>
-//                     :
-//                     null
-//                 }
-//             </View>
-//         )
-//     }
-// }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         backgroundColor: '#fff'
-//     },
-//     map: {
-//         width: Dimensions.get('window').width,
-//         height: Dimensions.get('window').height,
-//     }
-// });
-
-// export default Map;
-
 import React, { Component, useEffect } from 'react';
-import { View, StyleSheet, Text, Dimensions, Platform, Alert, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, Platform, Alert, SafeAreaView, LogBox } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Circle, Callout } from 'react-native-maps';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LatLong } from './LatLong';
 import { useSelector } from "react-redux";
+import firebase from "../database/firebase";
+import * as Font from 'expo-font';
+import AppLoading from "expo-app-loading";
 
 class Map extends Component {
     constructor(props){
         super(props)
+        
+        this.infoVaccineUserCollection = firebase.firestore().collection("infoVaccineUser")
+
         this.state = {
+            infoVaccine: [],
+            latitude: 0,
+            longitude: 0,
+            // vaccineBrandFirstDose: '',
+            // vaccineBrandSecondDose: '',
+            // vaccineBrandThirdDose: '',
             test_props : {
               lat: 13,
               long: 100,
@@ -180,12 +43,66 @@ class Map extends Component {
         return null;
     }
 
+    loadAssetsAsync = async () => {
+        await Font.loadAsync({
+          'Kanit-Regular': require('../assets/fonts/Kanit-Regular.ttf'),
+          'Kanit-bold': require('../assets/fonts/Kanit-Bold.ttf'),
+        })
+        this.setState({ fontLoaded: true })
+    }
+
+    getCollection = (querySnapshot) => {
+        const all_data = [];
+        querySnapshot.forEach((res) => {
+            const { age, gender, latitude, longitude, name, quantity, vaccinationPlace, vaccineBrandFirstDose, vaccineBrandSecondDose, vaccineBrandThirdDose } = res.data();
+            all_data.push({
+                key: res.id,
+                age,
+                gender,
+                latitude,
+                longitude,
+                name,
+                quantity,
+                vaccinationPlace,
+                vaccineBrandFirstDose,
+                vaccineBrandSecondDose,
+                vaccineBrandThirdDose,
+            });
+        });
+        // all_data.map((item, index) => {
+        //     this.setState({
+        //         latitude: item.latitude,
+        //         longitude: item.longitude,
+        //         quantity: item.quantity,
+        //         gender: item.gender,
+        //         vaccineBrandFirstDose: item.vaccineBrandFirstDose,
+        //         vaccineBrandSecondDose: item.vaccineBrandSecondDose,
+        //         vaccineBrandThirdDose: item.vaccineBrandThirdDose,
+        //     })
+        // })
+        // console.log("all_data_Map : ", all_data);
+        this.setState({
+            infoVaccine: all_data,
+        })
+        LogBox.ignoreAllLogs();
+    }
+
+    componentDidMount() {
+        this.unsubscribe = this.infoVaccineUserCollection.onSnapshot(this.getCollection);
+        this.loadAssetsAsync()
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
+
     render() {
+        if (!this.state.fontLoaded) {
+            return <AppLoading />
+        }
         return (
             <View style={styles.container}>
                 <this.setProps />
-                {/* <Text>geo.lat {this.state.test_props.lat}</Text>
-                <Text>geo.long {this.state.test_props.long}</Text> */}
                 <MapView style={styles.map}
                     initialRegion={{
                         latitude: this.state.test_props.lat,
@@ -195,24 +112,82 @@ class Map extends Component {
                     }}
                     provider={PROVIDER_GOOGLE}
                 >
-                    <Marker coordinate={{
+                    {/* <Marker coordinate={{
                         latitude: this.state.test_props.lat,
                         longitude: this.state.test_props.long
                     }}>
-                        {/* <MaterialCommunityIcons name="home" size={45} color="#2958D1" /> */}
-                        {/* <Callout>
-                            <Text>Female</Text>
-                            <Text>Callout TEXT</Text>
-                            <Text>Callout TEXT</Text>
-                        </Callout> */}
-                    </Marker>
+                        <MaterialCommunityIcons name="human-handsdown" size={45} color="red" />
+                    </Marker> */}
 
-                    {/* <Circle
-                        center={{ latitude: 14.0208391, longitude: 100.52502759999993 }}
-                        radius={500}
-                        fillColor="rgb(169, 223, 191)"
-                    /> */}
-                    
+                    {
+                        this.state.infoVaccine.map((item, index) => {
+                            if (this.state.test_props.lat == item.latitude && this.state.test_props.long == item.longitude) {
+                                return(
+                                    <Marker coordinate={{
+                                        latitude: item.latitude,
+                                        longitude: item.longitude
+                                    }}
+                                    key={index}
+                                    >
+                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#F92D2D" />
+                                        <Callout>
+                                            <View style={{ width: 200, paddingLeft: 5 }}>
+                                                <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
+                                                <Text style={styles.textDetail}>รับวัควีนแล้ว : { item.quantity } เข็ม</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
+                                            </View>
+                                        </Callout>
+                                    </Marker>
+                                )
+                            }
+                            else {
+                                return (
+                                    <Marker coordinate={{
+                                        latitude: item.latitude,
+                                        longitude: item.longitude
+                                    }}
+                                    key={index}
+                                    >
+                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#27AE60" />
+                                        <Callout>
+                                            <View style={{ width: 200, paddingLeft: 5 }}>
+                                                <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
+                                                <Text style={styles.textDetail}>รับวัควีนแล้ว : { item.quantity } เข็ม</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
+                                            </View>
+                                        </Callout>
+                                    </Marker>
+                                )    
+                            }
+                            // return (
+                            //     <Marker coordinate={{
+                            //         latitude: item.latitude,
+                            //         longitude: item.longitude
+                            //     }}
+                            //     >
+                            //         <MaterialCommunityIcons name="human-handsdown" size={45} color="green" />
+                            //         <Callout>
+                            //             <View style={{ width: 200, paddingLeft: 5 }}>
+                            //                 <Text>เพศ : { item.gender }</Text>
+                            //                 <Text>รับวัควีนแล้ว : { item.quantity } เข็ม</Text>
+                            //                 <Text>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
+                            //                 <Text>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
+                            //                 <Text>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
+                            //             </View>
+                            //         </Callout>
+                            //     </Marker>
+                            //     // <Circle
+                            //     //     center={{ latitude: item.latitude, longitude: item.longitude }}
+                            //     //     radius={500}
+                            //     //     fillColor="rgb(169, 223, 191)"
+                            //     // />
+                            // )
+                        })
+                    } 
                 </MapView>
             </View>
         )
@@ -229,6 +204,10 @@ const styles = StyleSheet.create({
     map: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height * (8 / 10),
+    },
+    textDetail: {
+        fontFamily: 'Kanit_400Regular',
+        fontSize: 16
     }
 });
 
