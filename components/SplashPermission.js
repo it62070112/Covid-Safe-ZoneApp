@@ -27,7 +27,7 @@ const SplashPermission = () => {
     // }
 
     useEffect(() => {
-        Alert.alert('Safe-ZoneApp Permission', 'Safe-ZoneApp ขออนุญาตใช้ GPS', [
+        Alert.alert('COVID-19 Safe-Zone Permission', 'COVID-19 Safe-Zone ขออนุญาตใช้ GPS', [
             {
                 text: 'Ask me later',
                 onPress: (() => {

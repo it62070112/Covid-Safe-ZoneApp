@@ -393,7 +393,7 @@ const HospitalMap = () =>  {
                     latitude: latitude,
                     longitude: longitude,
                 }}>
-                    <MaterialCommunityIcons name="human-handsdown" size={45} color="#2958D1" />
+                    <MaterialCommunityIcons name="human-handsdown" size={50} color="#2958D1" />
                         <Callout style={{height: 36}}>
                             <Text style={{fontSize: 12, fontFamily: 'Kanit_400Regular'}}>ตำแหน่งของคุณ</Text>
                         </Callout>

@@ -23,6 +23,8 @@ import VaccinationRates from "../screens/VaccinationRates";
 import AllChartScreen from "../screens/AllChartScreen";
 import ShowInfoVacUser from "../screens/ShowInfoVacUser";
 import EditDataVac from "../screens/EditDataVac";
+import SplashScan from "../components/SplashScan";
+import PreAddInfoVaccine from "../screens/PreAddInfoVaccine";
 
 //icon
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -81,19 +83,21 @@ function StackDailyReportFunc({ navigation }) {
 function StackAddInfoFunc() {
     return (
         <StackAddInfo.Navigator
-            // screenOptions={{
-            //     headerShown: false
-            // }}
+            screenOptions={{
+                headerShown: false
+            }}
         >
+            {/* <StackAddInfo.Screen name="PreAddInfoVaccine" component={PreAddInfoVaccine}/> */}
+            <StackAddInfo.Screen name="SplashScan" component={SplashScan}/>
             <StackAddInfo.Screen name="AddInfoVaccine" component={AddInfoVaccine}
-                options={{
-                    headerShown: false
-                }}
+                // options={{
+                //     headerShown: false
+                // }}
             />
             <StackAddInfo.Screen name="ShowInfoVacUser" component={ShowInfoVacUser}
-                options={{
-                    headerShown: false
-                }}
+                // options={{
+                //     headerShown: false
+                // }}
             />
             <StackAddInfo.Screen name="EditDataVac" component={EditDataVac}/>
         </StackAddInfo.Navigator>
@@ -222,7 +226,7 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="AddInfoVaccineMain" component={StackAddInfoFunc}
                 options={{
-                    headerTitle: "เพิ่มข้อมูลการฉีดวัคซีน",
+                    headerTitle: "ข้อมูลการฉีดวัคซีน",
                     headerTitleStyle: {
                         fontSize: 26,
                         fontFamily: 'Kanit_500Medium',

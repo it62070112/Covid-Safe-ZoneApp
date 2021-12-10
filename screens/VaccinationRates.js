@@ -66,7 +66,7 @@ class VaccinationRates extends Component {
     }
 
     MyLineChart = () => {
-        const SliceData = this.state.masterData.slice(250)
+        const SliceData = this.state.masterData.slice(276)
         const dataChart = []
         SliceData.map((item, index) => {
             return dataChart.push(item.daily_vaccinations)

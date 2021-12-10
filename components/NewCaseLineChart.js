@@ -42,7 +42,7 @@ const NewCaseLineChart = () => {
         return <AppLoading />
     }
     
-    const SliceData = resData.slice(214)
+    const SliceData = resData.slice(244)
     const dataChart = []
     // console.log("SliceData : ", SliceData)
     SliceData.map((item, index) => {

@@ -9,6 +9,8 @@ import { createStore, combineReducers } from "redux";
 import LatLongReducer from "./store/reducers/LatLongReducer";
 import changeIconReducer from "./store/reducers/changeIconReducer";
 
+import SplashScan from "./components/SplashScan";
+
 const rootReducer = combineReducers({
   LatLong: LatLongReducer,
   changeIcon: changeIconReducer,
@@ -21,6 +23,7 @@ export default function App() {
     // <MyNavigator />
     <Provider store={store}>
       <MyNavigator2 />  
+      {/* <SplashScan /> */}
     </Provider>
   );
 }

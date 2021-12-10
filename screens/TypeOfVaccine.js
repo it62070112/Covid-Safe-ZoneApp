@@ -28,7 +28,7 @@ const TypeOfVaccine = ({ route }) => {
             }).catch((error) => {
                 console.log(error)
             })
-
+        //ข้อมูลการฉีดวัคซีนทั้งหมดของแต่ละยี่ห้อ
         axios.get("https://raw.githubusercontent.com/wiki/porames/the-researcher-covid-data/vaccination/vaccine-manufacturer-timeseries.json")
         .then((response) => {
             var testData = response.data

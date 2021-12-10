@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { Picker } from '@react-native-picker/picker';
 import {
@@ -13,7 +13,7 @@ import AppLoading from "expo-app-loading";
 import firebase from "../database/firebase";
 import { addIcon } from "../store/actions/changeIconAction";
 
-const AddInfoVaccine = ({ navigation }) => {
+const AddInfoVaccine = ({ navigation, route }) => {
     const latitude = useSelector((state) => state.LatLong.lat)
     const longitude = useSelector((state) => state.LatLong.long)
 
@@ -29,11 +29,13 @@ const AddInfoVaccine = ({ navigation }) => {
     const [saveSuccess, setSaveSuccess] = useState(null)
     const [disable, setDisable] = useState(true)
     const [allData, setAllData] = useState([])
-
+    const [CertificateCode, setCertificateCode] = useState('')
     const dispatch = useDispatch();
 
     useEffect(() => {
         getData()
+        setCertificateCode(route.params.Certificate_Code)
+        console.log(route.params.Certificate_Code)
     }, [])
 
     let [fontsLoaded] = useFonts({
@@ -52,6 +54,7 @@ const AddInfoVaccine = ({ navigation }) => {
             Alert.alert("กรุณากรอกข้อมูลก่อนกดปุ่มบันทึก")
         } else {
             return db.collection('infoVaccineUser')
+            // return db.collection('infoVaccineUserAuthen')
                 .add({
                     age: age,
                     gender: gender,
@@ -62,7 +65,8 @@ const AddInfoVaccine = ({ navigation }) => {
                     vaccinationPlace: vaccinationPlace,
                     vaccineBrandFirstDose: vaccineBrandFirstDose,
                     vaccineBrandSecondDose: vaccineBrandSecondDose,
-                    vaccineBrandThirdDose: vaccineBrandThirdDose
+                    vaccineBrandThirdDose: vaccineBrandThirdDose,
+                    CertificateCode: CertificateCode
                 })
                 .then((res) => {
                     // Alert.alert("บันทึกข้อมูลสำเร็จ")
@@ -204,7 +208,7 @@ const AddInfoVaccine = ({ navigation }) => {
                         autoCompleteType='off'
                         editable={disable}
                     />
-                    {
+                    {/* {
                         !saveSuccess ?
                         <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => createInfoVaccineUser()}>
                             <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
@@ -214,7 +218,10 @@ const AddInfoVaccine = ({ navigation }) => {
                         <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#3498DB', borderRadius: 10, justifyContent: 'center', marginTop: 5 }} onPress={() => navigation.navigate("ShowInfoVacUser", { nameUser: nameFirstLast })}>
                             <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>ดูข้อมูล</Text>
                         </TouchableOpacity>
-                    }                 
+                    }                  */}
+                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => createInfoVaccineUser()}>
+                            <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
+                        </TouchableOpacity> 
                 </View>
             </View>
         </ScrollView>
@@ -262,7 +269,7 @@ const styles = StyleSheet.create({
         height: 50,
         padding: 15,
         margin: 5,
-        marginBottom: 10,
+        marginBottom: 20,
         borderWidth: 1,
         borderColor: 'grey',
         borderStyle: 'solid',
@@ -272,7 +279,7 @@ const styles = StyleSheet.create({
     },
     input2: {
         width: 185,
-        height: 40,
+        height: Platform.OS == 'android' ? 40 : 200,
         padding: 8,
         margin: 5,
         marginBottom: 20,

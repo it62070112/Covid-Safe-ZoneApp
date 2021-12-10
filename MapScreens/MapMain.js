@@ -1,7 +1,10 @@
 import React, { Component, useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions, Platform, Alert, SafeAreaView, LogBox } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Circle, Callout } from 'react-native-maps';
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
+
 import { LatLong } from './LatLong';
 import { useSelector } from "react-redux";
 import firebase from "../database/firebase";
@@ -22,8 +25,8 @@ class Map extends Component {
             // vaccineBrandSecondDose: '',
             // vaccineBrandThirdDose: '',
             test_props : {
-              lat: 13,
-              long: 100,
+              lat: 0,
+              long: 0,
             },
         }
     }
@@ -112,13 +115,6 @@ class Map extends Component {
                     }}
                     provider={PROVIDER_GOOGLE}
                 >
-                    {/* <Marker coordinate={{
-                        latitude: this.state.test_props.lat,
-                        longitude: this.state.test_props.long
-                    }}>
-                        <MaterialCommunityIcons name="human-handsdown" size={45} color="red" />
-                    </Marker> */}
-
                     {
                         this.state.infoVaccine.map((item, index) => {
                             if (this.state.test_props.lat == item.latitude && this.state.test_props.long == item.longitude) {
@@ -129,7 +125,7 @@ class Map extends Component {
                                     }}
                                     key={index}
                                     >
-                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#F92D2D" />
+                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#3498DB" />
                                         <Callout>
                                             <View style={{ width: 200, paddingLeft: 5 }}>
                                                 <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
@@ -142,7 +138,7 @@ class Map extends Component {
                                     </Marker>
                                 )
                             }
-                            else {
+                            if (item.quantity == 1) {
                                 return (
                                     <Marker coordinate={{
                                         latitude: item.latitude,
@@ -150,7 +146,49 @@ class Map extends Component {
                                     }}
                                     key={index}
                                     >
-                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#27AE60" />
+                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#E74C3C" />
+                                        <Callout>
+                                            <View style={{ width: 200, paddingLeft: 5 }}>
+                                                <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
+                                                <Text style={styles.textDetail}>รับวัควีนแล้ว : { item.quantity } เข็ม</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
+                                            </View>
+                                        </Callout>
+                                    </Marker>
+                                )
+                            }
+                           if (item.quantity = 2 &&  item.vaccineBrandThirdDose == '-') {
+                                return (
+                                    <Marker coordinate={{
+                                        latitude: item.latitude,
+                                        longitude: item.longitude
+                                    }}
+                                    key={index}
+                                    >
+                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#31C54D" />
+                                        <Callout>
+                                            <View style={{ width: 200, paddingLeft: 5 }}>
+                                                <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
+                                                <Text style={styles.textDetail}>รับวัควีนแล้ว : 2 เข็ม</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
+                                                <Text style={styles.textDetail}>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
+                                            </View>
+                                        </Callout>
+                                    </Marker>
+                                )
+                            }
+                            if (item.quantity = 3) {
+                                return (
+                                    <Marker coordinate={{
+                                        latitude: item.latitude,
+                                        longitude: item.longitude
+                                    }}
+                                    key={index}
+                                    >
+                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#319B45" />
                                         <Callout>
                                             <View style={{ width: 200, paddingLeft: 5 }}>
                                                 <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
@@ -163,29 +201,27 @@ class Map extends Component {
                                     </Marker>
                                 )    
                             }
-                            // return (
-                            //     <Marker coordinate={{
-                            //         latitude: item.latitude,
-                            //         longitude: item.longitude
-                            //     }}
-                            //     >
-                            //         <MaterialCommunityIcons name="human-handsdown" size={45} color="green" />
-                            //         <Callout>
-                            //             <View style={{ width: 200, paddingLeft: 5 }}>
-                            //                 <Text>เพศ : { item.gender }</Text>
-                            //                 <Text>รับวัควีนแล้ว : { item.quantity } เข็ม</Text>
-                            //                 <Text>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
-                            //                 <Text>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
-                            //                 <Text>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
-                            //             </View>
-                            //         </Callout>
-                            //     </Marker>
-                            //     // <Circle
-                            //     //     center={{ latitude: item.latitude, longitude: item.longitude }}
-                            //     //     radius={500}
-                            //     //     fillColor="rgb(169, 223, 191)"
-                            //     // />
-                            // )
+                            // else {
+                            //     return (
+                            //         <Marker coordinate={{
+                            //             latitude: item.latitude,
+                            //             longitude: item.longitude
+                            //         }}
+                            //         key={index}
+                            //         >
+                            //             <MaterialCommunityIcons name="human-handsdown" size={45} color="black" />
+                            //             <Callout>
+                            //                 <View style={{ width: 200, paddingLeft: 5 }}>
+                            //                     <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
+                            //                     <Text style={styles.textDetail}>รับวัควีนแล้ว : { item.quantity } เข็ม</Text>
+                            //                     <Text style={styles.textDetail}>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
+                            //                     <Text style={styles.textDetail}>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
+                            //                     <Text style={styles.textDetail}>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
+                            //                 </View>
+                            //             </Callout>
+                            //         </Marker>
+                            //     )    
+                            // }
                         })
                     } 
                 </MapView>

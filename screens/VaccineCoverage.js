@@ -54,6 +54,7 @@ class Vaccine extends Component {
         if (text) {
             const newData = this.state.vaccineData.filter((item) => {
                 const itemData = item.province
+                // console.log("itemData.indexOf(text) > -1 : ", itemData.indexOf(text) > -1)
                 return itemData.indexOf(text) > -1
             });
             this.setState({
