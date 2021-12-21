@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, FlatList, TouchableOpacity, Dimensions } from '
 import { Picker } from '@react-native-picker/picker';
 import {
     Kanit_400Regular,
-    Kanit_500Medium,
+    // Kanit_500Medium,
     Kanit_600SemiBold,
     Kanit_700Bold,
 } from '@expo-google-fonts/kanit'
@@ -57,7 +57,7 @@ const TypeOfVaccine = ({ route }) => {
 
     let [fontsLoaded] = useFonts({
         Kanit_400Regular,
-        Kanit_500Medium,
+        // Kanit_500Medium,
         Kanit_600SemiBold,
         Kanit_700Bold,
     })
@@ -139,7 +139,7 @@ const TypeOfVaccine = ({ route }) => {
                         barPercentage: 0.3,
                         propsForLabels: {
                             fontSize: 12,
-                            fontFamily: "Kanit_500Medium",
+                            // fontFamily: "Kanit_400Regular",
                         }
                         
                     }}
@@ -223,26 +223,8 @@ const TypeOfVaccine = ({ route }) => {
                         }
                     </Picker>
                 </View>
-                {/* <Picker
-                    selectedValue={selectProvince}
-                    style={{ width: "95%", fontSize: 20, fontFamily: "Kanit_400Regular", alignSelf: 'center', marginTop: 10, backgroundColor: '#fff' }}
-                    onValueChange={(itemValue, itemIndex) => searchFilter(itemValue)}
-                >
-                    <Picker.Item label="ทั้งหมด" value="ทั้งหมด" style={{ fontSize: 18, fontFamily: "Kanit_400Regular" }} />
-                    {
-                        masterData.map((item, index) => {
-                            return (<Picker.Item label={item.province} value={item.province} key={index} style={{ fontSize: 18, fontFamily: "Kanit_400Regular" }} />)
-                        })
-                    }
-                </Picker> */}
             </View>
             <View style={styles.itemContainer}>
-                {/* <View style={{ alignItems: 'flex-start', marginLeft: 10 }}>
-                    <Text style={{ marginLeft: -5, marginRight: 40, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>Province</Text>
-                    <Text style={{ marginLeft: 30, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>New Case</Text>
-                    <Text style={{ fontSize: 18, fontFamily: 'Kanit_700Bold' }}>Total</Text>
-                    <Text style={{ marginRight: -5, fontSize: 18, fontFamily: 'Kanit_700Bold' }}>Death</Text>
-                </View> */}
                 <FlatList
                     data={dailyProvinceData}
                     renderItem={renderReportProvinceData}
@@ -300,7 +282,7 @@ const styles = StyleSheet.create({
     },
     brandText: {
         fontSize: 16,
-        fontFamily: "Kanit_500Medium",
+        fontFamily: "Kanit_400Regular",
         paddingLeft: 10,
         color: "black",
     },

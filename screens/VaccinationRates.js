@@ -111,49 +111,6 @@ class VaccinationRates extends Component {
                 />
             </View>
         </View>
-        //     <View style={styles.containerChart}>
-        //     <BarChart
-        //         data={{
-        //             labels: labelDate,
-        //             datasets: [
-        //                 {
-        //                     data: dataChart,
-        //                     // colors: (opacity = 1) => '#F4D03F'
-        //                     color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
-        //                 },
-        //             ],
-        //         }}
-        //         width={Dimensions.get('window').width - 5}
-        //         height={220}
-        //         chartConfig={{
-        //             backgroundColor: 'transparent',
-        //             backgroundGradientFrom: '#fff',
-        //             backgroundGradientTo: '#fff',
-        //             // backgroundGradientFromOpacity: 0,
-        //             // backgroundGradientFrom: '#E74C3C',
-        //             // backgroundGradientToOpacity: 0,
-        //             color: (opacity = 1) => `rgba(86, 101, 115, ${opacity})`,
-        //             barRadius: 5,
-        //             barPercentage: 0.3,
-        //             propsForLabels: {
-        //                 fontSize: 12,
-        //                 fontFamily: "Kanit_500Medium",
-        //             }
-                    
-        //         }}
-        //         withCustomBarColorFromData={true}
-        //         flatColor={true}
-        //         // showValuesOnTopOfBars={true}
-        //         withHorizontalLabels={false}
-        //         // fromZero={true}
-        //         showBarTops={false}
-        //         style={{
-        //             marginVertical: 8,
-        //             borderRadius: 5,
-        //             marginLeft: -20
-        //         }}
-        //     />
-        // </View>
         );
     };
 
@@ -167,7 +124,7 @@ class VaccinationRates extends Component {
                         <Text style={styles.valueText}>{ item.daily_vaccinations } โดส</Text>
                     </View>
                     <View style={styles.deathCase}>
-                        <Text style={styles.titleText}>ฉีดแล้วมั้งหมด</Text>
+                        <Text style={styles.titleText}>ฉีดแล้วทั้งหมด</Text>
                         <Text style={styles.valueText}>{ item.total_doses } โดส</Text>
                     </View>
                     <View style={styles.recovered}>

@@ -87,7 +87,7 @@ class Map extends Component {
         this.setState({
             infoVaccine: all_data,
         })
-        LogBox.ignoreAllLogs();
+        LogBox.ignoreLogs(['Setting a timer for a long period of time'])
     }
 
     componentDidMount() {
@@ -124,6 +124,7 @@ class Map extends Component {
                                         longitude: item.longitude
                                     }}
                                     key={index}
+                                    // pinColor='#3498DB'
                                     >
                                         <MaterialCommunityIcons name="human-handsdown" size={45} color="#3498DB" />
                                         <Callout>
@@ -146,7 +147,7 @@ class Map extends Component {
                                     }}
                                     key={index}
                                     >
-                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#E74C3C" />
+                                        <MaterialCommunityIcons name="human-handsdown" size={45} color="#F39B38" />
                                         <Callout>
                                             <View style={{ width: 200, paddingLeft: 5 }}>
                                                 <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
@@ -201,27 +202,6 @@ class Map extends Component {
                                     </Marker>
                                 )    
                             }
-                            // else {
-                            //     return (
-                            //         <Marker coordinate={{
-                            //             latitude: item.latitude,
-                            //             longitude: item.longitude
-                            //         }}
-                            //         key={index}
-                            //         >
-                            //             <MaterialCommunityIcons name="human-handsdown" size={45} color="black" />
-                            //             <Callout>
-                            //                 <View style={{ width: 200, paddingLeft: 5 }}>
-                            //                     <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold'}}>เพศ : { item.gender }</Text>
-                            //                     <Text style={styles.textDetail}>รับวัควีนแล้ว : { item.quantity } เข็ม</Text>
-                            //                     <Text style={styles.textDetail}>เข็มที่ 1 : { item.vaccineBrandFirstDose }</Text>
-                            //                     <Text style={styles.textDetail}>เข็มที่ 2 : { item.vaccineBrandSecondDose }</Text>
-                            //                     <Text style={styles.textDetail}>เข็มที่ 3 : { item.vaccineBrandThirdDose }</Text>
-                            //                 </View>
-                            //             </Callout>
-                            //         </Marker>
-                            //     )    
-                            // }
                         })
                     } 
                 </MapView>

@@ -107,18 +107,6 @@ const DailyReportCovidProvince = ({ route }) => {
                         </Picker>
                     </View>
                 </View>
-                {/* <Picker
-                    selectedValue={selectProvince}
-                    style={{ width: "95%", fontSize: 20, fontFamily: "Kanit_400Regular", borderWidth: 1, alignSelf: 'center', marginTop: 10, backgroundColor: '#fff' }}
-                    onValueChange={(itemValue, itemIndex) => searchFilter(itemValue)}
-                >
-                    <Picker.Item label="ทั้งหมด" value="ทั้งหมด" style={{ fontSize: 18, fontFamily: "Kanit_400Regular"}}/>
-                    {
-                        masterData.map((item, index) => {
-                            return(<Picker.Item label={item.province} value={item.province} key={index} style={{ fontSize: 18, fontFamily: "Kanit_400Regular"}}/>)
-                        })
-                    }
-                </Picker> */}
                 <View style={{ alignItems: 'center' }}>
                     <View style={styles.totalBox}>
                         <View style={{ flexDirection: 'column' }}>

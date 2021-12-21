@@ -17,7 +17,8 @@ export default function SplashScan({navigation}) {
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
         // setText(data)
-        navigation.navigate('AddInfoVaccine', { Certificate_Code: data.slice(52) })
+        navigation.navigate('AddInfoVaccine', { Certificate_Code: data })
+        console.log("certificate code : ", data);
         // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
 
@@ -36,7 +37,7 @@ export default function SplashScan({navigation}) {
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
             />
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+            {/* {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />} */}
         </View>
     );
 }

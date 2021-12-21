@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, View, TextInput } from "react-native";
+import { Alert, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 import firebase from "../database/firebase";
 import { Button, Input, Image } from "react-native-elements";
 import { Picker } from '@react-native-picker/picker';
+import * as Font from 'expo-font';
+import AppLoading from "expo-app-loading";
 
 class EditDataVac extends Component {
     constructor() {
@@ -21,10 +23,21 @@ class EditDataVac extends Component {
             vaccineBrandThirdDose: "",
             latitude: 0,
             longitude: 0,
+            CertificateCode: "",
+            CertificateNo: ""
         };
     }
 
+    loadAssetsAsync = async () => {
+        await Font.loadAsync({
+          'Kanit-Regular': require('../assets/fonts/Kanit-Regular.ttf'),
+          'Kanit-bold': require('../assets/fonts/Kanit-Bold.ttf'),
+        })
+        this.setState({ fontLoaded: true })
+    }
+
     componentDidMount() {
+        this.loadAssetsAsync()
         const VaccineDoc = firebase
             .firestore()
             .collection("infoVaccineUser")
@@ -44,6 +57,8 @@ class EditDataVac extends Component {
                     vaccineBrandThirdDose: Vaccine.vaccineBrandThirdDose,
                     latitude: Vaccine.latitude,
                     longitude: Vaccine.longitude,
+                    CertificateCode: Vaccine.CertificateCode,
+                    CertificateNo: Vaccine.CertificateNo
                 });
             } else {
                 console.log("Document does not exist!!");
@@ -74,6 +89,8 @@ class EditDataVac extends Component {
             vaccineBrandThirdDose: this.state.vaccineBrandThirdDose,
             latitude: this.state.latitude,
             longitude: this.state.longitude,
+            CertificateCode: this.state.CertificateCode,
+            CertificateNo: this.state.CertificateNo
         })
         .then(() => {
             this.props.navigation.pop();
@@ -81,6 +98,9 @@ class EditDataVac extends Component {
     }
 
     render() {
+        if (!this.state.fontLoaded) {
+            return <AppLoading />
+        }
         return (
             <View style={styles.container}>
                 <View style={styles.form}>
@@ -181,15 +201,18 @@ class EditDataVac extends Component {
                         autoCompleteType='off'
                     />
                 <View style={{ width: "100%", margin: 10, }}>
-                    <Button
+                    {/* <Button
                         title="อัพเดตข้อมูล"
                         onPress={() => this.updateVaccine()}
                         buttonStyle={{
                             backgroundColor: "#52BE80",
                             borderRadius: 10,
                         }} 
-                    />
-                    <Button
+                    /> */}
+                    <TouchableOpacity onPress={() => this.updateVaccine()} style={{ padding: 10, backgroundColor: "#52BE80", borderRadius: 10 }}>
+                        <Text style={{ textAlign: 'center', color: '#fff', fontFamily: 'Kanit_600SemiBold', fontSize: 15 }}>อัพเดตข้อมูล</Text>
+                    </TouchableOpacity>
+                    {/* <Button
                         title="กลับหน้าแสดงข้อมูล"
                         onPress={() => this.props.navigation.pop()}
                         buttonStyle={{
@@ -197,7 +220,10 @@ class EditDataVac extends Component {
                             borderRadius: 10,
                             backgroundColor: "#34CCF3"
                         }} 
-                    />
+                    /> */}
+                    <TouchableOpacity onPress={() => this.props.navigation.pop()} style={{ marginTop: 5, padding: 10, backgroundColor: "#34CCF3", borderRadius: 10 }}>
+                        <Text style={{ textAlign: 'center', color: '#fff', fontFamily: 'Kanit_600SemiBold', fontSize: 15 }}>กลับหน้าแสดงข้อมูล</Text>
+                    </TouchableOpacity>
                 </View>
                 </View>
             </View>
@@ -210,7 +236,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // justifyContent: 'flex-start',
         // alignItems: 'center',
-        padding: 10,
+        paddingBottom: Platform.OS == 'android' ? 10 : 150,
         backgroundColor: '#fff'
     },
     column2: {
@@ -241,6 +267,7 @@ const styles = StyleSheet.create({
         marginTop: -5,
     },
     input: {
+        fontFamily: 'Kanit-Regular',
         width: "100%",
         height: 50,
         padding: 15,
@@ -254,8 +281,9 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     input2: {
+        fontFamily: 'Kanit-Regular',
         width: 185,
-        height: 40,
+        height: Platform.OS == 'android' ? 40 : 150,
         padding: 8,
         margin: 5,
         marginBottom: 20,

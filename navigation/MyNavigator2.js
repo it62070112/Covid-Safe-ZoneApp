@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, TouchableOpacity, Text, View, LogBox } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity, Text, View, LogBox, Platform } from 'react-native';
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 //navigation
@@ -87,13 +87,9 @@ function StackAddInfoFunc() {
                 headerShown: false
             }}
         >
-            {/* <StackAddInfo.Screen name="PreAddInfoVaccine" component={PreAddInfoVaccine}/> */}
+            <StackAddInfo.Screen name="PreAddInfoVaccine" component={PreAddInfoVaccine}/>
             <StackAddInfo.Screen name="SplashScan" component={SplashScan}/>
-            <StackAddInfo.Screen name="AddInfoVaccine" component={AddInfoVaccine}
-                // options={{
-                //     headerShown: false
-                // }}
-            />
+            <StackAddInfo.Screen name="AddInfoVaccine" component={AddInfoVaccine}/>
             <StackAddInfo.Screen name="ShowInfoVacUser" component={ShowInfoVacUser}
                 // options={{
                 //     headerShown: false
@@ -180,14 +176,15 @@ function TabBarNavigatorFunc({ navigation }) {
                     fontFamily: 'Kanit_400Regular',
                 },
                 tabBarStyle: {
-                    height: 60,
+                    height: Platform.OS == 'android' ? 60 : 90,
                     position: 'absolute',
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20,
                     // backgroundColor: '#F2F3F4'
                 },
                 headerStyle: {
-                    backgroundColor: '#48C9B0'
+                    backgroundColor: '#48C9B0',
+                    height: Platform.OS == 'ios' ? 100 : 80
                 },
             }}
         >
@@ -265,7 +262,7 @@ function TabBarNavigatorFunc({ navigation }) {
             />
             <TabBar.Screen name="MapMain" component={MapMain}
                 options={{
-                    headerTitle: "Map",
+                    headerTitle: "SafeZone",
                     headerStyle: {
                         backgroundColor: '#48C9B0'
                     },
@@ -274,7 +271,7 @@ function TabBarNavigatorFunc({ navigation }) {
                         fontFamily: 'Kanit_500Medium',
                         color: "#fff"
                     },
-                    tabBarLabel: "Map",
+                    tabBarLabel: "SafeZone",
                     tabBarIcon: ({ color }) => {
                         return <FontAwesome5 name="map-marked-alt" size={24} color={color} />
                     },

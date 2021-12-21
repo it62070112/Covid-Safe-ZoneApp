@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, LogBox } from "re
 import firebase from "../database/firebase";
 import { ListItem } from "react-native-elements";
 import { Feather } from '@expo/vector-icons'; 
+import * as Font from 'expo-font';
+import AppLoading from "expo-app-loading";
 
 class ShowInfoVacUser extends Component {
     constructor() {
@@ -13,6 +15,15 @@ class ShowInfoVacUser extends Component {
         this.state = {
             infoVaccine: [],
         };
+    }
+
+    loadAssetsAsync = async () => {
+        await Font.loadAsync({
+          'Kanit-Regular': require('../assets/fonts/Kanit-Regular.ttf'),
+          'Kanit-bold': require('../assets/fonts/Kanit-Bold.ttf'),
+          'Kanit-Medium': require('../assets/fonts/Kanit-Medium.ttf'),
+        })
+        this.setState({ fontLoaded: true })
     }
 
     getCollection = (querySnapshot) => {
@@ -47,6 +58,7 @@ class ShowInfoVacUser extends Component {
 
     componentDidMount() {
         this.unsubscribe = this.infoVaccineUserCollection.onSnapshot(this.getCollection);
+        this.loadAssetsAsync()
     }
 
     componentWillUnmount() {
@@ -54,6 +66,9 @@ class ShowInfoVacUser extends Component {
     }
 
     render() {
+        if (!this.state.fontLoaded) {
+            return <AppLoading />
+        }
         return (
             <View style={styles.container}>
                 <ScrollView>
@@ -65,28 +80,46 @@ class ShowInfoVacUser extends Component {
                                         <TouchableOpacity onPress={() => this.updateData(item.key)} style={{ alignItems: 'flex-end' }}>
                                             <Feather name="edit" size={24} color="black" />
                                         </TouchableOpacity>
-                                        <Text style={ styles.showText }>ชื่อ : {item.name}</Text>
-                                        <Text style={ styles.showText }>อายุ : {item.age}</Text>
-                                        <Text style={ styles.showText }>เพศ : {item.gender}</Text>
-                                        <Text style={ styles.showText }>จำนวนโดส : {item.quantity}</Text>
-                                        <Text style={ styles.showText }>เข็มที่ 1 : {item.vaccineBrandFirstDose}</Text>
-                                        <Text style={ styles.showText }>เข็มที่ 2 : {item.vaccineBrandSecondDose}</Text>
-                                        <Text style={ styles.showText }>เข็มที่ 3 : {item.vaccineBrandThirdDose}</Text>
-                                        <Text style={ styles.showText }>สถานที่ฉีดวัคซีน : {item.vaccinationPlace}</Text>
+
+                                        <Text style={{ textAlign: 'center', fontSize: 18, fontFamily: 'Kanit-bold' }}>ชื่อ นามสกุล</Text>
+                                        <View style={{ borderRadius: 10, backgroundColor: '#52BE80', padding: 5 }}>
+                                            <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 18, color: '#Fff', textAlign: 'center' }}>{item.name}</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <View style={{ width: '49%' }}>
+                                                <Text style={{ textAlign: 'center', fontSize: 18, fontFamily: 'Kanit-bold' }}>อายุ</Text>
+                                                <View style={{ borderRadius: 10, backgroundColor: '#52BE80', padding: 5 }}>
+                                                    <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 18, color: '#Fff', textAlign: 'center' }}>{item.age}</Text>
+                                                </View>
+                                            </View>
+                                            <View style={{ width: '49%', marginLeft: 10 }}>
+                                                <Text style={{ textAlign: 'center', fontSize: 18, fontFamily: 'Kanit-bold' }}>เพศ</Text>
+                                                <View style={{ borderRadius: 10, backgroundColor: '#52BE80', padding: 5 }}>
+                                                    <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 18, color: '#Fff', textAlign: 'center' }}>{item.gender}</Text>
+                                                </View>
+                                            </View>
+                                        </View>
+                                        <Text style={{ textAlign: 'center', fontSize: 18, fontFamily: 'Kanit-bold' }}>การับวัคซีน</Text>
+                                        <View style={{ borderRadius: 10, backgroundColor: '#52BE80', padding: 10, marginBottom: 5 }}>
+                                            <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 18, color: '#Fff' }}>เข็มที่ 1 : {item.vaccineBrandFirstDose}</Text>
+                                            {/* <Text style={{ fontSize: 18,color: '#fff' }}>{item.vaccineBrandFirstDose}</Text> */}
+                                        </View>
+                                        <View style={{ borderRadius: 10, backgroundColor: '#52BE80', padding: 10, marginBottom: 5 }}>
+                                            <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 18, color: '#Fff' }}>เข็มที่ 2 : {item.vaccineBrandSecondDose}</Text>
+                                            {/* <Text style={{ fontSize: 18,color: '#fff' }}>{item.vaccineBrandFirstDose}</Text> */}
+                                        </View>
+                                        <View style={{ borderRadius: 10, backgroundColor: '#52BE80', padding: 10 }}>
+                                            <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 18, color: '#Fff' }}>เข็มที่ 3 : {item.vaccineBrandThirdDose}</Text>
+                                            {/* <Text style={{ fontSize: 18,color: '#fff' }}>{item.vaccineBrandFirstDose}</Text> */}
+                                        </View>
+
+                                        <Text style={{ textAlign: 'center', fontSize: 18, fontSize: 18, fontFamily: 'Kanit-bold' }}>สถานที่ฉีดวัคซีน</Text>
+                                        <View style={{ borderRadius: 10, backgroundColor: '#52BE80', padding: 5 }}>
+                                            <Text style={{ fontFamily: 'Kanit-Regular', fontSize: 18, color: '#Fff', textAlign: 'center' }}>{item.vaccinationPlace}</Text>
+                                        </View>
                                     </View>
                                 )
                             }
-                            // return (
-                            //     <TouchableOpacity>
-                            //         <ListItem key={ index } bottomDivider>
-                            //             <ListItem.Content>
-                            //                 <ListItem.Title>{ item.id }</ListItem.Title>
-                            //                 <ListItem.Title>{ item.name }</ListItem.Title>
-                            //                 <ListItem.Title>{ item.gpa }</ListItem.Title>
-                            //             </ListItem.Content>
-                            //         </ListItem>
-                            //     </TouchableOpacity>
-                            // )
                         })
                     }
                 </ScrollView>
@@ -101,8 +134,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff'
     },
     showText: {
-        // fontFamily: "Kanit_400Regular",
-        fontSize: 18
+        textAlign: 'center',
+        fontSize: 18,
+        color: '#fff'
     }
 });
 

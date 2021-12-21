@@ -1,22 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-} from "react-native-chart-kit";
-import axios from "axios";
-import { 
-    Kanit_400Regular,
-    Kanit_500Medium,
-    Kanit_600SemiBold,
-    Kanit_700Bold,
-  } from '@expo-google-fonts/kanit'
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
 import NewCaseLineChart from "../components/NewCaseLineChart";
 import NewRecoverLineChart from "../components/NewRecoverLineChart";
 import DeathLineChart from "../components/DeathLineChart";

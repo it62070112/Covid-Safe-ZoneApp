@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox, TouchableOpacity, ScrollView, Platform, Linking, SafeAreaView } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { Picker } from '@react-native-picker/picker';
 import {
@@ -30,12 +30,13 @@ const AddInfoVaccine = ({ navigation, route }) => {
     const [disable, setDisable] = useState(true)
     const [allData, setAllData] = useState([])
     const [CertificateCode, setCertificateCode] = useState('')
+    const [CertificateNo, setCertificateNo] = useState("")
     const dispatch = useDispatch();
 
     useEffect(() => {
         getData()
-        setCertificateCode(route.params.Certificate_Code)
-        console.log(route.params.Certificate_Code)
+        setCertificateCode(route.params.Certificate_Code.slice(52))
+        console.log('CertificateCode : ', route.params.Certificate_Code.slice(52))
     }, [])
 
     let [fontsLoaded] = useFonts({
@@ -50,7 +51,7 @@ const AddInfoVaccine = ({ navigation, route }) => {
 
     var db = firebase.firestore();
     const createInfoVaccineUser = () => {
-        if (age == "" || gender == "" || nameFirstLast == "" || numVaccine == "" || vaccinationPlace == "" || vaccineBrandFirstDose == "" || vaccineBrandSecondDose == "" || vaccineBrandThirdDose == "") {
+        if (CertificateNo == "" || age == "" || gender == "0" || nameFirstLast == "" || numVaccine == '0' || vaccinationPlace == "" || vaccineBrandFirstDose == "" || vaccineBrandSecondDose == "" || vaccineBrandThirdDose == "") {
             Alert.alert("กรุณากรอกข้อมูลก่อนกดปุ่มบันทึก")
         } else {
             return db.collection('infoVaccineUser')
@@ -66,7 +67,8 @@ const AddInfoVaccine = ({ navigation, route }) => {
                     vaccineBrandFirstDose: vaccineBrandFirstDose,
                     vaccineBrandSecondDose: vaccineBrandSecondDose,
                     vaccineBrandThirdDose: vaccineBrandThirdDose,
-                    CertificateCode: CertificateCode
+                    CertificateCode: CertificateCode,
+                    CertificateNo: CertificateNo
                 })
                 .then((res) => {
                     // Alert.alert("บันทึกข้อมูลสำเร็จ")
@@ -91,11 +93,17 @@ const AddInfoVaccine = ({ navigation, route }) => {
                     name,
                     quantity,
                     vaccinationPlace,
-                    vaccineBrand
+                    vaccineBrand,
+                    CertificateNo,
+                    CertificateCode
                 })
                 setAllData(all_data)
-                // console.log('all_data: ', all_data);
             })
+            // console.log(all_data)
+            // console.log(all_data.length)
+            // all_data.map((item, index) => {
+            //     console.log(item.CertificateNo)
+            // })
         })
     }
 
@@ -104,9 +112,24 @@ const AddInfoVaccine = ({ navigation, route }) => {
 
     return (
         <ScrollView>
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <Text style={styles.titleLogin}>กรอกข้อมูลการฉีดวัคซีน</Text>
+                <Text
+                        style={styles.hyperlinkStyle}
+                            onPress={() => {
+                                Linking.openURL(route.params.Certificate_Code);
+                        }}>
+                        See your Certificate Serial No.
+                </Text>
                 <View style={styles.form}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Certificate Serial No. 10 หลัก'
+                        placeholderTextColor='#566573'
+                        onChangeText={(text) => setCertificateNo(text)}
+                        value={CertificateNo}
+                        editable={disable}
+                    />
                     <TextInput
                         style={styles.input}
                         placeholder='ชื่อ - นามสกุล'
@@ -219,11 +242,11 @@ const AddInfoVaccine = ({ navigation, route }) => {
                             <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>ดูข้อมูล</Text>
                         </TouchableOpacity>
                     }                  */}
-                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => createInfoVaccineUser()}>
+                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center', marginBottom: 70, marginTop: -10 }} onPress={() => createInfoVaccineUser()}>
                             <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
                         </TouchableOpacity> 
                 </View>
-            </View>
+            </SafeAreaView>
         </ScrollView>
     )
 }
@@ -234,7 +257,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'flex-start',
         // alignItems: 'center',
         padding: 10,
-        paddingBottom: 120,
+        paddingBottom: Platform.OS == 'android' ? 10 : 150,
         backgroundColor: '#fff',
     },
     column2: {
@@ -279,7 +302,7 @@ const styles = StyleSheet.create({
     },
     input2: {
         width: 185,
-        height: Platform.OS == 'android' ? 40 : 200,
+        height: Platform.OS == 'android' ? 40 : 150,
         padding: 8,
         margin: 5,
         marginBottom: 20,
@@ -293,8 +316,14 @@ const styles = StyleSheet.create({
     showText: {
         fontFamily: "Kanit_400Regular",
         fontSize: 18
+    },
+    hyperlinkStyle: {
+        color: 'blue',
+        fontSize: 16,
+        margin: 5,
+        textDecorationLine: 'underline',
+        fontFamily: "Kanit_400Regular",
     }
-
 });
 
 export default AddInfoVaccine;
