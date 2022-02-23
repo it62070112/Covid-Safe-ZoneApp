@@ -18,7 +18,6 @@
 ## Video Demo
 วิดีโอสาธิตการใช้งานแอปพลิเคชัน : [COVID19 Safe Zone! App Presentation](https://youtu.be/ivoMWmO9CcI) เริ่ม Demo นาทีที่ 07:18
 
-## Spec Doc
 
 ## Data Collection
 ใช้ ``Firebase`` ในการเก็บข้อมูลของผู้ใช้
