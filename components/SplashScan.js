@@ -5,7 +5,6 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export default function SplashScan({navigation}) {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    // const [text , setText] = useState('')
 
     useEffect(() => {
         (async () => {
@@ -16,10 +15,8 @@ export default function SplashScan({navigation}) {
 
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
-        // setText(data)
         navigation.navigate('AddInfoVaccine', { Certificate_Code: data })
         console.log("certificate code : ", data);
-        // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
 
     // console.log("certificate code : ", text.slice(52));
@@ -37,7 +34,6 @@ export default function SplashScan({navigation}) {
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
             />
-            {/* {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />} */}
         </View>
     );
 }

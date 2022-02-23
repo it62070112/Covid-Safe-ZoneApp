@@ -16,15 +16,8 @@ import { addLocation } from "../store/actions/LatLongAction";
 const SplashPermission = () => {
     const [MyLatitude, setMyLatitude] = useState(0);
     const [MyLongitude, setMyLongitude] = useState(0);
-
-    // const latitude = useSelector((state) => state.LatLong.lat)
-    // const longitude = useSelector((state) => state.LatLong.long)
     
     const dispatch = useDispatch();
-
-    // const addLocationHandler = () => {
-    //     dispatch(addLocation(latitude, longitude))
-    // }
 
     useEffect(() => {
         Alert.alert('COVID-19 Safe-Zone Permission', 'COVID-19 Safe-Zone ขออนุญาตใช้ GPS', [

@@ -6,11 +6,6 @@ import AppLoading from "expo-app-loading";
 import { StatusBar } from 'expo-status-bar';
 import {
     LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
 } from "react-native-chart-kit";
 import { color } from "react-native-reanimated";
 class VaccinationRates extends Component {
@@ -66,7 +61,7 @@ class VaccinationRates extends Component {
     }
 
     MyLineChart = () => {
-        const SliceData = this.state.masterData.slice(276)
+        const SliceData = this.state.masterData.slice(341)
         const dataChart = []
         SliceData.map((item, index) => {
             return dataChart.push(item.daily_vaccinations)

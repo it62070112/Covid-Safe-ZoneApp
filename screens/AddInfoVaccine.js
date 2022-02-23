@@ -155,7 +155,7 @@ const AddInfoVaccine = ({ navigation, route }) => {
                             style={styles.input2}
                             enabled={disable}
                         >
-                            <Picker.Item label='เพศ' value='0' />
+                            <Picker.Item label='เพศ' value='-' />
                             <Picker.Item label="ชาย" value="ชาย" />
                             <Picker.Item label="หญิง" value="หญิง" />
                         </Picker>
@@ -167,7 +167,7 @@ const AddInfoVaccine = ({ navigation, route }) => {
                             selectedValue={numVaccine}
                             onValueChange={(itemValue, itemIndex) => setNumVaccine(itemValue)}
                         >
-                            <Picker.Item label='จำนวนโดส' value='0' />
+                            <Picker.Item label='จำนวนโดส' value='-' />
                             <Picker.Item label="1" value="1" />
                             <Picker.Item label="2" value="2" />
                             <Picker.Item label="3" value="3" />
@@ -178,7 +178,7 @@ const AddInfoVaccine = ({ navigation, route }) => {
                             onValueChange={(itemValue, itemIndex) => setVaccineBrandFirstDose(itemValue)}
                             style={styles.input2}
                         >
-                            <Picker.Item label='เข็มที่ 1' value='0' />
+                            <Picker.Item label='เข็มที่ 1' value='-' />
                             <Picker.Item label="Pfizer" value="Pfizer" />
                             <Picker.Item label="Moderna" value="Moderna" />
                             <Picker.Item label="Johnson & Johnson" value="Johnson & Johnson" />
@@ -196,7 +196,7 @@ const AddInfoVaccine = ({ navigation, route }) => {
                             onValueChange={(itemValue, itemIndex) => setVaccineBrandSecondDose(itemValue)}
                             style={styles.input2}
                         >
-                            <Picker.Item label='เข็มที่ 2' value='0' />
+                            <Picker.Item label='เข็มที่ 2' value='-' />
                             <Picker.Item label="Pfizer" value="Pfizer" />
                             <Picker.Item label="Moderna" value="Moderna" />
                             <Picker.Item label="Johnson & Johnson" value="Johnson & Johnson" />
@@ -211,7 +211,7 @@ const AddInfoVaccine = ({ navigation, route }) => {
                             onValueChange={(itemValue, itemIndex) => setVaccineBrandThirdDose(itemValue)}
                             style={styles.input2}
                         >
-                            <Picker.Item label='เข็มที่ 3' value='0' />
+                            <Picker.Item label='เข็มที่ 3' value='-' />
                             <Picker.Item label="Pfizer" value="Pfizer" />
                             <Picker.Item label="Moderna" value="Moderna" />
                             <Picker.Item label="Johnson & Johnson" value="Johnson & Johnson" />
