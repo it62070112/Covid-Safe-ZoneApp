@@ -1,29 +1,26 @@
 # Covid-Safe-ZoneApp
+```
+1. Clone Project ลงเครื่อง
+2. yarn install
+3. expo start
+**ภายในแอปพลิเคชันมีฟังก์ชันการแสกน QR CODE ต้องใช้โทรศัพท์จริงๆมาลองรันแอปพลิเคชัน
+**แอปพลิเคชันสามารถทำงานได้ทั้งบน IOS และ Android แต่ใน IOS หน้าตาของ UI อาจจะไม่เสถียรเท่าฝั่ง Android
+```
+วิดีโอสาธิตการใช้งานแอปพลิเคชัน : [COVID19 Safe Zone! App Presentation](https://youtu.be/ivoMWmO9CcI) เริ่ม Demo นาทีที่ 07:18
 
-*****ถ้า Run ไม่ได้ ให้ npm install*****
-
-ถ้ารันไม่ได้ลองแก้ตาม Error ดูจ้า
-
-expo install @react-navigation/native
-expo install react-native-screens react-native-safe-area-context
-
-*****************************************************************************
-expo install @react-navigation/native-stack
-expo install @react-navigation/bottom-tabs
-
-*****************************************************************************
-
-expo install @react-navigation/drawer
-expo install react-native-gesture-handler react-native-reanimated
-
-*****************************************************************************
-ถ้า install ก่อนหน้าแล้ว Error ใชัอันนี้
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
-
-*****************************************************************************
-expo install @expo/vector-icons
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+ใช้ Firebase ในการเก็บข้อมูล
+Collection infoVaccineUser เก็บข้อมูลดังนี้
+| Field Name | Description |
+|------------|-------------|
+| CertificateNo | Certificate Serial No. 10 หลัก ที่ได้รับจากเอกสารการฉีดวัคซีนของหมอพร้อม |
+| CertificateCode | ได้จากการสแกน QR CODE ของหมอพร้อม |
+| vaccineBrandFirstDose | วัคซีนเข็มที่ 1|
+| vaccineBrandSecondDose | วัคซีนเข็มที่ 2 |
+| vaccineBrandThirdDose | วัคซีนเข็มที่ 3 |
+| vaccinationPlace | สถานที่ฉีดวัคซีน |
+| quantity | จำนวนโดสของวัคซีนที่ผู้ใช้รับมา |
+| name | ชื่อ - นามสกุล |
+| gender | เพศ |
+| age | อายุ |
+| longitude | พิกัด longitude ของผู้ใช้ |
+| latitude | พิกัด latitude ของผู้ใช้ |
