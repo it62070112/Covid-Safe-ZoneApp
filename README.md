@@ -1,4 +1,5 @@
 # Covid-Safe-ZoneApp
+## Installation
 ```
 1. Clone Project ลงเครื่อง
 2. yarn install
@@ -7,8 +8,12 @@
 **ภายในแอปพลิเคชันมีฟังก์ชันการแสกน QR CODE ต้องใช้โทรศัพท์จริงๆมาลองรันแอปพลิเคชัน
 **แอปพลิเคชันสามารถทำงานได้ทั้งบน IOS และ Android แต่ใน IOS หน้าตาของ UI อาจจะไม่เสถียรเท่าฝั่ง Android
 ```
+## Video Demo
 วิดีโอสาธิตการใช้งานแอปพลิเคชัน : [COVID19 Safe Zone! App Presentation](https://youtu.be/ivoMWmO9CcI) เริ่ม Demo นาทีที่ 07:18
 
+## Spec Doc
+
+## Data Collection
 ใช้ ``Firebase`` ในการเก็บข้อมูลของผู้ใช้
 * Collection ``infoVaccineUser`` เก็บข้อมูลดังนี้
 
