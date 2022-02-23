@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
+import { FlatList, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import axios from "axios";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";

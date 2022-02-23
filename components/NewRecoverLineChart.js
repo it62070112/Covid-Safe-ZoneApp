@@ -93,7 +93,6 @@ const NewRecoverLineChart = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#48C9B0',
     },
     header: {
         // color: "#fff",

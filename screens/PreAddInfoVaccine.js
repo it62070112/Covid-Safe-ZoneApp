@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import {
     Kanit_400Regular,
     Kanit_500Medium,

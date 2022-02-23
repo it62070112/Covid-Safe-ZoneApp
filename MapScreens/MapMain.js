@@ -1,9 +1,8 @@
 import React, { Component, useEffect } from 'react';
-import { View, StyleSheet, Text, Dimensions, Platform, Alert, SafeAreaView, LogBox } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker, Circle, Callout } from 'react-native-maps';
+import { View, StyleSheet, Text, Dimensions, LogBox } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import { LatLong } from './LatLong';
 import { useSelector } from "react-redux";
@@ -21,9 +20,6 @@ class Map extends Component {
             infoVaccine: [],
             latitude: 0,
             longitude: 0,
-            // vaccineBrandFirstDose: '',
-            // vaccineBrandSecondDose: '',
-            // vaccineBrandThirdDose: '',
             test_props : {
               lat: 0,
               long: 0,
@@ -72,18 +68,6 @@ class Map extends Component {
                 vaccineBrandThirdDose,
             });
         });
-        // all_data.map((item, index) => {
-        //     this.setState({
-        //         latitude: item.latitude,
-        //         longitude: item.longitude,
-        //         quantity: item.quantity,
-        //         gender: item.gender,
-        //         vaccineBrandFirstDose: item.vaccineBrandFirstDose,
-        //         vaccineBrandSecondDose: item.vaccineBrandSecondDose,
-        //         vaccineBrandThirdDose: item.vaccineBrandThirdDose,
-        //     })
-        // })
-        // console.log("all_data_Map : ", all_data);
         this.setState({
             infoVaccine: all_data,
         })

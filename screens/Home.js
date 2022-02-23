@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, VirtualizedList } from "react-native";
+import { View, StyleSheet } from "react-native";
 //fonts
 import {
     Kanit_400Regular,

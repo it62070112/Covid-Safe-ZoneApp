@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, LogBox } from "react-native";
 import firebase from "../database/firebase";
-import { ListItem } from "react-native-elements";
 import { Feather } from '@expo/vector-icons'; 
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";

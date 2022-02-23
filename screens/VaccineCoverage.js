@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, SafeAreaView, TextInput, Image, Button } from "react-native";
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { SearchBar } from "react-native-elements";
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
@@ -71,16 +71,6 @@ class Vaccine extends Component {
     }
 
     renderVaccineData({ item }) {
-        // let color
-        // if (item.total_1st_dose >= 1000000) {
-        //     color = "#27AE60";
-        // }
-        // if (item.total_1st_dose >= 500000 && item.total_1st_dose < 1000000 ) {
-        //     color = "#52BE80";
-        // }
-        // if (item.total_1st_dose < 500000 ) {
-        //     color = "#7DCEA0";
-        // }
         return (
             <View style={{ flex: 1, margin: 5, backgroundColor: "#E5E7E9", borderRadius: 5, height: 50, justifyContent: 'center' }}>
                 <TouchableOpacity>

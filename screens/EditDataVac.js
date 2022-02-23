@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 import firebase from "../database/firebase";
-import { Button, Input, Image } from "react-native-elements";
 import { Picker } from '@react-native-picker/picker';
 import * as Font from 'expo-font';
 import AppLoading from "expo-app-loading";
@@ -201,26 +200,10 @@ class EditDataVac extends Component {
                         autoCompleteType='off'
                     />
                 <View style={{ width: "100%", margin: 10, }}>
-                    {/* <Button
-                        title="อัพเดตข้อมูล"
-                        onPress={() => this.updateVaccine()}
-                        buttonStyle={{
-                            backgroundColor: "#52BE80",
-                            borderRadius: 10,
-                        }} 
-                    /> */}
                     <TouchableOpacity onPress={() => this.updateVaccine()} style={{ padding: 10, backgroundColor: "#52BE80", borderRadius: 10 }}>
                         <Text style={{ textAlign: 'center', color: '#fff', fontFamily: 'Kanit_600SemiBold', fontSize: 15 }}>อัพเดตข้อมูล</Text>
                     </TouchableOpacity>
-                    {/* <Button
-                        title="กลับหน้าแสดงข้อมูล"
-                        onPress={() => this.props.navigation.pop()}
-                        buttonStyle={{
-                            marginTop: 5,
-                            borderRadius: 10,
-                            backgroundColor: "#34CCF3"
-                        }} 
-                    /> */}
+
                     <TouchableOpacity onPress={() => this.props.navigation.pop()} style={{ marginTop: 5, padding: 10, backgroundColor: "#34CCF3", borderRadius: 10 }}>
                         <Text style={{ textAlign: 'center', color: '#fff', fontFamily: 'Kanit_600SemiBold', fontSize: 15 }}>กลับหน้าแสดงข้อมูล</Text>
                     </TouchableOpacity>
@@ -234,8 +217,6 @@ class EditDataVac extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'flex-start',
-        // alignItems: 'center',
         paddingBottom: Platform.OS == 'android' ? 10 : 150,
         backgroundColor: '#fff'
     },
@@ -243,7 +224,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "flex-start",
         marginTop: -10,
-        // borderWidth: 1
     },
     containerBtn: {
         flexDirection: "column",
@@ -256,7 +236,6 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginBottom: 10,
         marginTop: 10,
-        // fontFamily: 'Kanit_600SemiBold'
     },
     form: {
         width: '100%',
@@ -277,7 +256,6 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         borderStyle: 'solid',
         borderRadius: 4,
-        // fontFamily: "Kanit_400Regular",
         fontSize: 16
     },
     input2: {
@@ -291,11 +269,9 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         borderStyle: 'solid',
         borderRadius: 4,
-        // fontFamily: 'Kanit_400Regular',
         fontSize: 16,
     },
     showText: {
-        // fontFamily: "Kanit_400Regular",
         fontSize: 18
     }
 

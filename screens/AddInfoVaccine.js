@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, TextInput, Button, LogBox, TouchableOpacity, ScrollView, Platform, Linking, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, LogBox, TouchableOpacity, ScrollView, Platform, Linking, SafeAreaView } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { Picker } from '@react-native-picker/picker';
 import {
@@ -231,17 +231,6 @@ const AddInfoVaccine = ({ navigation, route }) => {
                         autoCompleteType='off'
                         editable={disable}
                     />
-                    {/* {
-                        !saveSuccess ?
-                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center' }} onPress={() => createInfoVaccineUser()}>
-                            <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
-                        </TouchableOpacity> 
-                        :
-                        
-                        <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#3498DB', borderRadius: 10, justifyContent: 'center', marginTop: 5 }} onPress={() => navigation.navigate("ShowInfoVacUser", { nameUser: nameFirstLast })}>
-                            <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>ดูข้อมูล</Text>
-                        </TouchableOpacity>
-                    }                  */}
                         <TouchableOpacity style={{ width: '100%', height: 30, backgroundColor: '#52BE80', borderRadius: 10, justifyContent: 'center', marginBottom: 70, marginTop: -10 }} onPress={() => createInfoVaccineUser()}>
                             <Text style={{ fontFamily: 'Kanit_600SemiBold', fontSize: 17, textAlign: 'center', color: '#fff' }}>บันทึก</Text>
                         </TouchableOpacity> 
@@ -254,8 +243,6 @@ const AddInfoVaccine = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'flex-start',
-        // alignItems: 'center',
         padding: 10,
         paddingBottom: Platform.OS == 'android' ? 10 : 150,
         backgroundColor: '#fff',
@@ -264,7 +251,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "flex-start",
         marginTop: -10,
-        // borderWidth: 1
     },
     containerBtn: {
         flexDirection: "column",

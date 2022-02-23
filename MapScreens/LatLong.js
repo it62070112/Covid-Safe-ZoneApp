@@ -23,7 +23,6 @@ function get_geo(opt) {
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
-    // text = JSON.stringify(location);
     text = location.coords;
   }
 

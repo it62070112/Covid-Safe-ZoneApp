@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Dimensions, FlatList } from 'react-native';
-import MapView, { Circle, Marker, Callout } from 'react-native-maps';
-// import MapView from 'react-native-map-clustering';
-// import { LocationProvince } from '../Data/mockData';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import { 
     Kanit_400Regular,
     Kanit_500Medium,
@@ -129,25 +127,6 @@ const HeatMap = () => {
                         )
                     }
                     
-
-                    
-                    // return (
-                    //     <Marker
-                    //         coordinate={{
-                    //             latitude: val.latitude,
-                    //             longitude: val.longitude
-                    //     }}
-                    //         key={index}
-                    //         title={val.province}
-                    //         pinColor={val.color}
-                    //     >
-                    //         <Callout>
-                    //             <Text style={{ fontSize: 18, fontFamily: 'Kanit_600SemiBold' }}>{ val.province }</Text>
-                    //             <Text style={styles.textDetail}>จำนวนประชากร : { val.population }</Text>
-                    //             <Text style={styles.textDetail}>ฉีดวัคซีนไปแล้ว : { ((val.num_people_vaccinated / val.population) * 100).toFixed(2) + '%' }</Text>
-                    //         </Callout>
-                    //     </Marker>
-                    // )
                 })}
             </MapView>
         </View>

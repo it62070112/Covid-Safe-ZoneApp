@@ -16,16 +16,6 @@ class VaccinationRates extends Component {
         fontLoaded: false
     }
 
-    // MyBarChart = () => {
-    //     const SliceData = this.state.masterData.slice(250)
-    //     const dataChart = []
-
-    //     SliceData.map((item, index) => {
-    //         return dataChart.push(item.daily_vaccinations)
-    //     })
-    //     console.log('dataChart: ', dataChart);
-    // }
-
     async componentDidMount() {
         // console.log("render DidMount")
         this.loadAssetsAsync()
