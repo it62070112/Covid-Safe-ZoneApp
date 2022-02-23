@@ -8,8 +8,9 @@
 ```
 วิดีโอสาธิตการใช้งานแอปพลิเคชัน : [COVID19 Safe Zone! App Presentation](https://youtu.be/ivoMWmO9CcI) เริ่ม Demo นาทีที่ 07:18
 
-ใช้ Firebase ในการเก็บข้อมูล
-Collection infoVaccineUser เก็บข้อมูลดังนี้
+ใช้ ``Firebase`` ในการเก็บข้อมูลของผู้ใช้
+* Collection ``infoVaccineUser`` เก็บข้อมูลดังนี้
+
 | Field Name | Description |
 |------------|-------------|
 | CertificateNo | Certificate Serial No. 10 หลัก ที่ได้รับจากเอกสารการฉีดวัคซีนของหมอพร้อม |
